@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Marquee from '../components/Marquee.astro';
+import Work from '../components/Work.astro';
+import Services from '../components/Services.astro';
+import Stats from '../components/Stats.astro';
+import Process from '../components/Process.astro';
+import Pricing from '../components/Pricing.astro';
+import Contact from '../components/Contact.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: '1337 LLC',
+  url: 'https://the1337llc.com/',
+  email: 'the1337llc@gmail.com',
+  image: 'https://the1337llc.com/work/spk-lawn.jpg',
+  description: 'Websites, quote calculators, business systems and IT for local businesses.',
+  areaServed: [{ '@type': 'Place', name: 'Northwest Indiana' }, { '@type': 'Place', name: 'Chicagoland' }],
+  address: { '@type': 'PostalAddress', addressRegion: 'IN', addressCountry: 'US' },
+};
+---
+<Base
+  ogTitle="1337 LLC | Tech that pays for itself"
+  ogDescription="Websites, quote calculators, business systems and IT for Northwest Indiana and Chicagoland businesses."
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <Hero />
+  <Marquee />
+  <Work />
+  <Services />
+  <Stats />
+  <Process />
+  <Pricing />
+  <Contact />
+</Base>

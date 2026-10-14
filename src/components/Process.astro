@@ -1,0 +1,22 @@
+<section id="process"><div class="wrap two">
+  <div class="sticky reveal"><div class="eyebrow">How it works</div><h2>From first call<br>to <span class="grad">live in days.</span></h2>
+    <p class="sub">No 40-page proposals and no six-month timelines. A clear plan, a flat price and fast, visible progress.</p>
+    <div style="margin-top:28px"><a class="btn primary magnetic" href="#contact">Get your free plan <span class="arr">→</span></a></div></div>
+  <div class="steps" id="steps"><div class="rail"><i></i></div>
+    <div class="step reveal" data-n="01"><h3>Free 20-minute call</h3><p>Tell us about your business, your customers and what's slowing you down. We'll find the smallest fix with the biggest payoff.</p></div>
+    <div class="step reveal" data-n="02"><h3>Flat quote, in writing</h3><p>A clear scope, price and timeline. Nothing starts until you say yes, and the price doesn't creep.</p></div>
+    <div class="step reveal" data-n="03"><h3>Build &amp; preview</h3><p>You get a live preview link early and watch it come together. Revisions are included.</p></div>
+    <div class="step reveal" data-n="04"><h3>Launch &amp; handoff</h3><p>We connect your domain, Google and forms, then hand over everything with simple instructions. It's all yours.</p></div>
+    <div class="step reveal" data-n="05"><h3>Grow</h3><p>Optional care plan for updates, new pages, IT questions and fixes, so your tech never falls behind.</p></div>
+  </div>
+</div></section>
+
+<script>
+// process rail progress
+const steps = document.getElementById('steps')!, rail = steps.querySelector<HTMLElement>('.rail i')!;
+addEventListener('scroll', () => {
+  const r = steps.getBoundingClientRect(), vh = innerHeight;
+  const p = Math.min(Math.max((vh * .6 - r.top) / r.height, 0), 1);
+  rail.style.setProperty('--p', p * 100 + '%');
+}, { passive: true });
+</script>

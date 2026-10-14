@@ -1,0 +1,20 @@
+---
+import { plans, addons } from '../data/pricing';
+---
+<section id="pricing"><div class="wrap">
+  <div class="head reveal"><div><div class="eyebrow">Pricing</div><h2>Flat prices.<br><span class="grad">No surprises.</span></h2></div>
+  <p class="sub">Starting points for the most common projects. Every quote is fixed and agreed before work begins.</p></div>
+  <div class="prices">
+    {plans.map((p) => (
+      <div class={p.featured ? 'price feat reveal' : 'price reveal'}>
+        {p.featured && <span class="badge">MOST POPULAR</span>}
+        <h3>{p.name}</h3><div class="amt">{p.price}<small> {p.per}</small></div>
+        <ul>{p.features.map((f) => <li>{f}</li>)}</ul>
+        {p.featured
+          ? <a class="btn primary magnetic" href="#contact">{p.cta} <span class="arr">→</span></a>
+          : <a class="btn magnetic" href="#contact">{p.cta}</a>}
+      </div>
+    ))}
+  </div>
+  <div class="addons reveal">{addons.map(([name, price]) => <span>{name} <b>{price}</b></span>)}</div>
+</div></section>

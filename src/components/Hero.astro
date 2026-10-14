@@ -1,0 +1,73 @@
+<section class="hero"><div class="wrap hero-grid">
+  <div>
+    <span class="pill"><span class="dot"><i></i></span>Now booking NWI &amp; Chicagoland projects</span>
+    <h1>
+      <span class="line"><span>We build</span></span>
+      <span class="line"><span class="grad swap" id="swap">websites</span></span>
+      <span class="line"><span>that pay for themselves.</span></span>
+    </h1>
+    <p class="lead">1337 LLC is a small business development and IT studio. We design fast, modern websites, instant-quote tools and back-office systems for local service businesses, then keep them running.</p>
+    <div class="cta">
+      <a class="btn primary magnetic" href="#contact">Book a free consult <span class="arr">→</span></a>
+      <a class="btn magnetic" href="#work">See our work</a>
+    </div>
+    <div class="trust"><span><b>7+</b> local business sites built</span><span><b>Flat</b> up-front pricing</span><span><b>You own</b> everything we build</span></div>
+  </div>
+  <div class="term tilt" aria-hidden="true">
+    <div class="term-top"><i></i><i></i><i></i><span class="mono">~/1337/deploy</span></div>
+    <div class="term-body" id="term"></div>
+  </div>
+</div>
+<div class="scroll-hint mono">scroll<i></i></div>
+</section>
+
+<script>
+import { scramble } from '../scripts/scramble';
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// rotating headline word
+const words = ['websites', 'quote tools', 'systems', 'automations', 'IT setups'];
+let wi = 0;
+const sw = document.getElementById('swap')!;
+if (!reduce) setInterval(() => { wi = (wi + 1) % words.length; scramble(sw, words[wi]); }, 2600);
+
+// terminal typing
+const lines: [string, string][] = [
+  ['<span class="p">$</span> 1337 new-site --client "local-business"', ''],
+  ['<span class="k">→</span> designing mobile-first layout', '<span class="ok">✓</span>'],
+  ['<span class="k">→</span> wiring instant quote calculator', '<span class="ok">✓</span>'],
+  ['<span class="k">→</span> google business + local seo', '<span class="ok">✓</span>'],
+  ['<span class="k">→</span> forms → inbox + text alerts', '<span class="ok">✓</span>'],
+  ['<span class="k">→</span> lighthouse score', '<span class="ok">98</span>'],
+  ['<span class="p">$</span> 1337 deploy --prod', ''],
+  ['<span class="ok">● live</span> new leads incoming <span class="w">▲ +3 today</span>', ''],
+];
+const term = document.getElementById('term')!;
+const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+async function typeTerm() {
+  term.innerHTML = '';
+  for (const [l, r] of lines) {
+    const d = document.createElement('div');
+    d.style.cssText = 'display:flex;justify-content:space-between;gap:10px;margin-bottom:9px';
+    term.appendChild(d);
+    const left = document.createElement('span');
+    d.appendChild(left);
+    if (reduce) { left.innerHTML = l; d.insertAdjacentHTML('beforeend', '<span>' + r + '</span>'); continue; }
+    const tmp = document.createElement('div');
+    tmp.innerHTML = l;
+    const plain = tmp.textContent || '';
+    for (let i = 1; i <= plain.length; i++) {
+      left.textContent = plain.slice(0, i);
+      left.insertAdjacentHTML('beforeend', '<span class="caret"></span>');
+      await wait(18 + Math.random() * 28);
+    }
+    left.innerHTML = l;
+    await wait(180);
+    d.insertAdjacentHTML('beforeend', '<span>' + r + '</span>');
+  }
+  term.insertAdjacentHTML('beforeend', '<span class="p">$</span> <span class="caret"></span>');
+  if (!reduce) setTimeout(typeTerm, 6000);
+}
+typeTerm();
+</script>

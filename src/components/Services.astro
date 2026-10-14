@@ -1,0 +1,41 @@
+<section id="services"><div class="wrap">
+  <div class="head reveal"><div><div class="eyebrow">What we do</div><h2>Everything your business<br>runs on, <span class="grad">built right.</span></h2></div>
+  <p class="sub">One local team for the website, the tools behind it and the tech that keeps it all running.</p></div>
+  <div class="bento">
+    <div class="tile w4 reveal"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M8 21h8"/></svg></div>
+      <h3>Websites that bring in calls</h3><p>Fast, mobile-first sites with click-to-call, quote forms, reviews and the local SEO groundwork Google needs to rank you.</p>
+      <div class="bars"><i style="animation-delay:-.2s"></i><i style="animation-delay:-.6s"></i><i style="animation-delay:-1s"></i><i style="animation-delay:-1.4s"></i><i style="animation-delay:-.4s"></i><i style="animation-delay:-1.8s"></i><i style="animation-delay:-.9s"></i><i style="animation-delay:-1.2s"></i><i style="animation-delay:-.1s"></i><i style="animation-delay:-1.6s"></i></div></div>
+    <div class="tile reveal"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 6h6M9 10h.01M12 10h.01M15 10h.01M9 14h.01M12 14h.01M15 14h.01M9 18h6"/></svg></div>
+      <h3>Instant quote tools</h3><p>Customers see a price before they call. Try it:</p>
+      <div class="mini-calc"><label for="sq" style="width:100%">Lawn size: <span id="sqv">5,000</span> sq ft</label><input id="sq" type="range" min="1000" max="20000" step="500" value="5000"><span class="out" id="qout">$45</span><span style="color:var(--dim)">/ visit</span></div></div>
+    <div class="tile reveal"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+      <h3>Google Business &amp; Maps</h3><p>Profile setup, categories, photos and a review engine so you show up when locals search.</p></div>
+    <div class="tile reveal"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
+      <h3>Business systems</h3><p>Spreadsheets and dashboards for jobs, invoices, expenses, mileage and profit that do the math for you.</p></div>
+    <div class="tile reveal"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+      <h3>Automation</h3><p>Forms that text you, quotes that fill themselves in, reminders and follow-ups that send on time.</p></div>
+    <div class="tile w3 reveal"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg></div>
+      <h3>IT setup &amp; support</h3><p>Business email, domains, Wi-Fi, backups, new devices and security basics. Set up right the first time, with someone local to call.</p></div>
+    <div class="tile w3 reveal"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg></div>
+      <h3>Payments &amp; field tools</h3><p>Take card, tap and even Bitcoin Lightning on site, send invoices from your phone and get paid before you leave the driveway.</p></div>
+  </div>
+</div></section>
+
+<script>
+// spotlight tiles
+document.querySelectorAll<HTMLElement>('.tile').forEach((t) => t.addEventListener('pointermove', (e) => {
+  const r = t.getBoundingClientRect();
+  t.style.setProperty('--x', e.clientX - r.left + 'px');
+  t.style.setProperty('--y', e.clientY - r.top + 'px');
+}));
+
+// mini quote calc
+const sq = document.getElementById('sq') as HTMLInputElement, sqv = document.getElementById('sqv')!, qo = document.getElementById('qout')!;
+function q() {
+  const v = +sq.value;
+  sqv.textContent = v.toLocaleString();
+  qo.textContent = '$' + Math.max(35, Math.round((25 + v * .004) / 5) * 5);
+}
+sq.addEventListener('input', q);
+q();
+</script>
