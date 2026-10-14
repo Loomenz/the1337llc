@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://the1337llc.com/sitemap.xml
