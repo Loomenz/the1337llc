@@ -41,16 +41,22 @@ It appears at `/blog/<url-name>/` and on `/blog/`. Add `draft: true` to keep it 
 
 ## Hosting (VPS, Laravel Forge)
 
-- Site: the1337llc.com (alias www.the1337llc.com) on the Forge server 72.61.1.95.
+- Site: the1337llc.com on the Forge server 72.61.1.95 (Static HTML site). www redirects to the1337llc.com.
 - Web directory: `/dist`
-- Deploy script:
+- Zero-downtime deploys. Deploy script:
 
 ```
-cd $FORGE_SITE_PATH
-git pull origin $FORGE_SITE_BRANCH
+$CREATE_RELEASE()
+
+cd $FORGE_RELEASE_DIRECTORY
+
 npm ci
 npm run build
+
+$ACTIVATE_RELEASE()
 ```
 
-Quick Deploy is on, so pushing to `main` updates the live site.
+Push to deploy is on, so pushing to `main` updates the live site. A deploy only builds this site's
+own release folder; it restarts nothing and doesn't affect other sites on the server.
+SSL: Let's Encrypt, managed in Forge.
 The contact form posts to FormSubmit, which emails the1337llc@gmail.com.
