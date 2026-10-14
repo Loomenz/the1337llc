@@ -1,0 +1,13 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import { projects } from '../data/work';
+---
+<section id="work"><div class="wrap">
+  <div class="head reveal">
+    <div><div class="eyebrow">Selected work</div><h2>Built for businesses<br>that <span class="grad">get their hands dirty.</span></h2></div>
+    <p class="sub">Real sites for real local companies. Hover a card to scroll through the build.</p>
+  </div>
+  <div class="work">
+    {projects.map((p) => <ProjectCard project={p} />)}
+  </div>
+</div></section>

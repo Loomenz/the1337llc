@@ -1,0 +1,17 @@
+{
+  "name": "the1337llc",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build --force",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "5.18.2"
+  },
+  "engines": {
+    "node": ">=18.20.8"
+  }
+}

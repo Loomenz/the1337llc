@@ -1,0 +1,102 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  image?: string;
+}
+
+const {
+  title = '1337 LLC | Websites, Systems & IT for NWI & Chicagoland Businesses',
+  description = '1337 LLC builds high-converting websites, instant quote calculators, business systems and IT for local service businesses across Northwest Indiana and Chicagoland. See our work and book a free consult.',
+  ogTitle = title,
+  ogDescription = description,
+  image = '/work/spk-lawn.jpg',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{title}</title>
+<meta name="description" content={description}>
+<link rel="canonical" href={canonical}>
+<meta property="og:title" content={ogTitle}>
+<meta property="og:description" content={ogDescription}>
+<meta property="og:image" content={ogImage}>
+<meta name="theme-color" content="#05070d">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2305070d'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='26' font-weight='700' text-anchor='middle' fill='%2339ff88'%3E1337%3C/text%3E%3C/svg%3E">
+<slot name="head" />
+</head>
+<body>
+<div class="bg"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<div class="gridbg"></div><div class="noise"></div><div class="cursor" id="glow"></div>
+
+<Header />
+
+<main id="top">
+<slot />
+</main>
+
+<Footer />
+
+<script>
+import { scramble } from '../scripts/scramble';
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fine = matchMedia('(pointer: fine)').matches;
+document.getElementById('yr')!.textContent = String(new Date().getFullYear());
+
+// nav state
+const nav = document.getElementById('nav')!;
+addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 30), { passive: true });
+
+// cursor glow
+const glow = document.getElementById('glow')!;
+if (fine && !reduce) {
+  addEventListener('pointermove', (e) => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; }, { passive: true });
+} else glow.style.display = 'none';
+
+// scramble on hover
+document.querySelectorAll<HTMLElement>('[data-scramble]').forEach((el) => {
+  const t = el.textContent || '';
+  el.addEventListener('mouseenter', () => scramble(el, t, 600));
+});
+
+// reveal on scroll
+const io = new IntersectionObserver((es) => es.forEach((e) => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll<HTMLElement>('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 3) * 80 + 'ms'; io.observe(el); });
+
+// tilt
+if (fine && !reduce) document.querySelectorAll<HTMLElement>('.tilt').forEach((c) => {
+  c.addEventListener('pointermove', (e) => {
+    const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+    c.style.transform = `perspective(1100px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translateY(-4px)`;
+  });
+  c.addEventListener('pointerleave', () => c.style.transform = '');
+});
+
+// magnetic buttons
+if (fine && !reduce) document.querySelectorAll<HTMLElement>('.magnetic').forEach((b) => {
+  b.addEventListener('pointermove', (e) => {
+    const r = b.getBoundingClientRect();
+    b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .18}px,${(e.clientY - r.top - r.height / 2) * .28}px)`;
+  });
+  b.addEventListener('pointerleave', () => b.style.transform = '');
+});
+</script>
+</body>
+</html>

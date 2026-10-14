@@ -1,0 +1,24 @@
+<section style="padding-top:0"><div class="wrap stats">
+  <div class="stat reveal"><b><span class="count" data-to="7">0</span>+</b><span>local business sites built</span></div>
+  <div class="stat reveal"><b><span class="count" data-to="7">0</span></b><span>core services under one roof</span></div>
+  <div class="stat reveal"><b>$<span class="count" data-to="0">0</span></b><span>lock-in. You own it all.</span></div>
+  <div class="stat reveal"><b><span class="count" data-to="1">0</span> day</b><span>reply on every inquiry</span></div>
+</div></section>
+
+<script>
+// counters
+const cio = new IntersectionObserver((es) => es.forEach((e) => {
+  if (!e.isIntersecting) return;
+  const el = e.target as HTMLElement, to = +(el.dataset.to || 0);
+  let t0: number | null = null;
+  const step = (ts: number) => {
+    if (!t0) t0 = ts;
+    const p = Math.min((ts - t0) / 1400, 1);
+    el.textContent = String(Math.round(to * (1 - Math.pow(1 - p, 3))));
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+  cio.unobserve(el);
+}), { threshold: .6 });
+document.querySelectorAll('.count').forEach((el) => cio.observe(el));
+</script>
