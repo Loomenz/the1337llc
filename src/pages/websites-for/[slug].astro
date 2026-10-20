@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import AuditCta from '../../components/AuditCta.astro';
+import { trades } from '../../data/trades';
+
+export function getStaticPaths() {
+  return trades.map((trade) => ({ params: { slug: trade.slug }, props: { trade } }));
+}
+
+const { trade } = Astro.props;
+---
+<Base title={trade.title} description={trade.description} image={trade.example.image}>
+  <article class="post"><div class="wrap">
+    <a class="mono back" href="/services/">← All services</a>
+    <div class="eyebrow" style="margin-top:20px">Websites for {trade.trade}</div>
+    <h1>Websites for {trade.trade} in Northwest Indiana</h1>
+    <div class="prose">
+      <p>{trade.intro}</p>
+      <p>Before 1337 LLC, our founder spent years working in construction, so we know how your customers think and how little time you have for this stuff.</p>
+      <h2>What your site needs</h2>
+      <ul>{trade.needs.map((n) => <li>{n}</li>)}</ul>
+      <h2>Example: {trade.example.name}</h2>
+      <p>{trade.example.note}</p>
+      <a href={trade.example.url} target="_blank" rel="noopener"><img src={trade.example.image} alt={`${trade.example.name} website`} loading="lazy"></a>
+      <p>See more in <a href="/#work">our work</a>, or read about <a href="/services/websites/">websites</a> and <a href="/services/local-seo/">local SEO</a>.</p>
+    </div>
+    <AuditCta />
+  </div></article>
+</Base>

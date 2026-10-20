@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import AuditCta from '../../components/AuditCta.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
@@ -17,6 +18,6 @@ const date = post.data.date.toLocaleDateString('en-US', { year: 'numeric', month
     <h1>{post.data.title}</h1>
     <p class="mono date">{date}</p>
     <div class="prose"><Content /></div>
-    <div style="margin-top:48px"><a class="btn primary magnetic" href="/#contact">Book a free consult <span class="arr">→</span></a></div>
+    <AuditCta />
   </div></article>
 </Base>

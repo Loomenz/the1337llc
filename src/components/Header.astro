@@ -2,13 +2,14 @@
 // Links point at sections of the home page, so they work from any page.
 const links = [
   { href: '/#work', label: 'Work' },
-  { href: '/#services', label: 'Services' },
+  { href: '/services/', label: 'Services' },
   { href: '/#process', label: 'Process' },
   { href: '/#pricing', label: 'Pricing' },
+  { href: '/blog/', label: 'Blog' },
 ];
 ---
 <header><div class="wrap"><nav class="nav" id="nav">
   <a class="logo" href="/#top"><span class="mono" data-scramble>1337</span> LLC</a>
   <div class="links">{links.map((l) => <a href={l.href}>{l.label}</a>)}</div>
-  <a class="btn primary magnetic" href="/#contact">Start a project <span class="arr">→</span></a>
+  <a class="btn primary magnetic" href="/free-audit/">Free Google check <span class="arr">→</span></a>
 </nav></div></header>

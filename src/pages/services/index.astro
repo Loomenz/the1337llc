@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import AuditCta from '../../components/AuditCta.astro';
+import { services } from '../../data/services';
+import { trades } from '../../data/trades';
+---
+<Base title="Services | 1337 LLC" description="Websites, local SEO, AI lead tools, business systems and IT for Northwest Indiana and Chicagoland contractors and small businesses.">
+  <section class="post-list"><div class="wrap">
+    <div class="eyebrow">Services</div>
+    <h2>Everything that gets you <span class="grad">more calls.</span></h2>
+    <div class="posts">{services.map((s) => (
+      <a class="post-card" href={`/services/${s.slug}/`}>
+        <span class="mono">{s.name}</span>
+        <h3>{s.headline}</h3>
+        <p>{s.description}</p>
+      </a>
+    ))}</div>
+    <h2 style="margin-top:80px">Built for <span class="grad">your trade.</span></h2>
+    <div class="posts">{trades.map((t) => (
+      <a class="post-card" href={`/websites-for/${t.slug}/`}>
+        <span class="mono">Websites for</span>
+        <h3>{t.trade}</h3>
+        <p>{t.description}</p>
+      </a>
+    ))}</div>
+    <AuditCta />
+  </div></section>
+</Base>

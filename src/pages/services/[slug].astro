@@ -1,0 +1,34 @@
+---
+import Base from '../../layouts/Base.astro';
+import AuditCta from '../../components/AuditCta.astro';
+import { services } from '../../data/services';
+
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+
+const { service } = Astro.props;
+const faq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: service.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+};
+---
+<Base title={service.title} description={service.description}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faq)} />
+  <article class="post"><div class="wrap">
+    <a class="mono back" href="/services/">← All services</a>
+    <div class="eyebrow" style="margin-top:20px">{service.name}</div>
+    <h1>{service.headline}</h1>
+    <div class="prose">
+      <p>{service.intro}</p>
+      <h2>What's included</h2>
+      <ul>{service.includes.map((i) => <li>{i}</li>)}</ul>
+      <h2>Who it's for</h2>
+      <p>{service.forWho}</p>
+      <h2>Questions</h2>
+      {service.faq.map(([q, a]) => <><h3>{q}</h3><p>{a}</p></>)}
+    </div>
+    <AuditCta />
+  </div></article>
+</Base>
