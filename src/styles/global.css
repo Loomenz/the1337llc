@@ -129,8 +129,6 @@ h2{font-size:clamp(2rem,4.6vw,3.6rem);line-height:1.04;letter-spacing:-.03em;mar
 .tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 .tags span{font-family:var(--mono);font-size:.7rem;color:var(--mute);border:1px solid var(--line2);padding:4px 9px;border-radius:999px;white-space:nowrap}
 .tags span.hot{color:var(--g);border-color:rgba(57,255,136,.35)}
-.hvac{background:radial-gradient(120% 90% at 0% 100%,rgba(251,146,60,.55),transparent 55%),radial-gradient(120% 90% at 100% 0%,rgba(34,211,238,.55),transparent 55%),#070b15}
-.hvac .overlay h4 .ice{background:linear-gradient(90deg,#22d3ee,#7dd3fc,#fb923c);-webkit-background-clip:text;background-clip:text;color:transparent}
 
 /* ---------- bento services ---------- */
 .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}

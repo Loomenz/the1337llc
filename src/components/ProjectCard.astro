@@ -13,9 +13,6 @@ const cls = ['proj', p.size === 'full' ? '' : p.size, 'reveal', 'tilt'].filter(B
     {p.kind === 'hero' && (
       <div class="shot hero-img" style={`background-image:url(${p.image})`}><div class="zoom"></div><div class="overlay"><h4 set:html={p.headline}></h4><p>{p.caption}</p></div></div>
     )}
-    {p.kind === 'hvac' && (
-      <div class="shot hvac"><div class="overlay"><h4 set:html={p.headline}></h4><p>{p.caption}</p></div></div>
-    )}
   </div>
   <div class="meta"><div><h3>{p.name}</h3><p>{p.blurb}</p></div><div class="tags">{p.tags.map((t) => <span class={t.hot ? 'hot' : undefined}>{t.label}</span>)}</div></div>
 </article>
