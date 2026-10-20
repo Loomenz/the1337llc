@@ -9,12 +9,14 @@ export interface Plan {
 }
 
 export const plans: Plan[] = [
-  { name: 'Starter', price: '$499', per: 'one-time', cta: 'Get started',
-    features: ['One-page, mobile-first site', 'Quote request form & click-to-call', 'Google-ready SEO basics', 'Domain & hosting setup'] },
-  { name: 'Growth', price: '$999', per: 'one-time', cta: 'Book a consult', featured: true,
-    features: ['Up to 5 custom pages', 'Instant quote calculator', 'Google Business Profile setup', 'Animations & premium design', 'Local SEO service-area pages'] },
-  { name: 'Care plan', price: '$79', per: '/ month', cta: 'Add care',
-    features: ['Updates & new content', 'Hosting, domain & email help', 'IT questions answered', 'Monthly check-up'] },
+  { name: 'Starter', price: '$1,200', per: 'one-time', cta: 'Get started',
+    features: ['Up to 3 mobile-first pages', 'Quote request form & click-to-call', 'Google-ready SEO basics', 'Domain, hosting & SSL setup'] },
+  { name: 'Growth', price: '$2,500', per: 'one-time', cta: 'Book a consult', featured: true,
+    features: ['Up to 8 custom pages', 'Instant quote calculator', 'Google Business Profile setup', 'Animations & premium design', 'Local SEO service-area pages'] },
+  { name: 'Care plan', price: '$149', per: '/ month', cta: 'Add care',
+    features: ['Hosting, SSL & backups', 'Small edits each month', 'Google Business posts', 'Monthly check-up report'] },
+  { name: 'Growth plan', price: '$299', per: '/ month', cta: 'Grow with us',
+    features: ['Everything in Care', 'A new service or town page monthly', 'Automatic review requests', 'Monthly ranking & calls report', 'Quarterly strategy call'] },
 ];
 
 export const addons: [string, string][] = [
