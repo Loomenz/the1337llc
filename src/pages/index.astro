@@ -16,14 +16,14 @@ const schema = {
   url: 'https://the1337llc.com/',
   email: 'the1337llc@gmail.com',
   image: 'https://the1337llc.com/work/spk-lawn.jpg',
-  description: 'Websites, quote calculators, business systems and IT for local businesses.',
+  description: 'Websites, local SEO, AI integrations and small business development for local businesses.',
   areaServed: [{ '@type': 'Place', name: 'Northwest Indiana' }, { '@type': 'Place', name: 'Chicagoland' }],
   address: { '@type': 'PostalAddress', addressRegion: 'IN', addressCountry: 'US' },
 };
 ---
 <Base
   ogTitle="1337 LLC | Tech that pays for itself"
-  ogDescription="Websites, quote calculators, business systems and IT for Northwest Indiana and Chicagoland businesses."
+  ogDescription="Websites, SEO, AI integrations and small business development for Northwest Indiana and Chicagoland businesses."
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} />
   <Hero />

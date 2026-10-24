@@ -56,6 +56,28 @@ export const services: Service[] = [
     ],
   },
   {
+    slug: 'ai-integrations',
+    name: 'AI Integrations',
+    title: 'AI Chatbots & AI Integration for Small Businesses in NWI | 1337 LLC',
+    description: 'AI chat assistants for your website, AI-powered follow-up and practical automation for Northwest Indiana and Chicagoland small businesses. Set up, trained and supported locally.',
+    headline: 'Put AI to work in your business',
+    intro: 'AI is not just for big companies. We set up practical AI tools that save small businesses real hours: a chat assistant on your website that answers questions and books leads at 2am, follow-ups that write themselves, and help turning messy notes into quotes, posts and emails. We pick what fits, set it up, train it on your business and keep it running.',
+    includes: [
+      'AI chat assistant on your website, trained on your services, prices and service area',
+      'Leads from the chat sent straight to your phone or inbox',
+      'AI-assisted follow-up, review requests and customer replies',
+      'Help writing quotes, job descriptions, posts and emails',
+      'Connecting the tools you already use so data moves on its own',
+      'Plain-English training for you and your crew',
+    ],
+    forWho: 'Owners who keep hearing about AI and want it doing real work in their business, without learning a pile of new software.',
+    faq: [
+      ['Will the chatbot make things up?', 'We limit it to your business info and set clear rules. When it does not know, it takes the customer\'s details and passes them to you.'],
+      ['What does AI cost to run?', 'For most small businesses the AI usage itself costs a few dollars to a few tens of dollars a month. We quote setup flat and tell you the running cost up front.'],
+      ['Do I need to be good with tech?', 'No. We set it up and keep it running. You just get the leads.'],
+    ],
+  },
+  {
     slug: 'ai-lead-tools',
     name: 'AI Lead Tools',
     title: 'AI Lead Follow-Up & Automation for Contractors | 1337 LLC',
@@ -73,6 +95,27 @@ export const services: Service[] = [
     faq: [
       ['Will it sound like a robot?', 'No. Messages are written in your voice and you approve them before anything goes live.'],
       ['Do I need new software?', 'Usually not. We work with your phone, email and website and keep it as simple as possible.'],
+    ],
+  },
+  {
+    slug: 'business-development',
+    name: 'Small Business Development',
+    title: 'Small Business Development & Growth Planning in Northwest Indiana | 1337 LLC',
+    description: 'Hands-on small business development for Northwest Indiana and Chicagoland owners: growth plans, offers and pricing, lead tracking, marketing and the systems to run it.',
+    headline: 'A plan to grow, and the tools to do it',
+    intro: 'A website is one piece. Growth comes from knowing who your best customers are, what to charge, where your leads come from and following up on every one. We work with you like an in-house growth partner: build the plan, set up the website, marketing and systems behind it, and check the numbers with you every month.',
+    includes: [
+      'Growth plan: target customers, services and goals',
+      'Offer and pricing review',
+      'Lead tracking from first call to paid job',
+      'Marketing plan: Google, reviews, social and email',
+      'Simple monthly dashboard of calls, leads and revenue',
+      'Monthly check-ins to adjust what is not working',
+    ],
+    forWho: 'New and growing small business owners who are great at the work and want help with the business side: getting customers, pricing and staying organized.',
+    faq: [
+      ['Is this consulting or do you do the work?', 'Both. We help make the plan and then build the website, tools and marketing to carry it out.'],
+      ['I just started my business. Is it too early?', 'No. It is the best time to set up the basics right so you are not fixing them later.'],
     ],
   },
   {

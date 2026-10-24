@@ -6,7 +6,7 @@
       <span class="line"><span class="grad swap" id="swap">websites</span></span>
       <span class="line"><span>that pay for themselves.</span></span>
     </h1>
-    <p class="lead">1337 LLC is a small business development and IT studio. We design fast, modern websites, instant-quote tools and back-office systems for local service businesses, then keep them running.</p>
+    <p class="lead">1337 LLC is a small business development studio. We build fast websites, get you found on Google and put AI to work answering customers, capturing leads and handling the busywork, then keep it all running.</p>
     <div class="cta">
       <a class="btn primary magnetic" href="/free-audit/">Get a free Google check <span class="arr">→</span></a>
       <a class="btn magnetic" href="#work">See our work</a>
@@ -27,7 +27,7 @@ import { scramble } from '../scripts/scramble';
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // rotating headline word
-const words = ['websites', 'quote tools', 'systems', 'automations', 'IT setups'];
+const words = ['websites', 'AI assistants', 'SEO', 'quote tools', 'automations', 'growth plans'];
 let wi = 0;
 const sw = document.getElementById('swap')!;
 if (!reduce) setInterval(() => { wi = (wi + 1) % words.length; scramble(sw, words[wi]); }, 2600);
@@ -38,6 +38,7 @@ const lines: [string, string][] = [
   ['<span class="k">→</span> designing mobile-first layout', '<span class="ok">✓</span>'],
   ['<span class="k">→</span> wiring instant quote calculator', '<span class="ok">✓</span>'],
   ['<span class="k">→</span> google business + local seo', '<span class="ok">✓</span>'],
+  ['<span class="k">→</span> ai chat assistant: trained on your business', '<span class="ok">✓</span>'],
   ['<span class="k">→</span> forms → inbox + text alerts', '<span class="ok">✓</span>'],
   ['<span class="k">→</span> lighthouse score', '<span class="ok">98</span>'],
   ['<span class="p">$</span> 1337 deploy --prod', ''],
