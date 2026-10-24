@@ -73,7 +73,7 @@ export const services: Service[] = [
     forWho: 'Owners who keep hearing about AI and want it doing real work in their business, without learning a pile of new software.',
     faq: [
       ['Will the chatbot make things up?', 'We limit it to your business info and set clear rules. When it does not know, it takes the customer\'s details and passes them to you.'],
-      ['What does AI cost to run?', 'For most small businesses the AI usage itself costs a few dollars to a few tens of dollars a month. We quote setup flat and tell you the running cost up front.'],
+      ['What does it cost?', 'Setup is a flat quote, and we tell you any monthly running cost up front before anything goes live.'],
       ['Do I need to be good with tech?', 'No. We set it up and keep it running. You just get the leads.'],
     ],
   },
