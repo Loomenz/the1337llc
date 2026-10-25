@@ -19,7 +19,7 @@ function getClaude() {
 }
 
 export const OFFLINE_REPLY =
-  "Sorry, the chat can't answer right now. Email the1337llc@gmail.com or use the [Contact](/#contact) form and we'll reply within one business day.";
+  "Sorry, the chat can't answer right now. Email ryan@the1337llc.com or use the [Contact](/#contact) form and we'll reply within one business day.";
 
 /**
  * Turns the visitor's chat into Claude messages: last 6 turns, starting with the visitor,

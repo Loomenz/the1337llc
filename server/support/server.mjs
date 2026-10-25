@@ -45,7 +45,7 @@ export function createServer() {
         send(res, result.status, result.body);
       } catch (err) {
         console.error('[SupportBot] Request failed:', err.message);
-        send(res, 500, { error: 'Sorry, something went wrong. Email the1337llc@gmail.com.' });
+        send(res, 500, { error: 'Sorry, something went wrong. Email ryan@the1337llc.com.' });
       }
     });
   });
