@@ -6,9 +6,12 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build --force",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "test": "node --test test/**/*.test.mjs",
+    "chat": "node server/support/server.mjs"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.137.0",
     "astro": "5.18.2"
   },
   "engines": {
