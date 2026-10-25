@@ -59,4 +59,4 @@ $ACTIVATE_RELEASE()
 Push to deploy is on, so pushing to `main` updates the live site. A deploy only builds this site's
 own release folder; it restarts nothing and doesn't affect other sites on the server.
 SSL: Let's Encrypt, managed in Forge.
-The contact form posts to FormSubmit, which emails the1337llc@gmail.com.
+The contact and free-check forms post to FormSubmit, which emails ryan@the1337llc.com.
