@@ -38,7 +38,7 @@ FREE GOOGLE CHECK
 - Request it at [Free Google check](/free-audit/).
 
 CONTACT
-- Email: the1337llc@gmail.com
+- Email: ryan@the1337llc.com
 - Contact form on the home page: [Contact](/#contact). We reply within one business day with ideas and a flat quote.
 - There is no public phone number. Don't make one up; offer the email, the contact form or the free Google check instead.
 - Blog with tips for local business owners: [Blog](/blog/).

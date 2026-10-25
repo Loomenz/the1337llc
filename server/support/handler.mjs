@@ -29,7 +29,7 @@ function parseTurns(body) {
   const last = raw[raw.length - 1];
   if (last.role !== 'user' || !last.text.trim()) return 'Please type a question.';
   if (last.text.length > MAX_MESSAGE_CHARS) {
-    return `Please keep your message under ${MAX_MESSAGE_CHARS} characters, or email the1337llc@gmail.com.`;
+    return `Please keep your message under ${MAX_MESSAGE_CHARS} characters, or email ryan@the1337llc.com.`;
   }
   turns[turns.length - 1] = { role: 'user', text: last.text };
   return turns;

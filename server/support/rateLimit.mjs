@@ -31,10 +31,10 @@ export function takeChatSlot(ip, now = Date.now()) {
     return { ok: false, message: "You're sending messages quickly. Please wait a minute and try again." };
   }
   if ((daily.get(ip) || 0) >= perIpDay) {
-    return { ok: false, message: "That's the chat limit for today. Email the1337llc@gmail.com or use the contact form." };
+    return { ok: false, message: "That's the chat limit for today. Email ryan@the1337llc.com or use the contact form." };
   }
   if ((daily.get('*') || 0) >= perDay) {
-    return { ok: false, message: 'The chat is resting for today. Email the1337llc@gmail.com or use the contact form.' };
+    return { ok: false, message: 'The chat is resting for today. Email ryan@the1337llc.com or use the contact form.' };
   }
 
   recent.push(now);

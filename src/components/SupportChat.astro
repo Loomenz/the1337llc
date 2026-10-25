@@ -4,7 +4,7 @@
 <div class="chat" id="chat">
   <div class="panel" id="chat-panel" role="dialog" aria-label="Chat with 1337 LLC" hidden>
     <div class="head">
-      <div><strong>1337 LLC</strong><span>Automated assistant · <a href="mailto:the1337llc@gmail.com">the1337llc@gmail.com</a> for a person</span></div>
+      <div><strong>1337 LLC</strong><span>Automated assistant · <a href="mailto:ryan@the1337llc.com">ryan@the1337llc.com</a> for a person</span></div>
       <button type="button" id="chat-close" aria-label="Close chat">×</button>
     </div>
     <div class="list" id="chat-list" aria-live="polite"></div>
@@ -114,7 +114,7 @@ form.addEventListener('submit', async (e) => {
   input.value = '';
   sending = true;
   render();
-  let reply = "Sorry, the chat couldn't connect. Email the1337llc@gmail.com.";
+  let reply = "Sorry, the chat couldn't connect. Email ryan@the1337llc.com.";
   try {
     const res = await fetch('/api/support', {
       method: 'POST',

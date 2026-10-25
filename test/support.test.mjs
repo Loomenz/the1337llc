@@ -76,7 +76,7 @@ test('both fail -> offline reply with the email and contact form', async () => {
   reply = () => badRequest;
   const out = await ask('Hello?');
   assert.equal(out.body.reply, bot.OFFLINE_REPLY);
-  assert.match(out.body.reply, /the1337llc@gmail\.com/);
+  assert.match(out.body.reply, /ryan@the1337llc.com/);
   assert.match(out.body.reply, /\/#contact/);
 });
 
