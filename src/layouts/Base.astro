@@ -17,7 +17,7 @@ const {
   description = '1337 LLC builds high-converting websites, instant quote calculators, business systems and IT for local service businesses across Northwest Indiana and Chicagoland. See our work and book a free consult.',
   ogTitle = title,
   ogDescription = description,
-  image = '/work/spk-lawn.jpg',
+  image = '/og-image.png',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -37,7 +37,10 @@ const ogImage = new URL(image, Astro.site);
 <meta name="theme-color" content="#05070d">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2305070d'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='26' font-weight='700' text-anchor='middle' fill='%2339ff88'%3E1337%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <slot name="head" />
 <script is:inline>
   // Always open at the top (phones restore the old scroll spot on reload/revisit)
