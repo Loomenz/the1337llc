@@ -1,0 +1,19 @@
+---
+// Closing call to action for inner pages: start a project, or get the free Google check.
+interface Props {
+  title?: string;
+  text?: string;
+}
+const {
+  title = 'Ready when you are.',
+  text = 'Tell us what you need and we reply within one business day with ideas and a fixed quote.',
+} = Astro.props;
+---
+<section style="padding-top:0"><div class="wrap"><div class="cta-box reveal">
+  <h2>{title}</h2>
+  <p class="sub">{text}</p>
+  <div class="cta-row">
+    <a class="btn primary magnetic" href="/contact/">Start a project <span class="arr">→</span></a>
+    <a class="btn magnetic" href="/free-audit/">Free Google check</a>
+  </div>
+</div></div></section>

@@ -3,8 +3,8 @@
 
 const BARS = [7.4, 22.2, 22.2, 51.8]; // bar heights from the logo (viewBox 55 x 52)
 const DEPTH = 10;
-const GREEN = [57, 255, 136];
-const CYAN = [34, 211, 238];
+const LIGHT = [236, 236, 236];
+const GREY = [160, 160, 160];
 
 type P = { x: number; y: number; z: number; sx: number; sy: number; sz: number; d: number; ox: number; oy: number; vx: number; vy: number; c: string };
 
@@ -30,7 +30,7 @@ function sample(n: number): P[] {
       const y = f.o[1] + f.u[1] * a + f.v[1] * b - 26;
       const z = f.o[2] + f.u[2] * a + f.v[2] * b;
       const t = 1 - (y + 26) / 51.8;
-      const col = GREEN.map((g, i) => Math.round(g + (CYAN[i] - g) * t)).join(',');
+      const col = LIGHT.map((g, i) => Math.round(g + (GREY[i] - g) * t)).join(',');
       const th = Math.random() * Math.PI * 2, ph = Math.acos(Math.random() * 2 - 1), r = 140 + Math.random() * 120;
       pts.push({ x, y, z, sx: r * Math.sin(ph) * Math.cos(th), sy: r * Math.cos(ph), sz: r * Math.sin(ph) * Math.sin(th),
         d: Math.random() * 0.5, ox: 0, oy: 0, vx: 0, vy: 0, c: col });
@@ -70,7 +70,7 @@ export function heroMark() {
     ctx.clearRect(0, 0, w, h);
 
     // drifting dust for depth
-    ctx.fillStyle = 'rgba(148,160,184,.35)';
+    ctx.fillStyle = 'rgba(155,155,155,.35)';
     for (const d of dust) {
       const y = (d.y - time * d.s) % 1, yy = (y < 0 ? y + 1 : y) * h;
       ctx.fillRect(d.x * w, yy, 1 + d.r, 1 + d.r);

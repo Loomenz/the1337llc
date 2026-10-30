@@ -6,9 +6,8 @@ import Work from '../components/Work.astro';
 import Services from '../components/Services.astro';
 import Systems from '../components/Systems.astro';
 import Stats from '../components/Stats.astro';
-import Process from '../components/Process.astro';
 import Pricing from '../components/Pricing.astro';
-import Contact from '../components/Contact.astro';
+import CtaBand from '../components/CtaBand.astro';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -29,11 +28,10 @@ const schema = {
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} />
   <Hero />
   <Marquee />
-  <Work />
+  <Work limit={2} />
   <Services />
   <Systems more />
   <Stats />
-  <Process />
-  <Pricing />
-  <Contact />
+  <Pricing teaser />
+  <CtaBand title="Got a business? Let's make it 1337." />
 </Base>

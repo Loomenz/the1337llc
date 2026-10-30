@@ -1,13 +1,21 @@
 ---
 import ProjectCard from './ProjectCard.astro';
 import { projects } from '../data/work';
+
+interface Props {
+  limit?: number; // home page shows a preview row and links to /work/
+  bare?: boolean; // leave out the heading when the page hero already has one
+}
+const { limit, bare = false } = Astro.props;
+const shown = limit ? projects.slice(0, limit) : projects;
 ---
-<section id="work"><div class="wrap">
-  <div class="head reveal">
+<section id="work" class={bare ? "flush" : undefined}><div class="wrap">
+  {!bare && (<div class="head reveal">
     <div><div class="eyebrow">Selected work</div><h2>Built for businesses<br>that <span class="grad">get their hands dirty.</span></h2></div>
     <p class="sub">Real sites for real local companies. Hover a card to scroll through the build.</p>
-  </div>
+  </div>)}
   <div class="work">
-    {projects.map((p) => <ProjectCard project={p} />)}
+    {shown.map((p) => <ProjectCard project={p} />)}
   </div>
+  {limit && <div class="more-link reveal"><a class="btn magnetic" href="/work/">See all work <span class="arr">→</span></a></div>}
 </div></section>
