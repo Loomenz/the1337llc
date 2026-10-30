@@ -37,7 +37,8 @@ header{position:fixed;top:14px;left:0;right:0;z-index:50}
   border:1px solid var(--line);border-radius:999px;transition:background .3s,border-color .3s}
 .nav.scrolled{background:rgba(10,14,26,.85);border-color:var(--line2)}
 .logo{font-weight:700;font-size:1.15rem;display:flex;align-items:center;gap:8px;letter-spacing:.3px}
-.logo .mono{color:var(--g);text-shadow:0 0 18px rgba(57,255,136,.6)}
+.logo .mark{width:26px;height:25px;filter:drop-shadow(0 0 10px rgba(57,255,136,.35))}
+.logo .llc{color:var(--mute);font-weight:500}
 .links{display:flex;gap:4px}
 .links a{color:var(--mute);font-size:.92rem;padding:8px 14px;border-radius:999px;transition:color .2s,background .2s}
 .links a:hover{color:var(--ink);background:rgba(255,255,255,.06)}

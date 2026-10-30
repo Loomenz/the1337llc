@@ -1,0 +1,24 @@
+# systemd user service for the website chat endpoint (copy to ~/.config/systemd/user/ on the VPS).
+#   systemctl --user daemon-reload && systemctl --user enable --now the1337llc-chat.service
+# nginx (Forge > the1337llc.com > Edit Nginx, inside the server block):
+#   location /api/support { proxy_pass http://127.0.0.1:3137; proxy_set_header Host $host;
+#     proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#     client_max_body_size 64k; }
+# Forge deploy script, after npm ci and the build: systemctl --user restart the1337llc-chat.service
+[Unit]
+Description=1337 LLC website chat (Claude)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/forge/the1337llc.com/current
+EnvironmentFile=/home/forge/the1337llc.com/.env
+Environment=NODE_ENV=production
+Environment=PORT=3137
+ExecStart=/usr/bin/node server/support/server.mjs
+Restart=always
+RestartSec=5
+MemoryMax=200M
+
+[Install]
+WantedBy=default.target
