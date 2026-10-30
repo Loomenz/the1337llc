@@ -27,7 +27,7 @@ import { scramble } from '../scripts/scramble';
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // rotating headline word
-const words = ['websites', 'payment systems', 'AI assistants', 'marketplaces', 'online stores', 'automations'];
+const words = ['websites', 'payments', 'AI tools', 'stores', 'systems', 'apps'];
 let wi = 0;
 const sw = document.getElementById('swap')!;
 if (!reduce) setInterval(() => { wi = (wi + 1) % words.length; scramble(sw, words[wi]); }, 2600);
