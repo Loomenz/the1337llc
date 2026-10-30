@@ -7,7 +7,7 @@ import { trades } from '../data/trades';
 export const GET: APIRoute = async ({ site }) => {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
   const paths = [
-    '/', '/free-audit/', '/services/',
+    '/', '/free-audit/', '/services/', '/systems/',
     ...services.map((s) => `/services/${s.slug}/`),
     ...trades.map((t) => `/websites-for/${t.slug}/`),
     ...(posts.length ? ['/blog/', ...posts.map((p) => `/blog/${p.id}/`)] : []),

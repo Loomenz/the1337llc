@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import Systems from '../components/Systems.astro';
+import Contact from '../components/Contact.astro';
+
+const steps: [string, string][] = [
+  ['Talk it through', 'A free call about what the system needs to do, who uses it and how you get paid. No tech talk needed.'],
+  ['Fixed quote & plan', 'You get a written scope, a fixed price and a timeline before any work starts.'],
+  ['Build & test', 'We build in stages you can click through, and test every flow, payment and email before launch.'],
+  ['Launch & run it', 'We host it, back it up, watch it and keep improving it. You own the code and the data.'],
+];
+
+const faq: [string, string][] = [
+  ['What kinds of systems do you build?', 'Payment and checkout systems, marketplaces, online stores, booking tools, customer portals, dashboards, AI assistants and integrations between the tools you already use. If you can describe what it should do, we can quote it.'],
+  ['Do you only work with local businesses?', 'No. We are based in Northwest Indiana and work with businesses anywhere, remotely or in person.'],
+  ['How much does a custom system cost?', 'It depends on what it needs to do. Every project gets a fixed quote after a free call, so you know the full price before we start.'],
+  ['Who owns it when it is done?', 'You do. The code, the data and the accounts are yours. We can keep hosting and running it on a monthly plan, or hand it off.'],
+  ['Can you take payments without card processors?', 'Yes. We have built checkout over Bitcoin Lightning, Cash App and Strike with instant payouts, and we can also wire up standard card payments.'],
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+};
+---
+<Base
+  title="Custom Software, Payment Systems & Marketplaces | 1337 LLC"
+  description="Custom payment systems, marketplaces, online stores, AI assistants and business software, built and run by 1337 LLC in Northwest Indiana for businesses anywhere. Get a fixed quote."
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <Systems />
+  <section style="padding-top:0"><div class="wrap">
+    <div class="head reveal"><div><div class="eyebrow">How it works</div><h2>From idea to <span class="grad">running system.</span></h2></div></div>
+    <div class="posts">{steps.map(([t, d], i) => (
+      <div class="post-card reveal"><span class="mono">0{i + 1}</span><h3>{t}</h3><p>{d}</p></div>
+    ))}</div>
+  </div></section>
+  <section style="padding-top:0"><div class="wrap">
+    <div class="head reveal"><div><div class="eyebrow">Questions</div><h2>Before you <span class="grad">ask.</span></h2></div></div>
+    <div class="prose">{faq.map(([q, a]) => <><h3>{q}</h3><p>{a}</p></>)}</div>
+  </div></section>
+  <Contact />
+</Base>
