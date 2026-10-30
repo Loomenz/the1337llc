@@ -3,6 +3,8 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Pricing from '../components/Pricing.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Panel from '../components/Panel.astro';
+import Faq from '../components/Faq.astro';
 
 const faq: [string, string][] = [
   ['Are these the final prices?', 'They are flat starting points for the most common projects. After a free call you get a fixed quote in writing, and the price does not creep once you say yes.'],
@@ -12,27 +14,27 @@ const faq: [string, string][] = [
   ['What about custom software or bigger builds?', 'Payment systems, marketplaces, portals and dashboards are quoted per project. See custom systems or tell us what you need.'],
 ];
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
-};
 ---
 <Base
   title="Website & SEO Pricing: Flat, Up-Front Prices | 1337"
   description="Flat pricing for small business websites, local SEO and care plans. Starter sites from $1,200, Growth sites $2,500, care plans from $149 a month. You own everything."
 >
-  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <PageHero
     label="Pricing // Fixed before we start"
     title="Flat prices,"
     accent="no surprises."
     lead="Pick a starting point or ask for a custom quote. Either way you get a written, fixed price before any work begins, and you own everything we build."
-  />
+  >
+    <Panel slot="aside" file="quote_0042.txt" status="fixed" rows={[
+      ['Growth website', '$2,500', 'ok'],
+      ['Instant quote calculator', 'included', 'ok'],
+      ['Google Business setup', 'included', 'ok'],
+      ['Care plan', '$149 / mo', 'ok'],
+      ['Price changes after yes', 'none'],
+      ['Who owns it', 'you'],
+    ]} foot={['Total, in writing', '$2,500 + $149/mo']} />
+  </PageHero>
   <Pricing bare />
-  <section style="padding-top:0"><div class="wrap">
-    <div class="head reveal"><div><div class="eyebrow">Questions</div><h2>Before you <span class="grad">ask.</span></h2></div></div>
-    <div class="prose">{faq.map(([q, a]) => <><h3>{q}</h3><p>{a}</p></>)}</div>
-  </div></section>
+  <Faq items={faq} />
   <CtaBand />
 </Base>

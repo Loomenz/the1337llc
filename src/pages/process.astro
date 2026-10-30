@@ -3,6 +3,8 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Process from '../components/Process.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Panel from '../components/Panel.astro';
+
 ---
 <Base
   title="How It Works: From First Call to Launch | 1337"
@@ -13,7 +15,15 @@ import CtaBand from '../components/CtaBand.astro';
     title="How we work,"
     accent="step by step."
     lead="No 40-page proposals and no six-month timelines. You always know what is being built, what it costs and when it goes live."
-  />
+  >
+    <Panel slot="aside" file="project_status" status="on track" rows={[
+      ['01 Free call', 'done', 'ok'],
+      ['02 Fixed quote', 'signed', 'ok'],
+      ['03 Build & preview', 'preview link sent', 'live'],
+      ['04 Launch & handoff', 'next', 'wait'],
+      ['05 Grow', 'optional', 'wait'],
+    ]} foot={['Surprise invoices', '0']} />
+  </PageHero>
   <Process />
   <CtaBand title="Start with a free call." text="Twenty minutes, no pressure. We find the smallest fix with the biggest payoff for your business." />
 </Base>

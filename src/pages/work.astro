@@ -3,6 +3,8 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Work from '../components/Work.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Panel from '../components/Panel.astro';
+import { projects } from '../data/work';
 ---
 <Base
   title="Our Work: Websites & Systems We've Built | 1337"
@@ -13,7 +15,10 @@ import CtaBand from '../components/CtaBand.astro';
     title="Work that"
     accent="brings in calls."
     lead="Every site here is live and working for a real business. Quote engines, payments in the field, floor plans and before-and-after galleries, built to turn visitors into customers."
-  />
+  >
+    <Panel slot="aside" file="deploys.log" status={`${projects.length} live`}
+      rows={projects.map((p) => [p.url, p.tags[0].label.toLowerCase(), 'live'])} />
+  </PageHero>
   <Work bare />
   <CtaBand title="Want yours on this page?" text="Tell us about your business. We reply within one business day with ideas and a fixed quote." />
 </Base>

@@ -3,6 +3,8 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Stats from '../components/Stats.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Panel from '../components/Panel.astro';
+
 
 const values: [string, string][] = [
   ['Flat, up-front pricing', 'A fixed quote in writing before anything starts. No hourly meter running in the background.'],
@@ -20,11 +22,20 @@ const values: [string, string][] = [
     title="Built by someone"
     accent="who's been there."
     lead="Before 1337 LLC, our founder spent years working in construction. We know how little time owners have for tech, so we build things that just work and pay for themselves."
-  />
+  >
+    <Panel slot="aside" file="whoami" status="online" rows={[
+      ['company', '1337 LLC'],
+      ['based in', 'Northwest Indiana'],
+      ['works with', 'anyone, anywhere'],
+      ['builds', 'sites, SEO, AI, systems'],
+      ['pricing', 'flat, in writing'],
+      ['lock-in', 'none'],
+    ]} foot={['reply time', '1 business day']} />
+  </PageHero>
   <section style="padding-top:0"><div class="wrap">
     <div class="head reveal"><div><div class="eyebrow">What we believe</div><h2>Tech should <span class="grad">earn its keep.</span></h2></div>
     <p class="sub">We build for contractors, shops, service businesses and startups, anywhere. If you can describe it, we can build it for the right price.</p></div>
-    <div class="posts">{values.map(([t, d], i) => (
+    <div class="grid4">{values.map(([t, d], i) => (
       <div class="post-card reveal"><span class="mono">0{i + 1}</span><h3>{t}</h3><p>{d}</p></div>
     ))}</div>
   </div></section>

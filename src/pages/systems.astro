@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Systems from '../components/Systems.astro';
 import Contact from '../components/Contact.astro';
+import Faq from '../components/Faq.astro';
 
 const steps: [string, string][] = [
   ['Talk it through', 'A free call about what the system needs to do, who uses it and how you get paid. No tech talk needed.'],
@@ -18,17 +19,11 @@ const faq: [string, string][] = [
   ['Can you take payments without card processors?', 'Yes. We have built checkout over Bitcoin Lightning, Cash App and Strike with instant payouts, and we can also wire up standard card payments.'],
 ];
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
-};
 ---
 <Base
   title="Custom Software, Payment Systems & Marketplaces | 1337"
   description="Custom payment systems, marketplaces, online stores, AI assistants and business software, built and run by 1337 LLC in Northwest Indiana for businesses anywhere. Get a fixed quote."
 >
-  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <Systems />
   <section style="padding-top:0"><div class="wrap">
     <div class="head reveal"><div><div class="eyebrow">How it works</div><h2>From idea to <span class="grad">running system.</span></h2></div></div>
@@ -36,9 +31,6 @@ const faqSchema = {
       <div class="post-card reveal"><span class="mono">0{i + 1}</span><h3>{t}</h3><p>{d}</p></div>
     ))}</div>
   </div></section>
-  <section style="padding-top:0"><div class="wrap">
-    <div class="head reveal"><div><div class="eyebrow">Questions</div><h2>Before you <span class="grad">ask.</span></h2></div></div>
-    <div class="prose">{faq.map(([q, a]) => <><h3>{q}</h3><p>{a}</p></>)}</div>
-  </div></section>
+  <Faq items={faq} />
   <Contact />
 </Base>

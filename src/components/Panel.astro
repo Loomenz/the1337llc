@@ -1,0 +1,22 @@
+---
+// Product-style card for page heroes: window bar with a file name, then mono rows.
+// Each row is [left, right, state?]; state 'ok' shows a check, 'live' a pulsing dot, 'wait' a hollow dot.
+interface Props {
+  file: string;
+  status?: string;
+  rows: [string, string, ('ok' | 'live' | 'wait')?][];
+  foot?: [string, string];
+}
+const { file, status = 'live', rows, foot } = Astro.props;
+---
+<div class="panel mono" aria-hidden="true">
+  <div class="panel-bar"><span class="dots"><i></i><i></i><i></i></span><span>{file}</span><span class="panel-status"><i></i>{status}</span></div>
+  <div class="panel-rows">
+    {rows.map(([l, r, s], i) => (
+      <div class="panel-row" style={`--d:${i * 90 + 500}ms`}>
+        <span>{s && <b class={`st ${s}`}>{s === 'ok' ? '✓' : ''}</b>}{l}</span><span class="dim">{r}</span>
+      </div>
+    ))}
+  </div>
+  {foot && <div class="panel-foot"><span>{foot[0]}</span><span>{foot[1]}</span></div>}
+</div>
