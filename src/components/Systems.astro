@@ -1,0 +1,38 @@
+---
+// Showcase of the custom systems we have built and run in production.
+// Client projects stay unnamed on purpose: describe what each system does, never whose it is.
+interface Props {
+  more?: boolean; // show the "see every system" link (home page only)
+}
+const { more = false } = Astro.props;
+---
+<section id="systems"><div class="wrap">
+  <div class="head reveal"><div><div class="eyebrow">Custom systems</div><h2>Not just websites.<br><span class="grad">Systems that run businesses.</span></h2></div>
+  <p class="sub">Payment rails, marketplaces, stores and AI we designed, built and keep running in production every day. If you can describe it, we can build it.</p></div>
+  <div class="bento">
+    <div class="tile w4 reveal"><span class="live mono"><i></i>in production</span><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></div>
+      <h3>Payment systems</h3><p>Checkout over Bitcoin Lightning, Cash App and Strike, running on our own payment node. Prices lock for 15 minutes, stock is held while the buyer pays, and sellers are paid out in under 2 seconds.</p>
+      <div class="paylog mono" aria-hidden="true">
+        <div><span><span class="k">→</span> invoice created</span> <span class="dim">$48.00 · locked 15:00</span></div>
+        <div><span><span class="k">→</span> payment received</span> <span class="ok">⚡ paid</span></div>
+        <div><span><span class="k">→</span> split to seller</span> <span class="ok">✓ 1.4s</span></div>
+      </div></div>
+    <div class="tile reveal"><span class="live mono"><i></i>in production</span><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9M3 9h18v11H3zM9 20v-6h6v6"/></svg></div>
+      <h3>Marketplaces</h3><p>Buyer and seller accounts, listings, custom orders, auctions, reviews, paid messaging and a full admin panel, built on a reusable template.</p></div>
+    <div class="tile reveal"><span class="live mono"><i></i>in production</span><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"/></svg></div>
+      <h3>Online stores</h3><p>Products, sizes and stock, held inventory at checkout, order and tracking emails, refunds and an admin that runs the whole shop.</p></div>
+    <div class="tile reveal"><span class="live mono"><i></i>in production</span><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.4A8 8 0 1 1 21 12z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg></div>
+      <h3>AI support assistants</h3><p>Chat that knows your business and answers customers 24/7. One shared knowledge base, tested before every update.</p></div>
+    <div class="tile reveal"><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6M11 8v6"/></svg></div>
+      <h3>AI lead finding</h3><p>Pulls public records, adds maps and court links, scores every lead 1 to 10 with AI and drafts the outreach, straight into a spreadsheet.</p></div>
+    <div class="tile reveal"><span class="live mono"><i></i>in production</span><div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/><path d="M7 6.5h.01M7 17.5h.01"/></svg></div>
+      <h3>Hosting &amp; deploys</h3><p>Your own server, not a rented template. Push to deploy, a database backup before every release and automatic rollback if anything fails.</p></div>
+    <div class="tile w4 reveal sys-cta">
+      <div><h3>Got something bigger in mind?</h3><p>Booking systems, customer portals, dashboards, integrations between the tools you already pay for. Tell us what it needs to do and we'll send a fixed quote.</p></div>
+      <div class="sys-cta-btns">
+        <a class="btn primary magnetic" href="#contact">Start a project <span class="arr">→</span></a>
+        {more && <a class="btn magnetic" href="/systems/">How custom builds work</a>}
+      </div>
+    </div>
+  </div>
+</div></section>

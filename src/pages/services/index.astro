@@ -4,7 +4,7 @@ import AuditCta from '../../components/AuditCta.astro';
 import { services } from '../../data/services';
 import { trades } from '../../data/trades';
 ---
-<Base title="Services | 1337 LLC" description="Websites, local SEO, AI lead tools, business systems and IT for Northwest Indiana and Chicagoland contractors and small businesses.">
+<Base title="Services | 1337 LLC" description="Websites, local SEO, AI integrations, small business development, business systems and IT for Northwest Indiana and Chicagoland contractors and small businesses.">
   <section class="post-list"><div class="wrap">
     <div class="eyebrow">Services</div>
     <h2>Everything that gets you <span class="grad">more calls.</span></h2>
@@ -14,7 +14,13 @@ import { trades } from '../../data/trades';
         <h3>{s.headline}</h3>
         <p>{s.description}</p>
       </a>
-    ))}</div>
+    ))}
+      <a class="post-card" href="/systems/">
+        <span class="mono">Custom Systems</span>
+        <h3>Payment systems, marketplaces &amp; custom software</h3>
+        <p>Checkout with instant payouts, two-sided marketplaces, online stores and AI assistants, built and run for businesses anywhere.</p>
+      </a>
+    </div>
     <h2 style="margin-top:80px">Built for <span class="grad">your trade.</span></h2>
     <div class="posts">{trades.map((t) => (
       <a class="post-card" href={`/websites-for/${t.slug}/`}>
