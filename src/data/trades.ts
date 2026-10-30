@@ -13,7 +13,7 @@ export const trades: Trade[] = [
   {
     slug: 'excavating-companies',
     trade: 'Excavating Companies',
-    title: 'Websites for Excavating Companies in Northwest Indiana | 1337 LLC',
+    title: 'Websites for Excavating Companies in Northwest Indiana | 1337',
     description: 'Websites and local SEO for excavating, land clearing and site prep companies in Northwest Indiana and Chicagoland.',
     intro: 'Excavating jobs are big tickets, and customers want proof before they call. Your site should show finished work, the equipment you run, the towns you cover and make it easy to request a quote.',
     needs: [
@@ -28,7 +28,7 @@ export const trades: Trade[] = [
   {
     slug: 'landscapers',
     trade: 'Landscapers & Lawn Care',
-    title: 'Websites for Landscapers & Lawn Care in Northwest Indiana | 1337 LLC',
+    title: 'Websites for Landscapers & Lawn Care in Northwest Indiana | 1337',
     description: 'Websites with instant lawn care quotes, snow removal pages and local SEO for Northwest Indiana landscapers.',
     intro: 'Lawn care customers compare three companies in five minutes. The one that shows a price first usually gets the call. We build sites with instant quote calculators so customers see a number and book.',
     needs: [
@@ -42,7 +42,7 @@ export const trades: Trade[] = [
   {
     slug: 'home-builders',
     trade: 'Home Builders',
-    title: 'Websites for Home Builders in Northwest Indiana | 1337 LLC',
+    title: 'Websites for Home Builders in Northwest Indiana | 1337',
     description: 'Websites for Northwest Indiana home builders with floor plans, galleries and lead capture for new construction and custom homes.',
     intro: 'Buying a new home is the biggest purchase most people make. A builder site has to look as solid as the homes, show floor plans and finished builds, and capture leads from serious buyers.',
     needs: [
@@ -56,7 +56,7 @@ export const trades: Trade[] = [
   {
     slug: 'truck-and-fleet-repair',
     trade: 'Truck & Fleet Repair',
-    title: 'Websites for Truck & Fleet Repair Shops in Northwest Indiana | 1337 LLC',
+    title: 'Websites for Truck & Fleet Repair Shops in Northwest Indiana | 1337',
     description: 'Lead-generating websites for mobile truck repair and fleet service companies in Northwest Indiana and Chicagoland.',
     intro: 'When a truck is down, the fleet manager calls whoever shows up first on Google with a clear phone number. Your site needs emergency calls front and center and pages for every service you do.',
     needs: [

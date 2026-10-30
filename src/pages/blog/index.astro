@@ -6,7 +6,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 ---
-<Base title="Blog | 1337 LLC" description="Tips on websites, Google and tech for Northwest Indiana and Chicagoland small businesses.">
+<Base title="Blog | 1337" description="Tips on websites, Google and tech for Northwest Indiana and Chicagoland small businesses.">
   {posts.length === 0 && <meta slot="head" name="robots" content="noindex">}
   <section class="post-list"><div class="wrap">
     <div class="eyebrow">Blog</div>
