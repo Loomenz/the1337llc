@@ -1,10 +1,23 @@
 ---
 import Base from '../layouts/Base.astro';
 import Contact from '../components/Contact.astro';
+
+const next: [string, string][] = [
+  ['We read it', 'A real person reads every message. No bots, no sales team, no auto-sequence.'],
+  ['You get ideas and a price', 'Within one business day we reply with what we would build and a fixed quote, or a few questions first.'],
+  ['Free 20-minute call', 'If it sounds right, we talk it through. Nothing starts until you say yes in writing.'],
+];
 ---
 <Base
   title="Contact: Start a Project | 1337"
   description="Tell 1337 LLC about your business and what you need: a website, local SEO, AI tools or a custom system. We reply within one business day with ideas and a fixed quote."
 >
   <div class="contact-page"><Contact /></div>
+  <section style="padding-top:0"><div class="wrap">
+    <div class="head reveal"><div><div class="eyebrow">What happens next</div><h2>No pressure. <span class="grad">Just a plan.</span></h2></div>
+    <p class="sub">Prefer email? Write to <a class="ul" href="mailto:ryan@the1337llc.com">ryan@the1337llc.com</a>. Not sure what you need? Start with the <a class="ul" href="/free-audit/">free Google check</a>.</p></div>
+    <div class="grid3">{next.map(([t, d], i) => (
+      <div class="post-card reveal"><span class="mono">0{i + 1}</span><h3>{t}</h3><p>{d}</p></div>
+    ))}</div>
+  </div></section>
 </Base>

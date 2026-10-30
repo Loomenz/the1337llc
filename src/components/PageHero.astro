@@ -1,5 +1,6 @@
 ---
 // Top of every inner page: mono label, big headline with one serif accent word, short lead.
+// Pass a <Panel slot="aside"> to fill the right side with a product-style card.
 interface Props {
   label: string;
   title: string;
@@ -7,13 +8,17 @@ interface Props {
   lead: string;
 }
 const { label, title, accent, lead } = Astro.props;
+const aside = Astro.slots.has('aside');
 ---
-<section class="page-hero"><div class="wrap">
-  <div class="label mono"><span class="dot"><i></i></span>{label}</div>
-  <h1>
-    <span class="line"><span>{title}</span></span>
-    <span class="line"><span class="grad serif">{accent}</span></span>
-  </h1>
-  <p class="lead">{lead}</p>
-  <slot />
+<section class="page-hero"><div class={aside ? 'wrap page-hero-grid' : 'wrap'}>
+  <div>
+    <div class="label mono"><span class="dot"><i></i></span>{label}</div>
+    <h1>
+      <span class="line"><span>{title}</span></span>
+      <span class="line"><span class="grad serif">{accent}</span></span>
+    </h1>
+    <p class="lead">{lead}</p>
+    <slot />
+  </div>
+  {aside && <div class="page-hero-aside"><slot name="aside" /></div>}
 </div></section>
