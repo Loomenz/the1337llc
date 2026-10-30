@@ -1,0 +1,19 @@
+---
+// Top of every inner page: mono label, big headline with one serif accent word, short lead.
+interface Props {
+  label: string;
+  title: string;
+  accent: string; // shown in the white-to-grey serif style on its own line
+  lead: string;
+}
+const { label, title, accent, lead } = Astro.props;
+---
+<section class="page-hero"><div class="wrap">
+  <div class="label mono"><span class="dot"><i></i></span>{label}</div>
+  <h1>
+    <span class="line"><span>{title}</span></span>
+    <span class="line"><span class="grad serif">{accent}</span></span>
+  </h1>
+  <p class="lead">{lead}</p>
+  <slot />
+</div></section>

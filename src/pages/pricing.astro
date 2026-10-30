@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Pricing from '../components/Pricing.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const faq: [string, string][] = [
+  ['Are these the final prices?', 'They are flat starting points for the most common projects. After a free call you get a fixed quote in writing, and the price does not creep once you say yes.'],
+  ['How fast can my site go live?', 'Most sites go live within two weeks of the deposit, depending on how quickly we get your photos and details.'],
+  ['Do I need a monthly plan?', 'No. The Care and Growth plans are optional. They keep your site updated, backed up and growing so you never have to think about it.'],
+  ['Who owns the website?', 'You do. The domain, the content and the code are yours, including if you stop a monthly plan.'],
+  ['What about custom software or bigger builds?', 'Payment systems, marketplaces, portals and dashboards are quoted per project. See custom systems or tell us what you need.'],
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+};
+---
+<Base
+  title="Website & SEO Pricing: Flat, Up-Front Prices | 1337"
+  description="Flat pricing for small business websites, local SEO and care plans. Starter sites from $1,200, Growth sites $2,500, care plans from $149 a month. You own everything."
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <PageHero
+    label="Pricing // Fixed before we start"
+    title="Flat prices,"
+    accent="no surprises."
+    lead="Pick a starting point or ask for a custom quote. Either way you get a written, fixed price before any work begins, and you own everything we build."
+  />
+  <Pricing bare />
+  <section style="padding-top:0"><div class="wrap">
+    <div class="head reveal"><div><div class="eyebrow">Questions</div><h2>Before you <span class="grad">ask.</span></h2></div></div>
+    <div class="prose">{faq.map(([q, a]) => <><h3>{q}</h3><p>{a}</p></>)}</div>
+  </div></section>
+  <CtaBand />
+</Base>

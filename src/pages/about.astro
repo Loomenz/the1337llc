@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Stats from '../components/Stats.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const values: [string, string][] = [
+  ['Flat, up-front pricing', 'A fixed quote in writing before anything starts. No hourly meter running in the background.'],
+  ['You own everything', 'Your domain, your code, your data and your accounts. No lock-in, even if you stop a plan.'],
+  ['One team for all of it', 'The website, the AI and tools behind it, the IT, and the plan to grow the business around it.'],
+  ['We keep it running', 'Hosting on our own server, backups before every release and someone to call when something breaks.'],
+];
+---
+<Base
+  title="About 1337 LLC: Small Business Development & Software | 1337"
+  description="1337 LLC is a Northwest Indiana studio that builds websites, AI tools and custom software for small businesses, then keeps them running. Flat pricing, and you own it all."
+>
+  <PageHero
+    label="About // Northwest Indiana + remote"
+    title="Built by someone"
+    accent="who's been there."
+    lead="Before 1337 LLC, our founder spent years working in construction. We know how little time owners have for tech, so we build things that just work and pay for themselves."
+  />
+  <section style="padding-top:0"><div class="wrap">
+    <div class="head reveal"><div><div class="eyebrow">What we believe</div><h2>Tech should <span class="grad">earn its keep.</span></h2></div>
+    <p class="sub">We build for contractors, shops, service businesses and startups, anywhere. If you can describe it, we can build it for the right price.</p></div>
+    <div class="posts">{values.map(([t, d], i) => (
+      <div class="post-card reveal"><span class="mono">0{i + 1}</span><h3>{t}</h3><p>{d}</p></div>
+    ))}</div>
+  </div></section>
+  <Stats />
+  <CtaBand title="Let's talk about your business." />
+</Base>

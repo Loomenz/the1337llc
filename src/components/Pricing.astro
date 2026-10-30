@@ -1,9 +1,15 @@
 ---
 import { plans, addons } from '../data/pricing';
+
+interface Props {
+  teaser?: boolean; // home page: plans only, with a link to the full pricing page
+  bare?: boolean; // leave out the heading when the page hero already has one
+}
+const { teaser = false, bare = false } = Astro.props;
 ---
-<section id="pricing"><div class="wrap">
-  <div class="head reveal"><div><div class="eyebrow">Pricing</div><h2>Flat prices.<br><span class="grad">No surprises.</span></h2></div>
-  <p class="sub">Starting points for the most common projects. Every quote is fixed and agreed before work begins.</p></div>
+<section id="pricing" class={bare ? "flush" : undefined}><div class="wrap">
+  {!bare && (<div class="head reveal"><div><div class="eyebrow">Pricing</div><h2>Flat prices.<br><span class="grad">No surprises.</span></h2></div>
+  <p class="sub">Starting points for the most common projects. Every quote is fixed and agreed before work begins.</p></div>)}
   <div class="prices">
     {plans.map((p) => (
       <div class={p.featured ? 'price feat reveal' : 'price reveal'}>
@@ -11,10 +17,12 @@ import { plans, addons } from '../data/pricing';
         <h3>{p.name}</h3><div class="amt">{p.price}<small> {p.per}</small></div>
         <ul>{p.features.map((f) => <li>{f}</li>)}</ul>
         {p.featured
-          ? <a class="btn primary magnetic" href="#contact">{p.cta} <span class="arr">→</span></a>
-          : <a class="btn magnetic" href="#contact">{p.cta}</a>}
+          ? <a class="btn primary magnetic" href="/contact/">{p.cta} <span class="arr">→</span></a>
+          : <a class="btn magnetic" href="/contact/">{p.cta}</a>}
       </div>
     ))}
   </div>
-  <div class="addons reveal">{addons.map(([name, price]) => <span>{name} <b>{price}</b></span>)}</div>
+  {teaser
+    ? <div class="more-link reveal"><a class="btn magnetic" href="/pricing/">Full pricing &amp; add-ons <span class="arr">→</span></a></div>
+    : <div class="addons reveal">{addons.map(([name, price]) => <span>{name} <b>{price}</b></span>)}</div>}
 </div></section>

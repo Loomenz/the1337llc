@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Work from '../components/Work.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+<Base
+  title="Our Work: Websites & Systems We've Built | 1337"
+  description="Real websites, quote tools and payment systems 1337 LLC built for local businesses in Northwest Indiana and Chicagoland. See the builds and start yours."
+>
+  <PageHero
+    label="Portfolio // Live client builds"
+    title="Work that"
+    accent="brings in calls."
+    lead="Every site here is live and working for a real business. Quote engines, payments in the field, floor plans and before-and-after galleries, built to turn visitors into customers."
+  />
+  <Work bare />
+  <CtaBand title="Want yours on this page?" text="Tell us about your business. We reply within one business day with ideas and a fixed quote." />
+</Base>
