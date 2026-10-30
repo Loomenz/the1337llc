@@ -337,3 +337,52 @@ header{view-transition-name:site-header}
 @media (prefers-reduced-motion:reduce){@view-transition{navigation:none}}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 @media (max-width:980px){.grid3{grid-template-columns:1fr}}
+
+/* ---------- depth: solid lit cards, soft shadows, glare ---------- */
+:root{
+  --face:linear-gradient(180deg,#151515,#0b0b0b);
+  --edge:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.04) 45%,rgba(255,255,255,.09));
+  --edge-hi:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,.07) 50%,rgba(255,255,255,.14));
+  --lift:inset 0 1px 0 rgba(255,255,255,.07),0 40px 70px -40px rgba(0,0,0,.95),0 14px 28px -14px rgba(0,0,0,.7);
+}
+.tile,.proj,.price,.post-card,.stat,.faq details,.panel{border:1px solid transparent;background:var(--face) padding-box,var(--edge) border-box;box-shadow:var(--lift)}
+:is(.tile,.proj,.price,.post-card,.stat):hover,.faq details[open]{background:var(--face) padding-box,var(--edge-hi) border-box}
+.price.feat{background:linear-gradient(180deg,#1d1d1d,#0e0e0e) padding-box,linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,.1)) border-box;
+  box-shadow:var(--lift),0 40px 90px -40px rgba(236,236,236,.35)}
+/* glare that follows the cursor (tiles already have one) */
+.price,.post-card,.stat,.proj{position:relative;isolation:isolate}
+:is(.price,.post-card,.stat,.proj)::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;opacity:0;transition:opacity .4s;
+  background:radial-gradient(380px circle at var(--x,50%) var(--y,0%),rgba(255,255,255,.09),transparent 50%)}
+:is(.price,.post-card,.stat,.proj):hover::after{opacity:1}
+.depth-tilt{transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .9s cubic-bezier(.2,.8,.2,1)}
+.depth-tilt.tilting{transition:transform .12s linear,opacity .9s}
+
+/* systems cards: solid, and they tip back as the next one stacks on top */
+@media (min-width:981px){
+  .stack>.tile{background:var(--face) padding-box,var(--edge) border-box}
+  .stack>.tile.reveal{opacity:1}
+  .stack{perspective:1400px}
+}
+
+/* ---------- 3D page-hero panel ---------- */
+.page-hero{overflow:hidden}
+.page-hero-aside{perspective:1400px;position:relative}
+.page-hero-aside .float{animation:bob 7s ease-in-out infinite;transform-style:preserve-3d}
+@keyframes bob{50%{transform:translateY(-12px)}}
+.page-hero-aside .panel{--ry:-16deg;--rx:8deg;transform:rotateY(var(--ry)) rotateX(var(--rx));transition:transform .7s cubic-bezier(.2,.8,.2,1);position:relative;z-index:2;
+  box-shadow:var(--lift),-30px 60px 90px -30px rgba(0,0,0,.9)}
+.page-hero-aside .ghost{position:absolute;inset:0;border-radius:18px;border:1px solid var(--line);background:linear-gradient(180deg,#121212,#080808);pointer-events:none;
+  transform:rotateY(-16deg) rotateX(8deg) translate3d(var(--gx),var(--gy),var(--gz));opacity:var(--go)}
+.page-hero-aside .ghost.g1{--gx:28px;--gy:26px;--gz:-70px;--go:.7;z-index:1}
+.page-hero-aside .ghost.g2{--gx:56px;--gy:52px;--gz:-140px;--go:.35;z-index:0}
+@media (max-width:980px){.page-hero-aside .panel{--ry:-6deg;--rx:6deg}.page-hero-aside .ghost{display:none}}
+
+/* ---------- moving 3D grid floor behind heroes ---------- */
+.floor{position:absolute;left:-40%;right:-40%;bottom:-2px;height:62%;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
+  background-size:72px 72px;transform:perspective(420px) rotateX(64deg);transform-origin:50% 100%;
+  mask-image:linear-gradient(to top,#000 5%,transparent 80%);-webkit-mask-image:linear-gradient(to top,#000 5%,transparent 80%);animation:floor 5s linear infinite}
+@keyframes floor{to{background-position:0 72px}}
+.hero .floor{height:46%}
+@media (prefers-reduced-motion:reduce){.floor,.page-hero-aside .float{animation:none}}
+.page-hero,.hero{isolation:isolate}
