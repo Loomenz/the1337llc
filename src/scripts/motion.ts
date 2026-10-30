@@ -56,7 +56,9 @@ function stackCards() {
       if (!next) return;
       gsap.to(card, {
         scale: 0.94 + i * 0.006,
-        filter: 'brightness(.6)',
+        rotationX: -6,
+        transformPerspective: 1400,
+        filter: 'brightness(.72)',
         ease: 'none',
         scrollTrigger: { trigger: next, start: 'top 75%', end: () => `top ${110 + (i + 1) * 14}px`, scrub: true },
       });

@@ -10,7 +10,7 @@ interface Props {
 const { label, title, accent, lead } = Astro.props;
 const aside = Astro.slots.has('aside');
 ---
-<section class="page-hero"><div class={aside ? 'wrap page-hero-grid' : 'wrap'}>
+<section class="page-hero"><div class="floor" aria-hidden="true"></div><div class={aside ? 'wrap page-hero-grid' : 'wrap'}>
   <div>
     <div class="label mono"><span class="dot"><i></i></span>{label}</div>
     <h1>
@@ -20,5 +20,18 @@ const aside = Astro.slots.has('aside');
     <p class="lead">{lead}</p>
     <slot />
   </div>
-  {aside && <div class="page-hero-aside"><slot name="aside" /></div>}
+  {aside && <div class="page-hero-aside" id="hero-aside"><div class="float"><i class="ghost g2"></i><i class="ghost g1"></i><slot name="aside" /></div></div>}
 </div></section>
+
+<script>
+// the hero panel turns gently toward the cursor
+const aside = document.getElementById('hero-aside');
+const panel = aside?.querySelector<HTMLElement>('.panel');
+if (panel && matchMedia('(pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  addEventListener('pointermove', (e) => {
+    const x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5;
+    panel.style.setProperty('--ry', `${-16 + x * 14}deg`);
+    panel.style.setProperty('--rx', `${8 - y * 10}deg`);
+  }, { passive: true });
+}
+</script>
