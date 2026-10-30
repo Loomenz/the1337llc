@@ -63,6 +63,9 @@ const ogImage = new URL(image, Astro.site);
 
 <script>
 import { scramble } from '../scripts/scramble';
+import { initMotion } from '../scripts/motion';
+
+initMotion();
 
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine = matchMedia('(pointer: fine)').matches;
