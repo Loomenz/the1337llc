@@ -15,7 +15,7 @@ export const services: Service[] = [
   {
     slug: 'websites',
     name: 'Websites',
-    title: 'Contractor & Small Business Websites in Northwest Indiana | 1337 LLC',
+    title: 'Contractor & Small Business Websites in Northwest Indiana | 1337',
     description: 'Fast, mobile-first websites for Northwest Indiana and Chicagoland contractors and local businesses. Click-to-call, quote forms and local SEO built in.',
     headline: 'Websites that bring in calls',
     intro: 'Most customers find you on their phone, compare you to two other companies and call whoever looks most trustworthy. We build sites that win that comparison: fast, clear about what you do and where you work, and one tap away from a phone call or quote request.',
@@ -37,7 +37,7 @@ export const services: Service[] = [
   {
     slug: 'local-seo',
     name: 'Local SEO & Google Business',
-    title: 'Local SEO & Google Business Profile for NWI Businesses | 1337 LLC',
+    title: 'Local SEO & Google Business Profile for NWI Businesses | 1337',
     description: 'Show up in the Google map pack when Northwest Indiana customers search for your service. Google Business Profile setup, reviews and local SEO.',
     headline: 'Show up when locals search',
     intro: 'When someone searches "your service near me", Google shows three businesses on the map before anything else. Those three get most of the calls. We set up and keep up your Google Business Profile, reviews and website so you have a real shot at those spots.',
@@ -58,7 +58,7 @@ export const services: Service[] = [
   {
     slug: 'ai-integrations',
     name: 'AI Integrations',
-    title: 'AI Chatbots & AI Integration for Small Businesses in NWI | 1337 LLC',
+    title: 'AI Chatbots & AI Integration for Small Businesses in NWI | 1337',
     description: 'AI chat assistants for your website, AI-powered follow-up and practical automation for Northwest Indiana and Chicagoland small businesses. Set up, trained and supported locally.',
     headline: 'Put AI to work in your business',
     intro: 'AI is not just for big companies. We set up practical AI tools that save small businesses real hours: a chat assistant on your website that answers questions and books leads at 2am, follow-ups that write themselves, and help turning messy notes into quotes, posts and emails. We pick what fits, set it up, train it on your business and keep it running.',
@@ -80,7 +80,7 @@ export const services: Service[] = [
   {
     slug: 'ai-lead-tools',
     name: 'AI Lead Tools',
-    title: 'AI Lead Follow-Up & Automation for Contractors | 1337 LLC',
+    title: 'AI Lead Follow-Up & Automation for Contractors | 1337',
     description: 'Stop losing leads. Missed-call text-back, instant quote follow-up, review requests and after-hours intake for Northwest Indiana contractors.',
     headline: 'Stop losing leads you already paid for',
     intro: 'Calls come in while you are on a job. Quote requests sit in your inbox overnight. Customers who would happily leave a review never get asked. We set up simple AI-powered tools that answer, follow up and ask for you, so leads do not slip through.',
@@ -100,7 +100,7 @@ export const services: Service[] = [
   {
     slug: 'business-development',
     name: 'Small Business Development',
-    title: 'Small Business Development & Growth Planning in Northwest Indiana | 1337 LLC',
+    title: 'Small Business Development & Growth Planning in Northwest Indiana | 1337',
     description: 'Hands-on small business development for Northwest Indiana and Chicagoland owners: growth plans, offers and pricing, lead tracking, marketing and the systems to run it.',
     headline: 'A plan to grow, and the tools to do it',
     intro: 'A website is one piece. Growth comes from knowing who your best customers are, what to charge, where your leads come from and following up on every one. We work with you like an in-house growth partner: build the plan, set up the website, marketing and systems behind it, and check the numbers with you every month.',
@@ -121,7 +121,7 @@ export const services: Service[] = [
   {
     slug: 'business-systems',
     name: 'Business Systems',
-    title: 'Job, Invoice & Profit Tracking Systems for Small Businesses | 1337 LLC',
+    title: 'Job, Invoice & Profit Tracking Systems for Small Businesses | 1337',
     description: 'Simple spreadsheets and dashboards for jobs, quotes, invoices, expenses, mileage and profit, built for Northwest Indiana small businesses.',
     headline: 'Know your numbers without the headache',
     intro: 'Most small businesses run on memory, sticky notes and a pile of receipts. We build simple systems that track jobs, quotes, invoices, expenses and profit, and do the math for you.',
@@ -140,7 +140,7 @@ export const services: Service[] = [
   {
     slug: 'it-support',
     name: 'IT Setup & Support',
-    title: 'Small Business IT Setup & Support in Northwest Indiana | 1337 LLC',
+    title: 'Small Business IT Setup & Support in Northwest Indiana | 1337',
     description: 'Business email, domains, Wi-Fi, backups, new devices and security basics for Northwest Indiana small businesses. Local help you can call.',
     headline: 'Tech set up right the first time',
     intro: 'Business email on your own domain, devices that are backed up, Wi-Fi that works and passwords that are not on a sticky note. We set it up properly and you have someone local to call when something breaks.',
