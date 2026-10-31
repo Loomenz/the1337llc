@@ -93,6 +93,12 @@ const io = new IntersectionObserver((es) => es.forEach((e) => {
 }), { threshold: .12, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll<HTMLElement>('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 3) * 80 + 'ms'; io.observe(el); });
 
+// touch screens have no hover, so color the work card that sits in the middle of the screen
+if (!fine) {
+  const lit = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle('lit', e.isIntersecting)), { rootMargin: '-35% 0px -35% 0px' });
+  document.querySelectorAll('.proj').forEach((el) => lit.observe(el));
+}
+
 // tilt
 // cards lean toward the cursor and catch a glare where it points (systems stack cards are moved by GSAP instead)
 const depth = '.tilt, .bento:not(.stack) > .tile, .price, .post-card, .stat';
