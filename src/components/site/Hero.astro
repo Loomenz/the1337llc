@@ -1,0 +1,60 @@
+---
+// Home hero: three giant stacked lines, the crew bot peeking over line one,
+// one plain sentence and two actions. The town strip underneath is the local proof.
+import Mascot from './Mascot.astro';
+import { BUSINESS, TOWNS } from '../../data/business';
+const sms = BUSINESS.phone ? `sms:${BUSINESS.phone}` : '/contact/#text';
+const badges = ['WEB', 'SEO', 'AI'];
+---
+<section class="relative" aria-labelledby="hero-title">
+  <div class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] pb-10 pt-8 md:px-8 md:pb-14 md:pt-12">
+    <div class="mb-6 flex flex-wrap items-center justify-between gap-3 md:mb-8">
+      <ul class="flex gap-2" aria-label="What we do">
+        {badges.map((b, i) => <li class="badge snap" style={`--i:${i}`}>{b}</li>)}
+      </ul>
+      <p class="mono text-[.72rem] uppercase tracking-[.12em] text-mute">Local crew · {BUSINESS.region}</p>
+    </div>
+
+    <h1 id="hero-title" class="display hero-h">
+      <span class="rise"><span style="--i:0">More calls.<Mascot class="ml-[.06em]" /></span></span>
+      <span class="rise"><span style="--i:1">Fewer <span class="accent text-[1.06em]">missed</span> leads.</span></span>
+      <span class="rise"><span style="--i:2">Less <span class="sweep on-load">hassle.</span></span></span>
+    </h1>
+
+    <div class="mt-8 grid gap-6 border-t-2 border-ink pt-6 md:mt-12 md:grid-cols-12 md:items-end">
+      <p class="mono fade-up text-[.72rem] uppercase tracking-[.12em] text-mute md:col-span-3">00 / 06<br>Websites · Google · AI tools</p>
+      <p class="fade-up max-w-[34ch] text-[1.25rem] leading-snug md:col-span-5 md:text-[1.4rem]">
+        We build your website, get you found on Google, and set up tools that answer the phone when you can't.
+      </p>
+      <div class="fade-up flex flex-wrap gap-3 md:col-span-4 md:justify-end">
+        <a href={sms} class="inline-flex items-center gap-2 rounded-full bg-hivis px-6 py-4 text-[1.05rem] font-semibold text-ink transition-transform hover:-translate-y-0.5">
+          Text us
+          <span aria-hidden="true">→</span>
+        </a>
+        <a href="#demo" class="inline-flex items-center gap-2 rounded-full border-2 border-ink px-6 py-[14px] text-[1.05rem] font-semibold transition-colors hover:bg-ink hover:text-paper">
+          See it work
+          <span aria-hidden="true">↓</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="overflow-hidden border-y-2 border-ink bg-ink py-3 text-paper" aria-label="Towns we serve">
+    <ul class="marquee-track mono flex w-max gap-6 whitespace-nowrap text-[.8rem] uppercase tracking-[.14em]">
+      {[...TOWNS, ...TOWNS].map((t, i) => (
+        <li class="flex items-center gap-6" aria-hidden={i >= TOWNS.length ? 'true' : undefined}>
+          {t}<span class="inline-block h-2 w-2 rotate-45 bg-hivis" aria-hidden="true"></span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  /* Phones: big and allowed to wrap. Tablet up: every line on one row, sized so the longest
+     line ("Fewer missed leads.", 7.8em wide) spans the column exactly. Pure CSS, so no layout shift. */
+  .hero-h { font-size: 16.4vw; }
+  @media (min-width: 768px) {
+    .hero-h { font-size: calc((min(100vw, 1440px) - 64px) / 7.8); white-space: nowrap; }
+  }
+</style>

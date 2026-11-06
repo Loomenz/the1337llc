@@ -1,35 +1,14 @@
 ---
-import Base from '../layouts/Base.astro';
-import Hero from '../components/Hero.astro';
-import Marquee from '../components/Marquee.astro';
-import Work from '../components/Work.astro';
-import Fixes from '../components/Fixes.astro';
-import MeetRyan from '../components/MeetRyan.astro';
-import Pricing from '../components/Pricing.astro';
-import CtaBand from '../components/CtaBand.astro';
-
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: '1337 LLC',
-  url: 'https://the1337llc.com/',
-  email: 'ryan@the1337llc.com',
-  image: 'https://the1337llc.com/work/spk-lawn.jpg',
-  description: 'Local web studio fixing what costs small businesses jobs: websites, Google, missed calls, quotes and payments.',
-  areaServed: [{ '@type': 'Place', name: 'Northwest Indiana' }, { '@type': 'Place', name: 'Chicagoland' }],
-  address: { '@type': 'PostalAddress', addressRegion: 'IN', addressCountry: 'US' },
-};
+// Home (redesign in progress): hero + problem picker first; demo, work, pricing and crew come next.
+import Site from '../layouts/Site.astro';
+import Hero from '../components/site/Hero.astro';
+import ProblemPicker from '../components/site/ProblemPicker.astro';
 ---
-<Base
-  ogTitle="1337 | Tell us what's costing you jobs. We fix it."
-  ogDescription="A local Northwest Indiana studio that fixes missed calls, slow quotes, late payments and weak Google listings with websites and simple systems. Flat prices."
+<Site
+  title="1337 | Websites, Local SEO & AI Tools for NWI and Chicagoland"
+  description="A local crew in Northwest Indiana and Chicagoland that builds websites, gets you found on Google, and sets up AI tools that answer missed calls and book estimates."
 >
-  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} />
   <Hero />
-  <Marquee />
-  <Fixes />
-  <Work limit={2} />
-  <MeetRyan />
-  <Pricing teaser />
-  <CtaBand title="Tell us what's slowing you down." text="Book a free 30-minute call. We'll find what's costing you jobs and give you a flat written price to fix it." />
-</Base>
+  <ProblemPicker />
+  <div id="demo" class="mx-auto max-w-[1440px] px-4 py-20 md:px-8"><p class="mono text-[.72rem] uppercase tracking-[.12em] text-mute">02 / 06 · Live demo goes here next</p></div>
+</Site>

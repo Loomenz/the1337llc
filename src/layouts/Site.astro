@@ -1,0 +1,49 @@
+---
+// Layout for the redesigned pages ("job site meets editorial").
+// Pages move over from Base.astro one at a time.
+import '../styles/site.css';
+import { ClientRouter } from 'astro:transitions';
+import SiteHeader from '../components/site/SiteHeader.astro';
+import { localBusinessSchema } from '../data/business';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  schema?: Record<string, unknown>[];
+}
+const { title, description, image = '/og-image.png', schema = [] } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site);
+const ld = [localBusinessSchema(), ...schema];
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>{title}</title>
+<meta name="description" content={description}>
+<link rel="canonical" href={canonical}>
+<meta property="og:type" content="website">
+<meta property="og:url" content={canonical}>
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:image" content={ogImage}>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f2f0ea">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<script type="application/ld+json" set:html={JSON.stringify(ld.length === 1 ? ld[0] : ld)} />
+<ClientRouter fallback="none" />
+</head>
+<body class="min-h-dvh overflow-x-clip">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-paper">Skip to content</a>
+  <SiteHeader />
+  <main id="main">
+    <slot />
+  </main>
+</body>
+</html>
