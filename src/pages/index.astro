@@ -3,9 +3,8 @@ import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import Marquee from '../components/Marquee.astro';
 import Work from '../components/Work.astro';
-import Services from '../components/Services.astro';
-import Systems from '../components/Systems.astro';
-import Stats from '../components/Stats.astro';
+import Fixes from '../components/Fixes.astro';
+import MeetRyan from '../components/MeetRyan.astro';
 import Pricing from '../components/Pricing.astro';
 import CtaBand from '../components/CtaBand.astro';
 
@@ -16,22 +15,21 @@ const schema = {
   url: 'https://the1337llc.com/',
   email: 'ryan@the1337llc.com',
   image: 'https://the1337llc.com/work/spk-lawn.jpg',
-  description: 'Websites, local SEO, AI integrations, custom software systems and small business development.',
+  description: 'Local web studio fixing what costs small businesses jobs: websites, Google, missed calls, quotes and payments.',
   areaServed: [{ '@type': 'Place', name: 'Northwest Indiana' }, { '@type': 'Place', name: 'Chicagoland' }],
   address: { '@type': 'PostalAddress', addressRegion: 'IN', addressCountry: 'US' },
 };
 ---
 <Base
-  ogTitle="1337 | Tech that pays for itself"
-  ogDescription="Websites, SEO, AI integrations and small business development for Northwest Indiana and Chicagoland businesses."
+  ogTitle="1337 | Tell us what's costing you jobs. We fix it."
+  ogDescription="A local Northwest Indiana studio that fixes missed calls, slow quotes, late payments and weak Google listings with websites and simple systems. Flat prices."
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} />
   <Hero />
   <Marquee />
+  <Fixes />
   <Work limit={2} />
-  <Services />
-  <Systems more />
-  <Stats />
+  <MeetRyan />
   <Pricing teaser />
-  <CtaBand title="Got a business? Let's make it 1337." />
+  <CtaBand title="Tell us what's slowing you down." text="Book a free 30-minute call. We'll find what's costing you jobs and give you a flat written price to fix it." />
 </Base>
