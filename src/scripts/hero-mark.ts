@@ -3,13 +3,18 @@
 
 const BARS = [7.4, 22.2, 22.2, 51.8]; // bar heights from the logo (viewBox 55 x 52)
 const DEPTH = 10;
-const LIGHT = [236, 236, 236];
-const GREY = [160, 160, 160];
+// Particle colors come from the --mark-a / --mark-b CSS variables ("r,g,b"), so the accent lives in one place.
+const cssRgb = (name: string, fallback: number[]) => {
+  const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const n = v.split(',').map((x) => parseInt(x, 10));
+  return n.length === 3 && n.every((x) => !isNaN(x)) ? n : fallback;
+};
 
 type P = { x: number; y: number; z: number; sx: number; sy: number; sz: number; d: number; ox: number; oy: number; vx: number; vy: number; c: string };
 
 // Spread points over the six faces of each bar, weighted by face area.
 function sample(n: number): P[] {
+  const LIGHT = cssRgb('--mark-a', [236, 236, 236]), GREY = cssRgb('--mark-b', [160, 160, 160]);
   const faces: { o: number[]; u: number[]; v: number[]; a: number }[] = [];
   BARS.forEach((h, i) => {
     const x0 = i * 15, x1 = x0 + 10, y0 = 51.8 - h, z0 = -DEPTH / 2, z1 = DEPTH / 2;
