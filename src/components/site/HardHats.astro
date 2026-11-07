@@ -1,0 +1,77 @@
+---
+// Easter egg: type 1337 anywhere (or hit the "Don't click this" button in the footer)
+// and a pile of hard hats drops onto the page. Tiny hand-rolled gravity, no library.
+// Reduced motion gets the message without the falling.
+---
+<div class="hats" aria-hidden="true" data-hats></div>
+<p class="hat-toast mono" role="status" aria-live="polite" data-hat-toast></p>
+
+<style>
+  .hats { position: fixed; inset: 0; pointer-events: none; z-index: 60; overflow: hidden; }
+  .hats svg { position: absolute; left: 0; top: 0; width: 64px; height: auto; will-change: transform; }
+  .hat-toast {
+    position: fixed; left: 50%; bottom: max(20px, env(safe-area-inset-bottom, 0px)); z-index: 61; translate: -50% 140%;
+    background: var(--color-ink); color: var(--color-paper); border: 2px solid var(--color-hivis); border-radius: 999px;
+    padding: .7rem 1.2rem; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; transition: translate .4s var(--ease-snap), visibility 0s .4s; white-space: nowrap; visibility: hidden;
+  }
+  .hat-toast.on { translate: -50% 0; visibility: visible; transition: translate .4s var(--ease-snap); }
+</style>
+
+<script>
+  const HAT = '<svg viewBox="0 0 92 40"><path d="M10 34C10 15 26 2 46 2s36 13 36 32z" fill="#ff5a1f"/><rect x="1" y="30" width="90" height="9" rx="4.5" fill="#ff5a1f"/><path d="M46 2v32" stroke="#111" stroke-width="3" opacity=".25"/><rect x="1" y="35" width="90" height="4" rx="2" fill="#111" opacity=".2"/></svg>';
+  const LINES = ['1337 mode: hard hats on', 'Safety first. Leet second.', 'You found it. Text us "1337" for a free Google check.'];
+  let busy = false;
+  let count = 0;
+
+  function drop() {
+    const box = document.querySelector<HTMLElement>('[data-hats]');
+    const toast = document.querySelector<HTMLElement>('[data-hat-toast]');
+    if (!box || !toast || busy) return;
+    busy = true;
+    toast.textContent = LINES[count++ % LINES.length];
+    toast.classList.add('on');
+    setTimeout(() => toast.classList.remove('on'), 3200);
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { setTimeout(() => (busy = false), 3200); return; }
+
+    const W = innerWidth, H = innerHeight, size = W < 600 ? 48 : 64;
+    const hats = Array.from({ length: W < 600 ? 14 : 24 }, () => {
+      const wrap = document.createElement('div');
+      wrap.innerHTML = HAT;
+      const el = wrap.firstElementChild as SVGElement;
+      el.style.width = `${size}px`;
+      box.append(el);
+      return { el, x: Math.random() * (W - size), y: -60 - Math.random() * H * 0.8, vx: (Math.random() - 0.5) * 4, vy: 0, r: Math.random() * 360, vr: (Math.random() - 0.5) * 12 };
+    });
+    const floor = H - size * 0.45;
+    const t0 = performance.now();
+    let last = t0;
+    const tick = (now: number) => {
+      const dt = Math.min(32, now - last) / 16.7;
+      last = now;
+      const age = now - t0;
+      for (const h of hats) {
+        h.vy += 0.55 * dt; h.x += h.vx * dt; h.y += h.vy * dt; h.r += h.vr * dt;
+        if (h.y > floor) { h.y = floor; h.vy *= -0.42; h.vx *= 0.8; h.vr *= 0.6; if (Math.abs(h.vy) < 1) h.vy = 0; }
+        if (h.x < 0 || h.x > W - size) { h.vx *= -1; h.x = Math.max(0, Math.min(W - size, h.x)); }
+        h.el.style.transform = `translate(${h.x}px, ${h.y}px) rotate(${h.r}deg)`;
+        if (age > 3800) h.el.style.opacity = String(Math.max(0, 1 - (age - 3800) / 700));
+      }
+      if (age < 4600) requestAnimationFrame(tick);
+      else { box.replaceChildren(); busy = false; }
+    };
+    requestAnimationFrame(tick);
+  }
+
+  // listeners live on document, so bind once for the whole visit
+  if (!(window as any).__hats) {
+    (window as any).__hats = true;
+    let buf = '';
+    document.addEventListener('keydown', (e) => {
+      const t = e.target as HTMLElement;
+      if (t.closest('input, textarea, select, [contenteditable]')) return;
+      buf = (buf + e.key).slice(-4);
+      if (buf === '1337') { buf = ''; drop(); }
+    });
+    document.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('[data-egg]')) drop(); });
+  }
+</script>

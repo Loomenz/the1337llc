@@ -1,29 +1,40 @@
 ---
-import Base from '../../layouts/Base.astro';
-import AuditCta from '../../components/AuditCta.astro';
+import { Picture } from 'astro:assets';
+import { WORK_IMAGES } from '../../data/work-images';
+import Site from '../../layouts/Site.astro';
+import PageHead from '../../components/site/PageHead.astro';
+import CtaBand from '../../components/site/CtaBand.astro';
 import { trades } from '../../data/trades';
 
 export function getStaticPaths() {
   return trades.map((trade) => ({ params: { slug: trade.slug }, props: { trade } }));
 }
-
 const { trade } = Astro.props;
 ---
-<Base title={trade.title} description={trade.description} image={trade.example.image}>
-  <article class="post"><div class="wrap">
-    <a class="mono back" href="/services/">← All services</a>
-    <div class="eyebrow" style="margin-top:20px">Websites for {trade.trade}</div>
-    <h1>Websites for {trade.trade} in Northwest Indiana</h1>
-    <div class="prose">
-      <p>{trade.intro}</p>
-      <p>Before 1337 LLC, our founder spent years working in construction, so we know how your customers think and how little time you have for this stuff.</p>
-      <h2>What your site needs</h2>
-      <ul>{trade.needs.map((n) => <li>{n}</li>)}</ul>
-      <h2>Example: {trade.example.name}</h2>
-      <p>{trade.example.note}</p>
-      <a href={trade.example.url} target="_blank" rel="noopener"><img src={trade.example.image} alt={`${trade.example.name} website`} loading="lazy"></a>
-      <p>See more in <a href="/work/">our work</a>, or read about <a href="/services/websites/">websites</a> and <a href="/services/local-seo/">local SEO</a>.</p>
+<Site title={trade.title} description={trade.description} image={trade.example.image}>
+  <PageHead num="Websites for" label={trade.trade} lines={['Websites for', `<span class="accent">${trade.trade.toLowerCase()}</span>`]} lede={trade.intro}>
+    <span slot="badges" class="badge">WEB</span>
+  </PageHead>
+
+  <section class="mx-auto grid max-w-[1440px] gap-12 px-[max(16px,env(safe-area-inset-left,0px))] pb-20 md:px-8 lg:grid-cols-12">
+    <div class="lg:col-span-5">
+      <p class="mono mb-4 text-[.72rem] uppercase tracking-[.12em] text-mute">What your site needs</p>
+      <ul class="prose-site"><>{trade.needs.map((n) => <li>{n}</li>)}</></ul>
+      <p class="mt-8 max-w-[46ch] text-[1.1rem] leading-relaxed text-mute">Before 1337, our founder spent years working in construction. We know how your customers think and how little time you have for this stuff.</p>
+      <p class="mt-6 flex flex-wrap gap-x-5 gap-y-2 font-semibold">
+        <a class="underline decoration-hivis decoration-2 underline-offset-4" href="/services/websites/">Websites</a>
+        <a class="underline decoration-hivis decoration-2 underline-offset-4" href="/services/local-seo/">Local SEO</a>
+        <a class="underline decoration-hivis decoration-2 underline-offset-4" href="/work/">More work</a>
+      </p>
     </div>
-    <AuditCta />
-  </div></article>
-</Base>
+    <figure class="lg:col-span-7">
+      <a href={trade.example.url} target="_blank" rel="noopener" class="block overflow-hidden rounded-[14px] border-2 border-ink shadow-[8px_8px_0_var(--color-hivis)]">
+        <Picture src={WORK_IMAGES[trade.example.image]} formats={['avif', 'webp']} widths={[480, 900]} sizes="(min-width: 1024px) 56vw, 100vw" alt={`${trade.example.name} website`} loading="lazy" decoding="async" class="aspect-[3/2] w-full object-cover object-top" />
+      </a>
+      <figcaption class="mono mt-4 flex flex-wrap justify-between gap-2 text-[.75rem] uppercase tracking-[.1em] text-mute">
+        <span>Real job · {trade.example.name}</span><span>{trade.example.note}</span>
+      </figcaption>
+    </figure>
+  </section>
+  <CtaBand />
+</Site>

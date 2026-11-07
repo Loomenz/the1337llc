@@ -1,0 +1,71 @@
+---
+// "Unit 1337": the crew's hard-hat robot. It peeks over the hero headline,
+// looks happy on hover, and waves when tapped. Decorative (aria-hidden) so the
+// headline reads cleanly to screen readers and Google. Pure SVG + CSS.
+interface Props { class?: string }
+const { class: cls = '' } = Astro.props;
+---
+<span class={`unit ${cls}`} aria-hidden="true" data-unit>
+  <svg viewBox="0 0 120 132" aria-hidden="true">
+    <!-- hands gripping the letters -->
+    <g class="hands">
+      <path d="M14 118c0-9 6-14 13-14s10 6 10 12v8H14z" fill="#111"/>
+      <path d="M83 124v-8c0-6 3-12 10-12s13 5 13 14v6z" fill="#111"/>
+      <path d="M19 113h4M25 111h4M89 111h4M95 113h4" stroke="#f2f0ea" stroke-width="2.2" stroke-linecap="round"/>
+    </g>
+    <!-- head -->
+    <rect x="22" y="44" width="76" height="76" rx="18" fill="#111"/>
+    <!-- visor screen -->
+    <rect x="31" y="60" width="58" height="32" rx="9" fill="#2a2a28"/>
+    <!-- eyes: pixel squares, swap to ^ ^ on hover -->
+    <g class="eyes-open" fill="#ff5a1f">
+      <rect x="41" y="69" width="9" height="12" rx="1.5"/><rect x="70" y="69" width="9" height="12" rx="1.5"/>
+    </g>
+    <g class="eyes-happy" fill="none" stroke="#ff5a1f" stroke-width="4" stroke-linecap="square">
+      <path d="M40 80l5.5-7 5.5 7M69 80l5.5-7 5.5 7"/>
+    </g>
+    <!-- 1337 on the chin plate -->
+    <text x="60" y="110" text-anchor="middle" font-family="JetBrains Mono Variable, monospace" font-size="11" font-weight="700" fill="#f2f0ea" letter-spacing="1">1337</text>
+    <!-- antenna -->
+    <path d="M60 44V34" stroke="#111" stroke-width="4"/>
+    <!-- hard hat -->
+    <g class="hat">
+      <path d="M24 46c0-19 16-32 36-32s36 13 36 32z" fill="#ff5a1f"/>
+      <rect x="15" y="42" width="90" height="9" rx="4.5" fill="#ff5a1f"/>
+      <path d="M60 14v32" stroke="#111" stroke-width="3" opacity=".25"/>
+      <rect x="15" y="47" width="90" height="4" rx="2" fill="#111" opacity=".18"/>
+    </g>
+  </svg>
+</span>
+
+<style>
+  .unit { display: inline-block; width: .92em; height: .84em; overflow: hidden; vertical-align: top; position: relative; cursor: pointer; background: none; border: 0; padding: 0; }
+  .unit svg { position: absolute; left: 0; bottom: -.06em; width: 100%; height: auto; transform: translateY(var(--peek, 22%)); transition: transform .5s cubic-bezier(.3,1.5,.5,1); }
+  .unit .eyes-happy { opacity: 0; }
+  .unit .hat { transform-origin: 30% 90%; transition: transform .4s cubic-bezier(.3,1.6,.5,1); }
+  .unit:hover svg, .unit:focus-visible svg { --peek: 2%; }
+  .unit:hover .eyes-open, .unit:focus-visible .eyes-open { opacity: 0; }
+  .unit:hover .eyes-happy, .unit:focus-visible .eyes-happy { opacity: 1; }
+  .unit:hover .hat, .unit:focus-visible .hat { transform: rotate(-12deg) translateY(-4px); }
+  .unit.wave .hands path:nth-child(2) { animation: wave .5s ease-in-out 3; transform-origin: 90% 100%; }
+  @keyframes wave { 50% { transform: rotate(-18deg) translateY(-10px); } }
+  .unit .eyes-open { animation: blink 4.5s infinite; transform-origin: center 75px; }
+  @keyframes blink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(.1); } }
+  @media (prefers-reduced-motion: no-preference) {
+    .unit svg { animation: peekin .8s 1.1s cubic-bezier(.3,1.5,.5,1) backwards; }
+    @keyframes peekin { from { transform: translateY(100%); } }
+  }
+  @media (prefers-reduced-motion: reduce) { .unit .eyes-open, .unit svg { animation: none; } }
+</style>
+
+<script>
+  function initUnit() {
+    document.querySelectorAll<HTMLElement>('[data-unit]').forEach((b) => {
+      if (b.dataset.ready) return;
+      b.dataset.ready = '1';
+      b.addEventListener('click', () => { b.classList.remove('wave'); void b.offsetWidth; b.classList.add('wave'); });
+    });
+  }
+  initUnit();
+  document.addEventListener('astro:page-load', initUnit);
+</script>

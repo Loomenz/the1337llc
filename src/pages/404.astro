@@ -1,0 +1,18 @@
+---
+import Site from '../layouts/Site.astro';
+import Mascot from '../components/site/Mascot.astro';
+---
+<Site title="Page not found | 1337" description="That page isn't here." noindex>
+  <section class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] py-16 md:px-8 md:py-24">
+    <p class="mono text-[.72rem] uppercase tracking-[.12em] text-mute">Error 404 · job not found</p>
+    <h1 class="display mt-6 text-[clamp(4rem,16vw,15rem)]">
+      <span class="rise"><span style="--i:0">Wrong<Mascot class="ml-[.06em]" /></span></span>
+      <span class="rise"><span style="--i:1"><span class="accent">address.</span></span></span>
+    </h1>
+    <p class="mt-8 max-w-[40ch] text-[1.25rem]">This page moved or never existed. Happens to the best of us.</p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/" class="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-4 font-semibold text-paper hover:bg-hivis hover:text-ink">Back to home <span aria-hidden="true">→</span></a>
+      <a href="/contact/" class="inline-flex items-center gap-2 rounded-full border-2 border-ink px-7 py-[14px] font-semibold hover:bg-ink hover:text-paper">Text the crew</a>
+    </div>
+  </section>
+</Site>

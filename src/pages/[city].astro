@@ -1,0 +1,46 @@
+---
+// City landing page template. One page per town in data/cities.ts.
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/site/PageHead.astro';
+import ProblemPicker from '../components/site/ProblemPicker.astro';
+import Faq from '../components/site/Faq.astro';
+import CtaBand from '../components/site/CtaBand.astro';
+import { CITIES, cityBySlug, type City } from '../data/cities';
+import { BUSINESS } from '../data/business';
+
+export function getStaticPaths() {
+  return CITIES.map((c) => ({ params: { city: c.slug }, props: { c } }));
+}
+const { c } = Astro.props as { c: City };
+const place = `${c.town}, ${c.state}`;
+const service = {
+  '@context': 'https://schema.org', '@type': 'Service', serviceType: 'Website design, local SEO and AI call tools',
+  provider: { '@type': 'ProfessionalService', name: BUSINESS.name, url: BUSINESS.url },
+  areaServed: { '@type': 'City', name: c.town, containedInPlace: { '@type': 'AdministrativeArea', name: `${c.county}, ${c.state === 'IN' ? 'Indiana' : 'Illinois'}` } },
+};
+const faq: [string, string][] = [
+  [`Do you work with businesses in ${c.town}?`, `Yes. ${c.town} is in our home turf in ${c.county}. We can meet in person, or do the whole thing by phone and text if that's easier.`],
+  [`How do I show up when people in ${c.town} search Google?`, `Three things move it most: a complete Google Business Profile with ${c.town} in your service area, a page on your site about the work you do in ${c.town}, and a steady stream of fresh reviews. We set up all three.`],
+  ['How much does a website cost?', 'Starter sites are $1,200 one time, bigger builds $2,500. You get a fixed quote in writing first, and you own the site.'],
+  [`Do you only work with contractors in ${c.town}?`, 'No. Trades are a big part of what we do, but we build for shops, salons, offices and anyone else with a pinch point.'],
+];
+const linked = c.nearby.map((t) => ({ t, page: cityBySlug(t) }));
+---
+<Site title={`Websites, Google & AI Tools in ${place} | 1337`} description={`Websites, Google Maps and local SEO, and missed-call text-back for ${c.town} businesses. Local crew from ${c.county}. Fixed prices, and you own everything.`} schema={[service]}>
+  <PageHead num={`${c.county} · ${c.state}`} label={`Websites in ${c.town}`} lines={['Websites for', `<span class="accent">${c.town}</span> shops.`]} lede={`We're a local crew building websites, Google rankings and call tools for businesses in ${c.town} and the towns around it. Fixed prices, plain English.`}>
+    <ul slot="badges" class="flex gap-2" aria-label="What we do">
+      {['WEB', 'SEO', 'AI'].map((b, i) => <li class="badge snap" style={`--i:${i}`}>{b}</li>)}
+    </ul>
+  </PageHead>
+  <ProblemPicker />
+  <Faq items={faq} num={`${c.town} · FAQ`} title={`Questions from ${c.town}`} />
+  <section class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] pb-16 md:px-8">
+    <p class="mono mb-4 text-[.72rem] uppercase tracking-[.12em] text-mute">Also near {c.town}</p>
+    <ul class="flex flex-wrap gap-2">
+      {linked.map(({ t, page }) => page
+        ? <li><a href={`/${page.slug}/`} class="inline-flex min-h-[44px] items-center rounded-full border-2 border-ink px-4 font-semibold hover:bg-ink hover:text-paper">{t}</a></li>
+        : <li class="inline-flex min-h-[44px] items-center rounded-full border-2 border-dashed border-ink/40 px-4 text-mute">{t}</li>)}
+    </ul>
+  </section>
+  <CtaBand title={`Got a shop in ${c.town}?`} accent="Text us. Quote in a day." />
+</Site>

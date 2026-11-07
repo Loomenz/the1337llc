@@ -1,37 +1,23 @@
 ---
-import Base from '../layouts/Base.astro';
-import Hero from '../components/Hero.astro';
-import Marquee from '../components/Marquee.astro';
-import Work from '../components/Work.astro';
-import Services from '../components/Services.astro';
-import Systems from '../components/Systems.astro';
-import Stats from '../components/Stats.astro';
-import Pricing from '../components/Pricing.astro';
-import CtaBand from '../components/CtaBand.astro';
-
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: '1337 LLC',
-  url: 'https://the1337llc.com/',
-  email: 'ryan@the1337llc.com',
-  image: 'https://the1337llc.com/work/spk-lawn.jpg',
-  description: 'Websites, local SEO, AI integrations, custom software systems and small business development.',
-  areaServed: [{ '@type': 'Place', name: 'Northwest Indiana' }, { '@type': 'Place', name: 'Chicagoland' }],
-  address: { '@type': 'PostalAddress', addressRegion: 'IN', addressCountry: 'US' },
-};
+// Home: 00 hero, 01 problem picker, 02 live demo, 03 work, 04 pricing, 05 crew, 06 the ask (CtaBand + footer).
+import Site from '../layouts/Site.astro';
+import Hero from '../components/site/Hero.astro';
+import ProblemPicker from '../components/site/ProblemPicker.astro';
+import LiveDemo from '../components/site/LiveDemo.astro';
+import HomeWork from '../components/site/HomeWork.astro';
+import HomePricing from '../components/site/HomePricing.astro';
+import HomeCrew from '../components/site/HomeCrew.astro';
+import CtaBand from '../components/site/CtaBand.astro';
 ---
-<Base
-  ogTitle="1337 | Tech that pays for itself"
-  ogDescription="Websites, SEO, AI integrations and small business development for Northwest Indiana and Chicagoland businesses."
+<Site
+  title="1337 | Websites, Local SEO & AI Tools for NWI and Chicagoland"
+  description="A local crew in Northwest Indiana and Chicagoland that builds websites, gets you found on Google, and sets up AI tools that answer missed calls and book estimates."
 >
-  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} />
   <Hero />
-  <Marquee />
-  <Work limit={2} />
-  <Services />
-  <Systems more />
-  <Stats />
-  <Pricing teaser />
-  <CtaBand title="Got a business? Let's make it 1337." />
-</Base>
+  <ProblemPicker />
+  <LiveDemo />
+  <HomeWork />
+  <HomePricing />
+  <HomeCrew />
+  <CtaBand />
+</Site>
