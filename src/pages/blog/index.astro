@@ -1,24 +1,28 @@
 ---
 import { getCollection } from 'astro:content';
-import Base from '../../layouts/Base.astro';
+import Site from '../../layouts/Site.astro';
+import PageHead from '../../components/site/PageHead.astro';
+import CtaBand from '../../components/site/CtaBand.astro';
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
 ---
-<Base title="Blog | 1337" description="Tips on websites, Google and tech for Northwest Indiana and Chicagoland small businesses.">
-  {posts.length === 0 && <meta slot="head" name="robots" content="noindex">}
-  <section class="post-list"><div class="wrap">
-    <div class="eyebrow">Blog</div>
-    <h2>Notes for <span class="grad">local business owners.</span></h2>
-    {posts.length === 0
-      ? <p class="sub">First posts are on the way.</p>
-      : <div class="posts">{posts.map((p) => (
-          <a class="post-card" href={`/blog/${p.id}/`}>
-            <span class="mono">{fmt(p.data.date)}</span>
-            <h3>{p.data.title}</h3>
-            <p>{p.data.description}</p>
-          </a>
-        ))}</div>}
-  </div></section>
-</Base>
+<Site title="Blog: Notes for Local Business Owners | 1337" description="Plain-English tips on websites, Google and tech for Northwest Indiana and Chicagoland small businesses." noindex={posts.length === 0}>
+  <PageHead num="Blog" label="Notes from the shop" lines={['Notes for', '<span class="accent">owners.</span>']} lede="Short, plain-English stuff about websites, Google and the tools that save you time." />
+  <section class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] pb-20 md:px-8">
+    {posts.length === 0 ? <p class="text-[1.2rem] text-mute">First posts are on the way.</p> : (
+      <ol class="border-t-2 border-ink">
+        {posts.map((p) => (
+          <li>
+            <a href={`/blog/${p.id}/`} class="group grid gap-3 border-b border-ink/25 py-8 md:grid-cols-12 md:items-baseline">
+              <span class="mono text-[.75rem] uppercase tracking-[.12em] text-mute md:col-span-2">{fmt(p.data.date)}</span>
+              <span class="display text-[clamp(2rem,4.4vw,3.8rem)] transition-transform duration-300 group-hover:translate-x-2 md:col-span-6">{p.data.title}</span>
+              <span class="text-[1.05rem] text-mute md:col-span-4">{p.data.description}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    )}
+  </section>
+  <CtaBand />
+</Site>

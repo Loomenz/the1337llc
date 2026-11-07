@@ -1,40 +1,118 @@
 ---
-import Base from '../layouts/Base.astro';
-import PageHero from '../components/PageHero.astro';
-import Pricing from '../components/Pricing.astro';
-import CtaBand from '../components/CtaBand.astro';
-import Panel from '../components/Panel.astro';
-import Faq from '../components/Faq.astro';
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/site/PageHead.astro';
+import Faq from '../components/site/Faq.astro';
+import CtaBand from '../components/site/CtaBand.astro';
+import { plans, addons } from '../data/pricing';
+import { FIXES } from '../data/fixes';
 
-const faq: [string, string][] = [
-  ['Are these the final prices?', 'They are flat starting points for the most common projects. After a free call you get a fixed quote in writing, and the price does not creep once you say yes.'],
-  ['How fast can my site go live?', 'Most sites go live within two weeks of the deposit, depending on how quickly we get your photos and details.'],
-  ['Do I need a monthly plan?', 'No. The Care and Growth plans are optional. They keep your site updated, backed up and growing so you never have to think about it.'],
-  ['Who owns the website?', 'You do. The domain, the content and the code are yours, including if you stop a monthly plan.'],
-  ['What about custom software or bigger builds?', 'Payment systems, marketplaces, portals and dashboards are quoted per project. See custom systems or tell us what you need.'],
+const steps: [string, string, string][] = [
+  ['Text or call', 'Tell us what is bugging you. Two minutes, plain English.', 'Day 0'],
+  ['Fixed quote, in writing', 'What we will build, the price and the date. Nothing starts until you say yes.', 'Within 1 business day'],
+  ['We build, you check', 'You get a live preview link early and tell us what to change. Revisions included.', 'Days to 3 weeks'],
+  ['Live, and we stay on it', 'We hook up your domain, Google and forms, then keep it running if you want us to.', 'Launch day'],
 ];
-
+const sites = plans.filter((p) => p.per === 'one-time');
+const monthly = plans.filter((p) => p.per !== 'one-time');
+const ai: [string, string, string][] = [
+  ['AI chat assistant on your site', 'Answers questions 24/7 from what you teach it, hands off hot leads to you.', '$750 setup ($500 with a Growth site)'],
+  ['AI add-on for a care plan', 'Keeps your assistant trained on new services, prices and questions.', '+$99/mo'],
+];
+const faq: [string, string][] = [
+  ['Are these the final prices?', 'They are flat starting points for the most common jobs. After a quick call you get a fixed quote in writing, and the price does not creep once you say yes.'],
+  ['Do I need a monthly plan?', 'No. Care and Growth plans are optional. They keep the site updated, backed up and growing so you never have to think about it.'],
+  ['Who owns the website?', 'You do. The domain, the content and the code are yours, including if you stop a monthly plan. No hostage situations.'],
+  ['Do you charge by the hour?', 'Not for builds. Every build is a flat price. IT support is the one thing billed hourly, at $60 an hour, and we tell you before the clock starts.'],
+  ['What about bigger or custom builds?', 'Payment systems, portals, dashboards and marketplaces are quoted per project after a call. See custom systems or just text us what you need.'],
+];
 ---
-<Base
-  title="Website & SEO Pricing: Flat, Up-Front Prices | 1337"
-  description="Flat pricing for small business websites, local SEO and care plans. Starter sites from $1,200, Growth sites $2,500, care plans from $149 a month. You own everything."
->
-  <PageHero
-    label="Pricing // Fixed before we start"
-    title="Flat prices,"
-    accent="no surprises."
-    lead="Pick a starting point or ask for a custom quote. Either way you get a written, fixed price before any work begins, and you own everything we build."
-  >
-    <Panel slot="aside" file="quote_0042.txt" status="fixed" rows={[
-      ['Growth website', '$2,500', 'ok'],
-      ['Instant quote calculator', 'included', 'ok'],
-      ['Google Business setup', 'included', 'ok'],
-      ['Care plan', '$149 / mo', 'ok'],
-      ['Price changes after yes', 'none'],
-      ['Who owns it', 'you'],
-    ]} foot={['Total, in writing', '$2,500 + $149/mo']} />
-  </PageHero>
-  <Pricing bare />
-  <Faq items={faq} />
-  <CtaBand />
-</Base>
+<Site title="Pricing & How It Works: Flat Prices for Websites, SEO & AI | 1337" description="Flat, written prices for websites ($1,200 and $2,500), Google and local SEO ($299/mo), missed-call text-back ($249) and AI tools. How it works, start to launch.">
+  <PageHead num="04 / 06" label="Pricing + how it works" lines={['Flat prices.', 'No <span class="accent">surprises.</span>']} lede="Every price is on this page. You get a fixed quote in writing before any work starts, and you own everything we build." />
+
+  <section id="how" class="bg-ink text-paper scroll-mt-20" aria-labelledby="how-title">
+    <div class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] py-16 md:px-8 md:py-24">
+      <h2 id="how-title" class="display mask-lines text-[clamp(2.8rem,7vw,6.4rem)]"><span class="ml"><span>How it <span class="accent text-hivis">works</span></span></span></h2>
+      <ol class="mt-12 grid border-t border-paper/25 md:grid-cols-4">
+        {steps.map(([h, p, when], i) => (
+          <li class="step">
+            <span class="display n">{String(i + 1).padStart(2, '0')}</span>
+            <b class="mt-4 block text-[1.3rem]">{h}</b>
+            <p class="mt-2 text-paper/75">{p}</p>
+            <p class="mono mt-4 text-[.7rem] uppercase tracking-[.12em] text-hivis">{when}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] py-16 md:px-8 md:py-24" aria-labelledby="sheet-title">
+    <div class="mb-10 flex flex-wrap items-end justify-between gap-4">
+      <h2 id="sheet-title" class="display mask-lines text-[clamp(2.8rem,7vw,6.4rem)]"><span class="ml"><span>The price sheet</span></span></h2>
+      <p class="mono text-[.72rem] uppercase tracking-[.12em] text-mute">Rev. 2026 · prices in USD</p>
+    </div>
+
+    <div class="sheet">
+      <h3 class="grp"><span class="badge">WEB</span> Websites · one time</h3>
+      {sites.map((p) => (
+        <div class="line">
+          <div><b class="display nm">{p.name}{p.featured && <span class="mono pick">Most pick this</span>}</b><p class="what">{p.features.join(' · ')}</p></div>
+          <p class="display price">{p.price}</p>
+        </div>
+      ))}
+
+      <h3 class="grp"><span class="badge">SEO</span> Monthly plans · cancel anytime</h3>
+      {monthly.map((p) => (
+        <div class="line">
+          <div><b class="display nm">{p.name}</b><p class="what">{p.features.join(' · ')}</p></div>
+          <p class="display price">{p.price}<span class="per">/mo</span></p>
+        </div>
+      ))}
+
+      <h3 class="grp"><span class="badge">AI</span> Quick fixes</h3>
+      {FIXES.map((f) => (
+        <div class="line">
+          <div><b class="display nm">{f.name}</b><p class="what">{f.fix} <span class="mono when">{f.speed.split('.')[0]}.</span></p></div>
+          <p class="price small">{f.cost}</p>
+        </div>
+      ))}
+      {ai.map(([n, w, c]) => (
+        <div class="line">
+          <div><b class="display nm">{n}</b><p class="what">{w}</p></div>
+          <p class="price small">{c}</p>
+        </div>
+      ))}
+
+      <h3 class="grp"><span class="badge">OPS</span> Add-ons</h3>
+      <div class="adds">
+        {addons.map(([n, c]) => <p><span>{n}</span><span class="dots" aria-hidden="true"></span><b class="mono">{c}</b></p>)}
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} num="Pricing · FAQ" />
+  <CtaBand title="Want a number for your shop?" accent="Text us. Quote in a day." />
+</Site>
+
+<style>
+  .step { padding: 1.6rem 1.25rem 1.8rem 0; border-bottom: 1px solid rgb(242 240 234 / .25); }
+  .step .n { font-size: clamp(4rem, 8vw, 7rem); color: transparent; -webkit-text-stroke: 2px var(--color-paper); }
+  @media (min-width: 768px) { .step { border-bottom: 0; border-right: 1px solid rgb(242 240 234 / .25); padding-left: 1.25rem; } .step:first-child { padding-left: 0; } .step:last-child { border-right: 0; } }
+
+  .sheet { border: 2px solid var(--color-ink); border-radius: 14px; padding: .5rem 1.25rem 1.5rem; background: var(--color-paper); box-shadow: 10px 10px 0 var(--color-ink); }
+  @media (min-width: 768px) { .sheet { padding: .75rem 2.2rem 2.2rem; } }
+  .grp { display: flex; align-items: center; gap: .75rem; font-family: var(--font-mono); font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; padding: 2rem 0 .8rem; border-bottom: 2px solid var(--color-ink); }
+  .line { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem; align-items: start; padding: 1.15rem 0; border-bottom: 1px dashed rgb(17 17 17 / .3); }
+  .nm { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; font-size: clamp(1.7rem, 3vw, 2.4rem); }
+  .pick { font-weight: 600; font-size: .62rem; letter-spacing: .1em; background: var(--color-hivis); padding: .35em .6em; border-radius: 4px; }
+  .what { margin-top: .4rem; color: var(--color-mute); max-width: 70ch; line-height: 1.45; }
+  .when { font-size: .78em; color: var(--color-ink); }
+  .price { font-size: clamp(2rem, 4vw, 3.2rem); text-align: right; white-space: nowrap; }
+  .price .per { font-size: .45em; margin-left: .1em; }
+  .price.small { font-family: var(--font-mono); font-size: .85rem; font-weight: 600; white-space: normal; max-width: 22ch; line-height: 1.4; }
+  .adds { display: grid; gap: .1rem; padding-top: .8rem; }
+  @media (min-width: 768px) { .adds { grid-template-columns: 1fr 1fr; column-gap: 3rem; } }
+  .adds p { display: flex; align-items: baseline; gap: .6rem; padding: .55rem 0; font-size: 1.05rem; }
+  .adds .dots { flex: 1; border-bottom: 2px dotted rgb(17 17 17 / .35); }
+  .adds b { font-size: .9rem; white-space: nowrap; }
+  @media (max-width: 520px) { .line { grid-template-columns: 1fr; gap: .5rem; } .price { text-align: left; } }
+</style>

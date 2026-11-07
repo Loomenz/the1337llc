@@ -1,24 +1,55 @@
 ---
-import Base from '../layouts/Base.astro';
-import PageHero from '../components/PageHero.astro';
-import Work from '../components/Work.astro';
-import CtaBand from '../components/CtaBand.astro';
-import Panel from '../components/Panel.astro';
+import { Picture } from 'astro:assets';
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/site/PageHead.astro';
+import CtaBand from '../components/site/CtaBand.astro';
 import { projects } from '../data/work';
+import { WORK_IMAGES } from '../data/work-images';
 ---
-<Base
-  title="Our Work: Websites & Systems We've Built | 1337"
-  description="Real websites, quote tools and payment systems 1337 LLC built for local businesses in Northwest Indiana and Chicagoland. See the builds and start yours."
->
-  <PageHero
-    label="Portfolio // Live client builds"
-    title="Work that"
-    accent="brings in calls."
-    lead="Every site here is live and working for a real business. Quote engines, payments in the field, floor plans and before-and-after galleries, built to turn visitors into customers."
-  >
-    <Panel slot="aside" file="deploys.log" status={`${projects.length} live`}
-      rows={projects.map((p) => [p.url, p.tags[0].label.toLowerCase(), 'live'])} />
-  </PageHero>
-  <Work bare />
-  <CtaBand title="Want yours on this page?" text="Tell us about your business. We reply within one business day with ideas and a fixed quote." />
-</Base>
+<Site title="Work: Websites We Built for Local Businesses | 1337" description="Real websites and tools 1337 built for Northwest Indiana businesses: lawn and snow, home builders, excavating, glass, landscaping and fleet repair.">
+  <PageHead num="03 / 06" label="Work" lines={['Real crews.', 'Real <span class="sweep on-load">sites.</span>']} lede="Every one of these is a real local business. Click through and poke around. They're live." />
+
+  <section class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] pb-20 md:px-8">
+    <ol class="grid gap-16 md:gap-24">
+      {projects.map((p, i) => (
+        <li class:list={['job grid items-center gap-6 lg:grid-cols-12 lg:gap-10', i % 2 && 'flip']}>
+          <a href={`https://${p.url}`} target="_blank" rel="noopener" class:list={['frame group lg:col-span-7', p.kind === 'scroll' && 'pan']} aria-label={`${p.name} website (opens in a new tab)`}>
+            {p.image && WORK_IMAGES[p.image] && (
+              <Picture src={WORK_IMAGES[p.image]} formats={['avif', 'webp']} widths={[480, 900]} sizes="(min-width: 1024px) 56vw, 100vw" alt={p.alt ?? `${p.name} website`} loading={i < 1 ? 'eager' : 'lazy'} decoding="async" />
+            )}
+            <span class="mono tag">↗ {p.url}</span>
+          </a>
+          <div class="lg:col-span-5">
+            <p class="mono text-[.75rem] uppercase tracking-[.12em] text-mute">Job {String(i + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</p>
+            <h2 class="display mt-3 text-[clamp(2.8rem,6vw,5.6rem)]">{p.name}</h2>
+            <p class="accent mt-3 text-[clamp(1.3rem,2.2vw,1.8rem)] leading-tight text-mute">{p.blurb}</p>
+            <ul class="mt-5 flex flex-wrap gap-2">
+              {p.tags.map((t) => <li class:list={['badge', t.hot && 'bg-hivis border-hivis']}>{t.label}</li>)}
+            </ul>
+          </div>
+        </li>
+      ))}
+      <li class="grid items-center gap-6 rounded-[14px] border-2 border-dashed border-ink p-8 md:p-12 lg:grid-cols-12">
+        <div class="lg:col-span-8">
+          <p class="mono text-[.75rem] uppercase tracking-[.12em] text-mute">Job {String(projects.length + 1).padStart(2, '0')} · open slot</p>
+          <h2 class="display mt-3 text-[clamp(2.8rem,6vw,5.6rem)]">Your shop <span class="accent">here.</span></h2>
+        </div>
+        <div class="lg:col-span-4 lg:justify-self-end">
+          <a href="/contact/" class="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-4 text-[1.08rem] font-semibold text-paper hover:bg-hivis hover:text-ink">Get on the list <span aria-hidden="true">→</span></a>
+        </div>
+      </li>
+    </ol>
+  </section>
+  <CtaBand />
+</Site>
+
+<style>
+  .frame { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; border: 2px solid var(--color-ink); border-radius: 14px; background: var(--color-paper-2); box-shadow: 10px 10px 0 var(--color-ink); container-type: size; transition: box-shadow .3s, translate .3s var(--ease-snap); }
+  .frame:hover { box-shadow: 14px 14px 0 var(--color-hivis); translate: -4px -4px; }
+  .frame :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .frame.pan :global(img) { height: auto; min-height: 100%; transition: transform 4s cubic-bezier(.4, 0, .2, 1); }
+  .frame.pan:hover :global(img) { transform: translateY(calc(-100% + 100cqh)); }
+  .tag { position: absolute; left: .9rem; bottom: .9rem; background: var(--color-ink); color: var(--color-paper); padding: .4rem .7rem; border-radius: 6px; font-size: .72rem; }
+  @media (min-width: 1024px) { .flip .frame { order: 2; } }
+  @media (prefers-reduced-motion: reduce) { .frame.pan :global(img) { transition: none; } .frame.pan:hover :global(img) { transform: none; } }
+</style>

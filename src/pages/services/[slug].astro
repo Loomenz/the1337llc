@@ -1,34 +1,81 @@
 ---
-import Base from '../../layouts/Base.astro';
-import AuditCta from '../../components/AuditCta.astro';
+import Site from '../../layouts/Site.astro';
+import PageHead from '../../components/site/PageHead.astro';
+import Faq from '../../components/site/Faq.astro';
+import CtaBand from '../../components/site/CtaBand.astro';
 import { services } from '../../data/services';
+import { SERVICE_TAGS, SERVICE_PAIN } from '../../data/service-groups';
+import { BUSINESS } from '../../data/business';
 
 export function getStaticPaths() {
-  return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+  return services.map((service, i) => ({ params: { slug: service.slug }, props: { service, i } }));
 }
-
-const { service } = Astro.props;
-const faq = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: service.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
-};
+const { service, i } = Astro.props;
+const others = services.filter((s) => s.slug !== service.slug).slice(0, 4);
+const sms = BUSINESS.phone ? `sms:${BUSINESS.phone}` : '/contact/#text';
+// split the headline so the last word gets the serif accent
+const words = service.headline.split(' ');
+const mid = Math.ceil(words.length / 2);
+const line1 = words.slice(0, mid).join(' ');
+const rest = words.slice(mid);
+const last = rest.pop();
+const line2 = `${rest.join(' ')} <span class="accent">${last}</span>`.trim();
 ---
-<Base title={service.title} description={service.description}>
-  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faq)} />
-  <article class="post"><div class="wrap">
-    <a class="mono back" href="/services/">← All services</a>
-    <div class="eyebrow" style="margin-top:20px">{service.name}</div>
-    <h1>{service.headline}</h1>
-    <div class="prose">
-      <p>{service.intro}</p>
-      <h2>What's included</h2>
-      <ul>{service.includes.map((i) => <li>{i}</li>)}</ul>
-      <h2>Who it's for</h2>
-      <p>{service.forWho}</p>
-      <h2>Questions</h2>
-      {service.faq.map(([q, a]) => <><h3>{q}</h3><p>{a}</p></>)}
+<Site title={service.title} description={service.description}>
+  <PageHead num={`Service ${String(i + 1).padStart(2, '0')}`} label={service.name} lines={[line1, line2]}>
+    <span slot="badges" class="badge">{SERVICE_TAGS[service.slug]}</span>
+  </PageHead>
+
+  <section class="mx-auto grid max-w-[1440px] gap-10 px-[max(16px,env(safe-area-inset-left,0px))] pb-16 md:px-8 lg:grid-cols-12 lg:gap-12">
+    <div class="lg:col-span-7">
+      <p class="accent text-[clamp(1.6rem,3vw,2.4rem)] leading-[1.1] text-mute">&ldquo;{SERVICE_PAIN[service.slug]}.&rdquo;</p>
+      <p class="mt-6 max-w-[52ch] text-[1.25rem] leading-relaxed">{service.intro}</p>
+      <div class="mt-10 border-t-2 border-ink pt-6">
+        <p class="mono mb-3 text-[.72rem] uppercase tracking-[.12em] text-mute">Who it's for</p>
+        <p class="max-w-[52ch] text-[1.15rem] leading-relaxed">{service.forWho}</p>
+      </div>
     </div>
-    <AuditCta />
-  </div></article>
-</Base>
+    <aside class="ticket lg:col-span-5" aria-label="What's included">
+      <header class="mono flex items-center justify-between border-b-2 border-ink pb-3 text-[.72rem] uppercase tracking-[.1em]">
+        <span>Work order · what's included</span><span class="badge">{SERVICE_TAGS[service.slug]}</span>
+      </header>
+      <ul class="mt-2">
+        {service.includes.map((x) => <li>{x}</li>)}
+      </ul>
+      <div class="mt-6 flex flex-wrap items-center gap-4">
+        <a href={`/contact/?service=${service.slug}`} class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-semibold text-paper transition-colors hover:bg-hivis hover:text-ink">Get a fixed quote <span aria-hidden="true">→</span></a>
+        <a href={sms} class="font-semibold underline decoration-2 underline-offset-4 hover:decoration-hivis">or text us</a>
+      </div>
+      <p class="mono mt-5 text-[.72rem] text-mute">Prices: <a class="underline" href="/pricing/">see the price sheet</a></p>
+    </aside>
+  </section>
+
+  <Faq items={service.faq} num={`${service.name} · FAQ`} />
+
+  <section class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] pb-16 md:px-8">
+    <p class="mono mb-4 text-[.72rem] uppercase tracking-[.12em] text-mute">Also on the truck</p>
+    <ul class="grid border-t-2 border-ink sm:grid-cols-2 lg:grid-cols-4">
+      {others.map((o) => (
+        <li class="border-b border-ink/25 sm:[&:nth-child(odd)]:border-r lg:border-r lg:[&:nth-child(4)]:border-r-0">
+          <a href={`/services/${o.slug}/`} class="group block p-5 hover:bg-ink hover:text-paper">
+            <span class="badge">{SERVICE_TAGS[o.slug]}</span>
+            <span class="display mt-3 block text-[2rem]">{o.name}</span>
+            <span class="mt-2 block text-mute group-hover:text-mute-dark">{SERVICE_PAIN[o.slug]}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+  <CtaBand />
+</Site>
+
+<style>
+  .ticket {
+    align-self: start; background: var(--color-paper); border: 2px solid var(--color-ink); border-radius: 14px; padding: 1.4rem 1.4rem 1.6rem;
+    box-shadow: 8px 8px 0 var(--color-ink);
+    background-image: radial-gradient(circle at 1px 1px, rgb(17 17 17 / .12) 1px, transparent 0); background-size: 18px 18px;
+  }
+  .ticket li { display: flex; gap: .8rem; padding: .8rem 0; border-bottom: 1px dashed rgb(17 17 17 / .3); font-size: 1.08rem; line-height: 1.4; }
+  .ticket li::before { content: "✓"; flex: none; display: grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 4px; background: var(--color-hivis); font-weight: 800; font-size: .85rem; }
+  @media (min-width: 1024px) { .ticket { position: sticky; top: 6rem; } }
+</style>

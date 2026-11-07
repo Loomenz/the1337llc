@@ -1,0 +1,38 @@
+---
+// 03 / 06: three real jobs as a strip of framed screenshots.
+import { Picture } from 'astro:assets';
+import { projects } from '../../data/work';
+import { WORK_IMAGES } from '../../data/work-images';
+const pick = projects.filter((p) => p.image).slice(0, 3);
+---
+<section class="border-t-2 border-ink" aria-labelledby="work-title">
+  <div class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] py-16 md:px-8 md:py-24">
+    <div class="mb-10 flex flex-wrap items-end justify-between gap-6">
+      <div>
+        <p class="mono mb-5 text-[.72rem] uppercase tracking-[.12em] text-mute">03 / 06 · Work</p>
+        <h2 id="work-title" class="display mask-lines text-[clamp(3rem,8vw,7.6rem)]"><span class="ml"><span>Real local</span></span><span class="ml"><span><span class="accent">clients.</span></span></span></h2>
+      </div>
+      <a href="/work/" class="inline-flex items-center gap-2 rounded-full border-2 border-ink px-6 py-3 font-semibold hover:bg-ink hover:text-paper">All the work <span aria-hidden="true">→</span></a>
+    </div>
+    <ul class="grid gap-8 md:grid-cols-3">
+      {pick.map((p, i) => (
+        <li class:list={['card', i === 1 && 'md:translate-y-12']}>
+          <a href="/work/" class="group block">
+            <span class="frame">
+              <Picture src={WORK_IMAGES[p.image!]} formats={['avif', 'webp']} widths={[400, 700]} sizes="(min-width: 768px) 30vw, 100vw" alt={p.alt ?? `${p.name} website`} loading="lazy" decoding="async" />
+            </span>
+            <span class="mono mt-4 flex justify-between text-[.72rem] uppercase tracking-[.1em] text-mute"><span>Job 0{i + 1}</span><span>{p.url}</span></span>
+            <span class="display mt-2 block text-[2.4rem] group-hover:text-hivis">{p.name}</span>
+            <span class="block text-mute">{p.blurb}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .frame { display: block; aspect-ratio: 4 / 5; overflow: hidden; border: 2px solid var(--color-ink); border-radius: 12px; box-shadow: 8px 8px 0 var(--color-ink); transition: box-shadow .3s, translate .3s var(--ease-snap); }
+  .group:hover .frame { box-shadow: 12px 12px 0 var(--color-hivis); translate: -3px -3px; }
+  .frame :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+</style>

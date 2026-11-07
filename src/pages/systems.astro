@@ -1,36 +1,70 @@
 ---
-import Base from '../layouts/Base.astro';
-import Systems from '../components/Systems.astro';
-import Contact from '../components/Contact.astro';
-import Faq from '../components/Faq.astro';
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/site/PageHead.astro';
+import Faq from '../components/site/Faq.astro';
+import CtaBand from '../components/site/CtaBand.astro';
 
+// What we've built and keep running. Client projects stay unnamed on purpose.
+const systems: [string, string, boolean][] = [
+  ['Payment systems', 'Checkout over Bitcoin Lightning, Cash App and Strike on our own payment node. Prices lock for 15 minutes, stock is held while the buyer pays, sellers get paid out in under 2 seconds.', true],
+  ['Marketplaces', 'Buyer and seller accounts, listings, custom orders, auctions, reviews, paid messaging and a full admin panel.', true],
+  ['Online stores', 'Products, sizes and stock, held inventory at checkout, order and tracking emails, refunds and an admin that runs the shop.', true],
+  ['AI support assistants', 'Chat that knows your business and answers customers 24/7. One shared knowledge base, tested before every update.', true],
+  ['AI lead finding', 'Pulls public records, adds maps and court links, scores every lead 1 to 10 and drafts the outreach, straight into a spreadsheet.', false],
+  ['Hosting + deploys', 'Your own server, not a rented template. Push to deploy, a database backup before every release, automatic rollback if anything fails.', true],
+];
 const steps: [string, string][] = [
-  ['Talk it through', 'A free call about what the system needs to do, who uses it and how you get paid. No tech talk needed.'],
-  ['Fixed quote & plan', 'You get a written scope, a fixed price and a timeline before any work starts.'],
-  ['Build & test', 'We build in stages you can click through, and test every flow, payment and email before launch.'],
-  ['Launch & run it', 'We host it, back it up, watch it and keep improving it. You own the code and the data.'],
+  ['Talk it through', 'A free call about what it needs to do, who uses it and how you get paid. No tech talk needed.'],
+  ['Fixed quote + plan', 'A written scope, a fixed price and a timeline before any work starts.'],
+  ['Build + test', 'Built in stages you can click through. Every flow, payment and email tested before launch.'],
+  ['Launch + run it', 'We host it, back it up, watch it and keep improving it. You own the code and the data.'],
 ];
-
 const faq: [string, string][] = [
-  ['What kinds of systems do you build?', 'Payment and checkout systems, marketplaces, online stores, booking tools, customer portals, dashboards, AI assistants and integrations between the tools you already use. If you can describe what it should do, we can quote it.'],
-  ['Do you only work with local businesses?', 'No. We are based in Northwest Indiana and work with businesses anywhere, remotely or in person.'],
+  ['What kinds of systems do you build?', 'Payment and checkout systems, marketplaces, online stores, booking tools, customer portals, dashboards, AI assistants and glue between the tools you already pay for. If you can describe it, we can quote it.'],
+  ['Do you only work with local businesses?', 'No. We are based in Northwest Indiana and work with businesses anywhere, in person or remote.'],
   ['How much does a custom system cost?', 'It depends on what it needs to do. Every project gets a fixed quote after a free call, so you know the full price before we start.'],
-  ['Who owns it when it is done?', 'You do. The code, the data and the accounts are yours. We can keep hosting and running it on a monthly plan, or hand it off.'],
-  ['Can you take payments without card processors?', 'Yes. We have built checkout over Bitcoin Lightning, Cash App and Strike with instant payouts, and we can also wire up standard card payments.'],
+  ['Who owns it when it is done?', 'You do. The code, the data and the accounts are yours. We can keep running it on a monthly plan, or hand it off.'],
 ];
-
 ---
-<Base
-  title="Custom Software, Payment Systems & Marketplaces | 1337"
-  description="Custom payment systems, marketplaces, online stores, AI assistants and business software, built and run by 1337 LLC in Northwest Indiana for businesses anywhere. Get a fixed quote."
->
-  <Systems />
-  <section style="padding-top:0"><div class="wrap">
-    <div class="head reveal"><div><div class="eyebrow">How it works</div><h2>From idea to <span class="grad">running system.</span></h2></div></div>
-    <div class="posts">{steps.map(([t, d], i) => (
-      <div class="post-card reveal"><span class="mono">0{i + 1}</span><h3>{t}</h3><p>{d}</p></div>
-    ))}</div>
-  </div></section>
-  <Faq items={faq} />
-  <Contact />
-</Base>
+<Site title="Custom Software, Payment Systems & Marketplaces | 1337" description="Custom payment systems, marketplaces, online stores, AI assistants and business software, built and run by 1337 in Northwest Indiana for businesses anywhere. Fixed quotes.">
+  <PageHead num="Custom systems" label="When nobody sells what you need" lines={['Not just', '<span class="accent">websites.</span>']} lede="Payment rails, marketplaces, stores and AI we designed, built and keep running every day. If you can describe it, we can build it.">
+    <span slot="badges" class="badge">DEV</span>
+  </PageHead>
+
+  <section class="bg-ink text-paper">
+    <ol class="mx-auto grid max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] py-12 md:grid-cols-2 md:px-8 md:py-20">
+      {systems.map(([h, p, live], i) => (
+        <li class="sys">
+          <div class="flex items-center justify-between gap-4">
+            <span class="mono text-[.75rem] text-mute-dark">{String(i + 1).padStart(2, '0')}</span>
+            {live && <span class="mono live">● Running right now</span>}
+          </div>
+          <h2 class="display mt-4 text-[clamp(2.4rem,4.6vw,4rem)]">{h}</h2>
+          <p class="mt-3 max-w-[48ch] text-[1.08rem] leading-relaxed text-paper/75">{p}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] py-16 md:px-8 md:py-24">
+    <h2 class="display mask-lines text-[clamp(2.8rem,7vw,6.4rem)]"><span class="ml"><span>Idea to <span class="accent">running.</span></span></span></h2>
+    <ol class="mt-10 grid border-t-2 border-ink md:grid-cols-4">
+      {steps.map(([h, p], i) => (
+        <li class="border-b border-ink/25 py-6 md:border-b-0 md:border-r md:px-5 md:first:pl-0 md:last:border-r-0">
+          <span class="mono text-[.8rem] font-bold text-hivis">{String(i + 1).padStart(2, '0')}</span>
+          <b class="mt-2 block text-[1.3rem]">{h}</b>
+          <p class="mt-2 text-mute">{p}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+  <Faq items={faq} num="Systems · FAQ" />
+  <CtaBand title="Got something bigger in mind?" accent="Describe it. Get a fixed quote." />
+</Site>
+
+<style>
+  .sys { padding: 2rem 0; border-top: 1px solid rgb(242 240 234 / .22); }
+  @media (min-width: 768px) { .sys { padding: 2.4rem 2.4rem 2.4rem 0; } .sys:nth-child(even) { padding-left: 2.4rem; border-left: 1px solid rgb(242 240 234 / .22); } }
+  .live { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--color-hivis); }
+  @media (prefers-reduced-motion: no-preference) { .live { animation: blinklive 2s steps(2) infinite; } @keyframes blinklive { 50% { opacity: .45; } } }
+</style>

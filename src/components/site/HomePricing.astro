@@ -1,0 +1,33 @@
+---
+// 04 / 06: prices up front, as a short "menu board" in ink.
+const rows: [string, string, string][] = [
+  ['Missed-call text-back', 'Live in 3–5 days', 'from $249'],
+  ['Review requests that work', 'Live in 2 days', '$249'],
+  ['A website that books jobs', 'Live in 2–3 weeks', '$1,200'],
+  ['Google Maps + local SEO', 'First fixes in a week', '$299/mo'],
+  ['AI receptionist', 'Live in 3–5 days', '$750 + $99/mo'],
+];
+---
+<section class="bg-ink text-paper" aria-labelledby="price-title">
+  <div class="mx-auto grid max-w-[1440px] gap-10 px-[max(16px,env(safe-area-inset-left,0px))] py-16 md:px-8 md:py-24 lg:grid-cols-12">
+    <div class="lg:col-span-5">
+      <p class="mono mb-5 text-[.72rem] uppercase tracking-[.12em] text-mute-dark">04 / 06 · Pricing</p>
+      <h2 id="price-title" class="display mask-lines text-[clamp(3rem,8vw,7.6rem)]"><span class="ml"><span>Prices on</span></span><span class="ml"><span>the <span class="accent text-hivis">wall.</span></span></span></h2>
+      <p class="mt-6 max-w-[36ch] text-[1.2rem] leading-snug text-paper/80">No "call for pricing." Fixed quote in writing before we start. You own everything.</p>
+      <a href="/pricing/" class="mt-8 inline-flex items-center gap-2 rounded-full bg-hivis px-7 py-4 font-semibold text-ink hover:-translate-y-0.5">Full price sheet <span aria-hidden="true">→</span></a>
+    </div>
+    <ul class="board lg:col-span-7">
+      {rows.map(([n, t, p]) => (
+        <li><span><b class="display block text-[clamp(1.6rem,3vw,2.4rem)]">{n}</b><span class="mono text-[.72rem] uppercase tracking-[.1em] text-mute-dark">{t}</span></span><span class="dots" aria-hidden="true"></span><span class="display price">{p}</span></li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .board { border-top: 2px solid var(--color-paper); align-self: end; }
+  .board li { display: flex; align-items: baseline; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid rgb(242 240 234 / .22); }
+  .dots { flex: 1; border-bottom: 2px dotted rgb(242 240 234 / .3); min-width: 1rem; }
+  .price { font-size: clamp(1.6rem, 3vw, 2.4rem); color: var(--color-hivis); white-space: nowrap; }
+  @media (max-width: 520px) { .board li { flex-wrap: wrap; } .dots { display: none; } .price { width: 100%; } }
+</style>

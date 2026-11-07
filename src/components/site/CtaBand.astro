@@ -1,0 +1,19 @@
+---
+// Orange band near the end of a page. Kept to one ask and one backup.
+import { BUSINESS } from '../../data/business';
+interface Props { title?: string; accent?: string }
+const { title = "Tell us what's costing you jobs.", accent = 'We fix it.' } = Astro.props;
+const sms = BUSINESS.phone ? `sms:${BUSINESS.phone}` : '/contact/#text';
+---
+<section class="border-y-2 border-ink bg-hivis text-ink">
+  <div class="mx-auto flex max-w-[1440px] flex-wrap items-end justify-between gap-8 px-[max(16px,env(safe-area-inset-left,0px))] py-14 md:px-8 md:py-20">
+    <h2 class="display mask-lines max-w-[16ch] text-[clamp(2.6rem,6.5vw,6rem)]">
+      <span class="ml"><span>{title}</span></span>
+      <span class="ml"><span class="accent">{accent}</span></span>
+    </h2>
+    <div class="flex flex-wrap gap-3">
+      <a href={sms} class="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-4 text-[1.08rem] font-semibold text-paper transition-transform hover:-translate-y-0.5">Text us <span aria-hidden="true">→</span></a>
+      <a href="/free-audit/" class="inline-flex items-center gap-2 rounded-full border-2 border-ink px-7 py-[14px] text-[1.08rem] font-semibold transition-colors hover:bg-ink hover:text-paper">Free Google check</a>
+    </div>
+  </div>
+</section>

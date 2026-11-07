@@ -1,23 +1,23 @@
 ---
 import { getCollection, render } from 'astro:content';
-import Base from '../../layouts/Base.astro';
-import AuditCta from '../../components/AuditCta.astro';
+import Site from '../../layouts/Site.astro';
+import CtaBand from '../../components/site/CtaBand.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
   return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
 }
-
 const { post } = Astro.props;
 const { Content } = await render(post);
 const date = post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+const article = { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: post.data.title, description: post.data.description, datePublished: post.data.date.toISOString(), author: { '@type': 'Organization', name: '1337 LLC' } };
 ---
-<Base title={`${post.data.title} | 1337`} description={post.data.description}>
-  <article class="post"><div class="wrap">
-    <a class="mono back" href="/blog/">← All posts</a>
-    <h1>{post.data.title}</h1>
-    <p class="mono date">{date}</p>
-    <div class="prose"><Content /></div>
-    <AuditCta />
-  </div></article>
-</Base>
+<Site title={`${post.data.title} | 1337`} description={post.data.description} schema={[article]}>
+  <article class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] pb-20 pt-10 md:px-8 md:pt-16">
+    <a href="/blog/" class="mono text-[.75rem] uppercase tracking-[.12em] text-mute hover:text-ink">← All notes</a>
+    <h1 class="display mt-6 max-w-[18ch] text-[clamp(3rem,8vw,7.4rem)]"><span class="rise"><span>{post.data.title}</span></span></h1>
+    <p class="mono mt-6 border-t-2 border-ink pt-4 text-[.75rem] uppercase tracking-[.12em] text-mute">{date} · 1337 crew</p>
+    <div class="prose-site mt-10"><Content /></div>
+  </article>
+  <CtaBand />
+</Site>

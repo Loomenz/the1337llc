@@ -1,0 +1,45 @@
+---
+// Ink footer: one last blunt ask, every way to reach us, the towns we cover and the site map.
+import { BUSINESS, TOWNS } from '../../data/business';
+const sms = BUSINESS.phone ? `sms:${BUSINESS.phone}` : '/contact/#text';
+const cols: [string, [string, string][]][] = [
+  ['Fixes', [['Websites', '/services/websites/'], ['Google + local SEO', '/services/local-seo/'], ['AI tools', '/services/ai-lead-tools/'], ['Custom systems', '/systems/'], ['All services', '/services/']]],
+  ['Shop', [['Work', '/work/'], ['Pricing', '/pricing/'], ['How it works', '/pricing/#how'], ['Crew', '/about/'], ['Free Google check', '/free-audit/'], ['Blog', '/blog/']]],
+];
+const year = new Date().getFullYear();
+---
+<footer class="bg-ink text-paper" aria-labelledby="foot-title">
+  <div class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] pb-10 pt-14 md:px-8 md:pt-20">
+    <h2 id="foot-title" class="sr-only">Contact and site map</h2>
+    <div class="flex flex-wrap items-center gap-3">
+      <a href={sms} class="inline-flex items-center gap-2 rounded-full bg-hivis px-7 py-4 text-[1.1rem] font-semibold text-ink transition-transform hover:-translate-y-0.5">Text us <span aria-hidden="true">→</span></a>
+      <a href={`mailto:${BUSINESS.email}`} class="inline-flex items-center gap-2 rounded-full border-2 border-paper px-7 py-[14px] text-[1.1rem] font-semibold transition-colors hover:bg-paper hover:text-ink">{BUSINESS.email}</a>
+    </div>
+
+    <div class="mt-16 grid gap-10 border-t border-paper/25 pt-10 md:grid-cols-12">
+      <div class="md:col-span-5">
+        <p class="mono mb-4 text-[.72rem] uppercase tracking-[.12em] text-mute-dark">Where we work</p>
+        <p class="max-w-[46ch] text-[1.05rem] leading-relaxed text-paper/85">{TOWNS.join(' · ')}, and anywhere else by phone and screen share.</p>
+      </div>
+      {cols.map(([h, links]) => (
+        <nav class="md:col-span-3" aria-label={h}>
+          <p class="mono mb-4 text-[.72rem] uppercase tracking-[.12em] text-mute-dark">{h}</p>
+          <ul class="grid gap-2 text-[1.05rem]">
+            {links.map(([l, href]) => <li><a href={href} class="hover:text-hivis">{l}</a></li>)}
+          </ul>
+        </nav>
+      ))}
+      <div class="md:col-span-1"></div>
+    </div>
+
+    <p aria-hidden="true" class="display wordmark mt-14">1337</p>
+    <div class="mono mt-6 flex flex-wrap items-end justify-between gap-4 text-[.7rem] uppercase tracking-[.12em] text-mute-dark">
+      <span>© {year} 1337 LLC · {BUSINESS.region}</span>
+      <button type="button" class="egg-spot uppercase tracking-[.12em] hover:text-hivis" data-egg>Don't click this</button>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .wordmark { font-size: clamp(8rem, 38vw, 34rem); line-height: .78; letter-spacing: -.03em; color: transparent; -webkit-text-stroke: 2px rgb(242 240 234 / .5); margin-bottom: -.06em; user-select: none; }
+</style>

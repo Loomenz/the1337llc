@@ -1,9 +1,13 @@
 ---
-// Home (redesign in progress): hero + problem picker first; demo, work, pricing and crew come next.
+// Home: 00 hero, 01 problem picker, 02 live demo, 03 work, 04 pricing, 05 crew, 06 the ask (CtaBand + footer).
 import Site from '../layouts/Site.astro';
 import Hero from '../components/site/Hero.astro';
 import ProblemPicker from '../components/site/ProblemPicker.astro';
 import LiveDemo from '../components/site/LiveDemo.astro';
+import HomeWork from '../components/site/HomeWork.astro';
+import HomePricing from '../components/site/HomePricing.astro';
+import HomeCrew from '../components/site/HomeCrew.astro';
+import CtaBand from '../components/site/CtaBand.astro';
 ---
 <Site
   title="1337 | Websites, Local SEO & AI Tools for NWI and Chicagoland"
@@ -12,4 +16,8 @@ import LiveDemo from '../components/site/LiveDemo.astro';
   <Hero />
   <ProblemPicker />
   <LiveDemo />
+  <HomeWork />
+  <HomePricing />
+  <HomeCrew />
+  <CtaBand />
 </Site>

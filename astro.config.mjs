@@ -8,5 +8,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://the1337llc.com',
   integrations: [react()],
+  // How it works now lives on the pricing page.
+  redirects: { '/process': '/pricing/' },
   vite: { plugins: [tailwindcss()] },
 });
