@@ -1,12 +1,12 @@
 // One place for the facts every page and the schema reuse.
-// PHONE is a placeholder until Ryan has a business number (Google Voice works).
+// phone is E.164 for tel:/sms: links and schema; phoneDisplay is what people read.
 export const BUSINESS = {
   name: '1337 LLC',
   short: '1337',
   url: 'https://the1337llc.com',
   email: 'ryan@the1337llc.com',
-  phone: null as string | null, // e.g. '+12195550142'
-  phoneDisplay: '(219) 555-0137 [placeholder]',
+  phone: '+12193070005' as string | null,
+  phoneDisplay: '(219) 307-0005',
   region: 'Northwest Indiana & Chicagoland',
 };
 
