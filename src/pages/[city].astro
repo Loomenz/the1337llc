@@ -6,7 +6,8 @@ import ProblemPicker from '../components/site/ProblemPicker.astro';
 import Faq from '../components/site/Faq.astro';
 import CtaBand from '../components/site/CtaBand.astro';
 import { CITIES, cityBySlug, type City } from '../data/cities';
-import { BUSINESS } from '../data/business';
+import { BUSINESS, BUSINESS_ID } from '../data/business';
+import { BUCKETS } from '../data/buckets';
 
 export function getStaticPaths() {
   return CITIES.map((c) => ({ params: { city: c.slug }, props: { c } }));
@@ -15,24 +16,84 @@ const { c } = Astro.props as { c: City };
 const place = `${c.town}, ${c.state}`;
 const service = {
   '@context': 'https://schema.org', '@type': 'Service', serviceType: 'Website design, local SEO and missed-call tools',
-  provider: { '@type': 'ProfessionalService', name: BUSINESS.name, url: BUSINESS.url },
+  provider: { '@id': BUSINESS_ID },
   areaServed: { '@type': 'City', name: c.town, containedInPlace: { '@type': 'AdministrativeArea', name: `${c.county}, ${c.state === 'IN' ? 'Indiana' : 'Illinois'}` } },
 };
+const stateName = c.state === 'IN' ? 'Indiana' : 'Illinois';
+const pageUrl = `${BUSINESS.url}/${c.slug}/`;
+const crumbs = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${BUSINESS.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'Service area', item: `${BUSINESS.url}/service-area/` },
+    { '@type': 'ListItem', position: 3, name: `Websites in ${c.town}`, item: pageUrl },
+  ],
+};
+const roadList = c.roads.length > 1 ? `${c.roads.slice(0, -1).join(', ')} or ${c.roads.at(-1)}` : c.roads[0];
+const steps: [string, string][] = [
+  ['Your Google profile, set up for ' + c.town, `Right categories, ${c.town} and the towns around it in your service area, real photos, hours and services with prices. This is what decides who shows up on the map.`],
+  ['A page that says ' + c.town, `A page on your site about the work you do in ${c.town}, so Google has a reason to show you when someone there searches. On a Pro site, every town you serve gets one.`],
+  ['Reviews that keep coming', `A text after every job asking for a review, with the link ready to tap. Fresh reviews from ${c.county} customers are one of the biggest things Google looks at.`],
+];
+const searches = ['plumber', 'hair salon', 'roofer', 'lawn care', 'dentist', 'auto repair'].map((t) => `${t} ${c.town.toLowerCase()}`);
 const faq: [string, string][] = [
   [`Do you work with businesses in ${c.town}?`, `Yes. ${c.town} is in our home turf in ${c.county}. We can meet in person, or do the whole thing by phone and text if that's easier.`],
   [`How do I show up when people in ${c.town} search Google?`, `Three things move it most: a complete Google Business Profile with ${c.town} in your service area, a page on your site about the work you do in ${c.town}, and a steady stream of fresh reviews. We set up all three.`],
+  [`My shop is on ${c.roads[0]}. Can I still show up for all of ${c.town}?`, `Usually, yes. Google weighs how close you are to the person searching, but a complete profile, a ${c.town} page on your site and steady reviews let you show up well past your own block. We tell you honestly how far we think you can reach.`],
   ['How much does a website cost?', 'Starter sites are $1,200 one time, Pro sites $2,500. You get a fixed quote in writing first, and you own the site.'],
   [`Do you only work with contractors in ${c.town}?`, 'No. Trades are a big part of what we do, but we build for shops, salons, offices and anyone else with a pinch point.'],
 ];
 const linked = c.nearby.map((t) => ({ t, page: cityBySlug(t) }));
 ---
-<Site title={`Websites, Google & Call Tools in ${place} | 1337`} description={`Websites, Google Maps and local SEO, and missed-call text-back for ${c.town} businesses. Local crew from ${c.county}. Fixed prices, and you own everything.`} schema={[service]}>
+<Site title={`Websites, Google & Call Tools in ${place} | 1337`} description={`Websites, Google Maps and local SEO, and missed-call text-back for ${c.town} businesses. Local crew from Northwest Indiana. Fixed prices, and you own everything.`} schema={[service, crumbs]}>
   <PageHead num={`${c.county} · ${c.state}`} label={`Websites in ${c.town}`} lines={['Websites for', `<span class="accent">${c.town}</span> businesses.`]} lede={`We're a local crew building websites, Google rankings and call tools for businesses in ${c.town} and the towns around it. Fixed prices, plain English.`}>
   </PageHead>
+
+  <section class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] pb-16 md:px-8 md:pb-24" aria-labelledby="local-title">
+    <nav aria-label="Breadcrumb" class="mono mb-8 text-[.75rem] uppercase tracking-[.12em] text-mute">
+      <a href="/" class="hover:text-ink">Home</a> / <a href="/service-area/" class="hover:text-ink">Service area</a> / <span aria-current="page">{c.town}</span>
+    </nav>
+    <div class="grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <p class="mono mb-4 text-[.75rem] uppercase tracking-[.12em] text-mute">{c.town}, {stateName}</p>
+        <h2 id="local-title" class="display text-[clamp(2.6rem,5.4vw,4.8rem)]">Getting found in <span class="accent">{c.town}.</span></h2>
+        <p class="mt-6 max-w-[48ch] text-[1.15rem] leading-relaxed">{c.local}</p>
+        <p class="mt-4 max-w-[48ch] text-[1.15rem] leading-relaxed text-mute">Whether you're near {roadList}, or you drive out to your customers, the people who need you are searching on their phones. Here's what we set up so they find you first.</p>
+      </div>
+      <ol class="lg:col-span-7">
+        {steps.map(([h, p], i) => (
+          <li class="step">
+            <span class="mono n">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h3 class="display text-[clamp(1.8rem,3vw,2.6rem)]">{h}</h3>
+              <p class="mt-2 max-w-[52ch] text-[1.05rem] leading-relaxed text-mute">{p}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+    <div class="mt-12 grid gap-8 border-t-2 border-ink pt-8 md:grid-cols-2">
+      <div>
+        <p class="mono mb-3 text-[.75rem] uppercase tracking-[.12em] text-mute">Searches people in {c.town} type</p>
+        <ul class="flex flex-wrap gap-2">
+          {searches.map((q) => <li class="mono inline-flex min-h-[40px] items-center rounded-md border border-ink/40 bg-paper-2 px-3 text-[.9rem]">"{q}"</li>)}
+        </ul>
+        <p class="mt-3 max-w-[52ch] text-[.95rem] text-mute">Examples. We find the ones for your business with the free Google check.</p>
+      </div>
+      <div>
+        <p class="mono mb-3 text-[.75rem] uppercase tracking-[.12em] text-mute">What we can do for a {c.town} business</p>
+        <ul class="grid">
+          {BUCKETS.map((b) => <li><a href={b.href ?? '/services/'} class="flex min-h-[44px] items-center justify-between gap-4 border-b border-ink/20 font-semibold hover:underline hover:decoration-hivis hover:decoration-2 hover:underline-offset-4"><span>{b.name}</span><span aria-hidden="true">→</span></a></li>)}
+        </ul>
+        <a href="/free-audit/" class="mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-semibold text-paper hover:bg-hivis hover:text-ink">Free Google check for {c.town} <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
   <ProblemPicker />
   <Faq items={faq} num={`${c.town} · FAQ`} title={`Questions from ${c.town}`} />
   <section class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] pb-16 md:px-8">
-    <p class="mono mb-4 text-[.75rem] uppercase tracking-[.12em] text-mute">Also near {c.town}</p>
+    <p class="mono mb-4 text-[.75rem] uppercase tracking-[.12em] text-mute">Also near {c.town} · <a href="/service-area/" class="underline decoration-hivis decoration-2 underline-offset-4 hover:text-ink">See the whole service area</a></p>
     <ul class="flex flex-wrap gap-2">
       {linked.map(({ t, page }) => page
         ? <li><a href={`/${page.slug}/`} class="inline-flex min-h-[44px] items-center rounded-full border-2 border-ink px-4 font-semibold hover:bg-ink hover:text-paper">{t}</a></li>
@@ -41,3 +102,9 @@ const linked = c.nearby.map((t) => ({ t, page: cityBySlug(t) }));
   </section>
   <CtaBand title={`Run a business in ${c.town}?`} accent="Text us. Quote in a day." />
 </Site>
+
+<style>
+  .step { display: grid; grid-template-columns: 2.6rem 1fr; gap: .5rem; padding: 1.4rem 0; border-bottom: 1px solid rgb(17 17 17 / .22); }
+  .step:first-child { padding-top: 0; }
+  .step .n { font-size: .8rem; padding-top: .45rem; color: var(--color-hivis); font-weight: 700; }
+</style>
