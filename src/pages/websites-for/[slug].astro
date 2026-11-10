@@ -13,17 +13,17 @@ const { trade } = Astro.props;
 ---
 <Site title={trade.title} description={trade.description} image={trade.example.image}>
   <PageHead num="Websites for" label={trade.trade} lines={['Websites for', `<span class="accent">${trade.trade.toLowerCase()}</span>`]} lede={trade.intro}>
-    <span slot="badges" class="badge">WEB</span>
+    <span slot="badges" class="badge">Websites</span>
   </PageHead>
 
   <section class="mx-auto grid max-w-[1440px] gap-12 px-[max(16px,env(safe-area-inset-left,0px))] pb-20 md:px-8 lg:grid-cols-12">
     <div class="lg:col-span-5">
-      <p class="mono mb-4 text-[.72rem] uppercase tracking-[.12em] text-mute">What your site needs</p>
+      <p class="mono mb-4 text-[.75rem] uppercase tracking-[.12em] text-mute">What your site needs</p>
       <ul class="prose-site"><>{trade.needs.map((n) => <li>{n}</li>)}</></ul>
-      <p class="mt-8 max-w-[46ch] text-[1.1rem] leading-relaxed text-mute">Before 1337, our founder spent years working in construction. We know how your customers think and how little time you have for this stuff.</p>
-      <p class="mt-6 flex flex-wrap gap-x-5 gap-y-2 font-semibold">
+      <p class="mt-8 max-w-[46ch] text-[1.1rem] leading-relaxed text-mute">Before 1337, Ryan, who runs the studio, spent years working in construction. We know how your customers think and how little time you have for this stuff.</p>
+      <p class="mt-6 flex flex-wrap gap-x-5 font-semibold [&>a]:inline-flex [&>a]:min-h-[44px] [&>a]:items-center">
         <a class="underline decoration-hivis decoration-2 underline-offset-4" href="/services/websites/">Websites</a>
-        <a class="underline decoration-hivis decoration-2 underline-offset-4" href="/services/local-seo/">Local SEO</a>
+        <a class="underline decoration-hivis decoration-2 underline-offset-4" href="/services/local-seo/">Get found on Google</a>
         <a class="underline decoration-hivis decoration-2 underline-offset-4" href="/work/">More work</a>
       </p>
     </div>
@@ -32,7 +32,7 @@ const { trade } = Astro.props;
         <Picture src={WORK_IMAGES[trade.example.image]} formats={['avif', 'webp']} widths={[480, 900]} sizes="(min-width: 1024px) 56vw, 100vw" alt={`${trade.example.name} website`} loading="lazy" decoding="async" class="aspect-[3/2] w-full object-cover object-top" />
       </a>
       <figcaption class="mono mt-4 flex flex-wrap justify-between gap-2 text-[.75rem] uppercase tracking-[.1em] text-mute">
-        <span>Real job · {trade.example.name}</span><span>{trade.example.note}</span>
+        <span>{trade.example.sample ? 'Sample build' : 'Real job'} · {trade.example.name}</span><span>{trade.example.note}</span>
       </figcaption>
     </figure>
   </section>

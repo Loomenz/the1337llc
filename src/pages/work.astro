@@ -7,7 +7,7 @@ import { projects } from '../data/work';
 import { WORK_IMAGES } from '../data/work-images';
 ---
 <Site title="Work: Websites We Built for Local Businesses | 1337" description="Real websites and tools 1337 built for Northwest Indiana businesses: lawn and snow, home builders, excavating, glass, landscaping and fleet repair.">
-  <PageHead num="03 / 06" label="Work" lines={['Real crews.', 'Real <span class="sweep on-load">sites.</span>']} lede="Every one of these is a real local business. Click through and poke around. They're live." />
+  <PageHead num="Work" label="Sites we built" lines={['Real crews.', 'Real <span class="sweep on-load">sites.</span>']} lede="Real local businesses, live right now. Click through and poke around. One is a sample build, and it's labeled." />
 
   <section class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] pb-20 md:px-8">
     <ol class="grid gap-16 md:gap-24">
@@ -49,7 +49,7 @@ import { WORK_IMAGES } from '../data/work-images';
   .frame :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: top; }
   .frame.pan :global(img) { height: auto; min-height: 100%; transition: transform 4s cubic-bezier(.4, 0, .2, 1); }
   .frame.pan:hover :global(img) { transform: translateY(calc(-100% + 100cqh)); }
-  .tag { position: absolute; left: .9rem; bottom: .9rem; background: var(--color-ink); color: var(--color-paper); padding: .4rem .7rem; border-radius: 6px; font-size: .72rem; }
+  .tag { position: absolute; left: .9rem; bottom: .9rem; background: var(--color-ink); color: var(--color-paper); padding: .4rem .7rem; border-radius: 6px; font-size: .75rem; }
   @media (min-width: 1024px) { .flip .frame { order: 2; } }
   @media (prefers-reduced-motion: reduce) { .frame.pan :global(img) { transition: none; } .frame.pan:hover :global(img) { transform: none; } }
 </style>

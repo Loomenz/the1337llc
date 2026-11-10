@@ -1,5 +1,5 @@
 ---
-// "I'm looking for help with my:" picker.
+// "What's slowing you down?" picker.
 // Desktop: pains on the left (one always active), the matching work order on the right.
 // Phones: the work order opens right under the row you tapped.
 // One row is open at rest, so the section reads complete before anyone taps.
@@ -11,10 +11,10 @@ const sms = BUSINESS.phone ? `sms:${BUSINESS.phone}` : '/contact/#text';
   <div class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] py-16 md:px-8 md:py-24">
     <div class="mb-10 flex flex-wrap items-end justify-between gap-6 md:mb-14">
       <h2 id="fixes-title" class="display mask-lines max-w-[13ch] text-[clamp(3rem,8.6vw,9rem)]">
-        <span class="ml"><span>I'm looking for</span></span>
-        <span class="ml"><span><span class="accent text-hivis">help</span> with my:</span></span>
+        <span class="ml"><span>What's slowing</span></span>
+        <span class="ml"><span>you <span class="accent text-hivis">down?</span></span></span>
       </h2>
-      <p class="mono text-[.72rem] uppercase tracking-[.12em] text-mute-dark">01 / 06 · Pick one</p>
+      <p class="mono text-[.75rem] uppercase tracking-[.12em] text-mute-dark">Pick one</p>
     </div>
 
     <div class="picker" data-picker>
@@ -37,8 +37,8 @@ const sms = BUSINESS.phone ? `sms:${BUSINESS.phone}` : '/contact/#text';
 
           <article class="order" id={`wo-${f.id}`} role="region" aria-labelledby={`fx-${f.id}`} hidden={i !== 0}>
             <header class="order-head mono">
-              <span>Work order · 0{i + 1} / 06</span>
-              <span class="flex gap-1.5">{f.tags.map((t) => <span class="badge">{t}</span>)}</span>
+              <span>The fix</span>
+              <span>0{i + 1} of 0{FIXES.length}</span>
             </header>
             <p class="accent quote">&ldquo;{f.pain}.&rdquo;</p>
             <h3 class="display fixname">{f.name}</h3>
@@ -49,7 +49,7 @@ const sms = BUSINESS.phone ? `sms:${BUSINESS.phone}` : '/contact/#text';
             </dl>
             <div class="flex flex-wrap items-center gap-4 pt-2">
               <a href={`/contact/?fix=${f.id}`} class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-[1.02rem] font-semibold text-paper transition-colors hover:bg-hivis hover:text-ink">Fix this for me <span aria-hidden="true">→</span></a>
-              <a href={sms} class="font-semibold underline decoration-2 underline-offset-4 hover:decoration-hivis">or text us a question</a>
+              <a href={sms} class="inline-flex min-h-[44px] items-center font-semibold underline decoration-2 underline-offset-4 hover:decoration-hivis">or text us a question</a>
             </div>
             <span aria-hidden="true" class="stamp display">Signed off</span>
           </article>
@@ -59,7 +59,7 @@ const sms = BUSINESS.phone ? `sms:${BUSINESS.phone}` : '/contact/#text';
 
     <p class="mt-12 flex flex-wrap items-baseline gap-x-4 gap-y-2 text-[1.2rem]">
       <span class="text-mute-dark">Not on the list?</span>
-      <a href={sms} class="underline decoration-hivis decoration-[3px] underline-offset-[6px] hover:text-hivis">Text us what's bugging you.</a>
+      <a href={sms} class="inline-flex min-h-[44px] items-center underline decoration-hivis decoration-[3px] underline-offset-[6px] hover:text-hivis">Text us what's bugging you.</a>
     </p>
   </div>
 </section>
@@ -88,14 +88,14 @@ const sms = BUSINESS.phone ? `sms:${BUSINESS.phone}` : '/contact/#text';
     background-image: radial-gradient(circle at 1px 1px, rgb(17 17 17 / .12) 1px, transparent 0); background-size: 18px 18px;
   }
   .order[hidden] { display: none; }
-  .order-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; padding-bottom: .9rem; border-bottom: 2px solid var(--color-ink); }
+  .order-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; padding-bottom: .9rem; border-bottom: 2px solid var(--color-ink); }
   .quote { font-size: clamp(1.5rem, 2.6vw, 2.1rem); line-height: 1.1; color: var(--color-mute); }
   .fixname { font-size: clamp(2.6rem, 5vw, 4.8rem); }
   .fixtext { font-size: 1.2rem; line-height: 1.45; max-width: 44ch; }
   .specs { display: grid; grid-template-columns: 1fr 1fr; border: 2px solid var(--color-ink); border-radius: 8px; }
   .specs > div { padding: .8rem .9rem; }
   .specs > div + div { border-left: 2px solid var(--color-ink); }
-  .specs dt { font-size: .66rem; text-transform: uppercase; letter-spacing: .12em; color: var(--color-mute); margin-bottom: .3rem; }
+  .specs dt { font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; color: var(--color-mute); margin-bottom: .3rem; }
   .specs dd { font-size: .92rem; line-height: 1.4; }
   .stamp {
     position: absolute; right: 1.1rem; top: 3.6rem; font-size: 1.5rem; color: var(--color-hivis);

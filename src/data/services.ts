@@ -8,6 +8,7 @@ export interface Service {
   intro: string;
   includes: string[];
   forWho: string;
+  price: string; // one plain line shown on the page; full detail is on /pricing/
   faq: [string, string][];
 }
 
@@ -15,8 +16,8 @@ export const services: Service[] = [
   {
     slug: 'websites',
     name: 'Websites',
-    title: 'Contractor & Small Business Websites in Northwest Indiana | 1337',
-    description: 'Fast, mobile-first websites for Northwest Indiana and Chicagoland contractors and local businesses. Click-to-call, quote forms and local SEO built in.',
+    title: 'Small Business Websites in Northwest Indiana & Chicagoland | 1337',
+    description: 'Fast, mobile-first websites for Northwest Indiana and Chicagoland small businesses. Click-to-call, quote forms and local SEO built in.',
     headline: 'Websites that bring in calls',
     intro: 'Most customers find you on their phone, compare you to two other companies and call whoever looks most trustworthy. We build sites that win that comparison: fast, clear about what you do and where you work, and one tap away from a phone call or quote request.',
     includes: [
@@ -27,16 +28,17 @@ export const services: Service[] = [
       'Local SEO groundwork: titles, schema, Google Business link',
       'Hosting, SSL and domain setup. You own everything.',
     ],
-    forWho: 'Contractors, trades and local service businesses that get most of their work from people searching Google or checking them out after a referral.',
+    forWho: 'Any local business that gets customers from Google or from people checking you out after a referral: trades, salons, shops, offices, restaurants.',
+    price: 'Starter $1,200. Pro $2,500. One time, and you own it.',
     faq: [
-      ['How long does a website take?', 'Most sites are live within two weeks of the deposit, depending on how fast we get your photos and details.'],
+      ['How long does a website take?', 'Most sites are live in 2 to 3 weeks from the deposit, depending on how fast we get your photos and details.'],
       ['Do I own the site?', 'Yes. The domain, the content and the code are yours.'],
       ['What if I already have a site?', 'We can redesign it or fix what is holding it back. Start with the free Google check to see what matters most.'],
     ],
   },
   {
     slug: 'local-seo',
-    name: 'Local SEO & Google Business',
+    name: 'Get found on Google',
     title: 'Local SEO & Google Business Profile for NWI Businesses | 1337',
     description: 'Show up in the Google map pack when Northwest Indiana customers search for your service. Google Business Profile setup, reviews and local SEO.',
     headline: 'Show up when locals search',
@@ -50,54 +52,37 @@ export const services: Service[] = [
       'Listings on Bing, Apple Maps, Yelp and local directories',
     ],
     forWho: 'Any local business that wants more calls from Google without paying for ads.',
+    price: '$300 to set up your Google profile, then $149/mo to keep it managed.',
     faq: [
       ['How fast will I rank?', 'Nobody can honestly promise a ranking. Profile fixes and reviews usually show movement within a few months; competitive trades take longer.'],
       ['Do I need a website for this?', 'It helps a lot. Google trusts businesses with a real website that matches their profile.'],
     ],
   },
   {
-    slug: 'ai-integrations',
-    name: 'AI Integrations',
-    title: 'AI Chatbots & AI Integration for Small Businesses in NWI | 1337',
-    description: 'AI chat assistants for your website, AI-powered follow-up and practical automation for Northwest Indiana and Chicagoland small businesses. Set up, trained and supported locally.',
-    headline: 'Put AI to work in your business',
-    intro: 'AI is not just for big companies. We set up practical AI tools that save small businesses real hours: a chat assistant on your website that answers questions and books leads at 2am, follow-ups that write themselves, and help turning messy notes into quotes, posts and emails. We pick what fits, set it up, train it on your business and keep it running.',
-    includes: [
-      'AI chat assistant on your website, trained on your services, prices and service area',
-      'Leads from the chat sent straight to your phone or inbox',
-      'AI-assisted follow-up, review requests and customer replies',
-      'Help writing quotes, job descriptions, posts and emails',
-      'Connecting the tools you already use so data moves on its own',
-      'Plain-English training for you and your crew',
-    ],
-    forWho: 'Owners who keep hearing about AI and want it doing real work in their business, without learning a pile of new software.',
-    faq: [
-      ['Will the chatbot make things up?', 'We limit it to your business info and set clear rules. When it does not know, it takes the customer\'s details and passes them to you.'],
-      ['What does it cost?', 'Setup is a flat quote, and we tell you any monthly running cost up front before anything goes live.'],
-      ['Do I need to be good with tech?', 'No. We set it up and keep it running. You just get the leads.'],
-    ],
-  },
-  {
-    slug: 'ai-lead-tools',
-    name: 'AI Lead Tools',
-    title: 'AI Lead Follow-Up & Automation for Contractors | 1337',
-    description: 'Stop losing leads. Missed-call text-back, instant quote follow-up, review requests and after-hours intake for Northwest Indiana contractors.',
-    headline: 'Stop losing leads you already paid for',
-    intro: 'Calls come in while you are on a job. Quote requests sit in your inbox overnight. Customers who would happily leave a review never get asked. We set up simple AI-powered tools that answer, follow up and ask for you, so leads do not slip through.',
+    slug: 'never-miss-a-call',
+    name: 'Never miss a call',
+    title: 'Missed-Call Text-Back, AI Receptionist & Booking for Small Businesses | 1337',
+    description: 'Stop losing customers to missed calls. Text-back, an AI receptionist, online booking, reminders, quote follow-up and review requests for Northwest Indiana and Chicagoland small businesses.',
+    headline: 'Stop losing customers you already earned',
+    intro: 'Calls come in while you are with a customer. Quote requests sit in your inbox overnight. People who would happily leave a review never get asked. We set up simple tools that answer, follow up and ask for you, so nobody slips through. Some of them run on AI. You never have to touch that part.',
     includes: [
       'Missed-call text-back: callers get a text right away',
-      'An AI receptionist that answers the calls you miss, books the job and texts you a summary',
-      'One customer list (a CRM) with every call, text and quote in one place',
+      'An AI receptionist that answers the calls you miss, books the appointment and texts you a summary',
+      'One customer list with every call, text and quote in one place',
       'Online booking with confirmation and reminder texts',
       'Automatic follow-up on quote requests',
       'Review requests after every finished job',
-      'The Front Desk package: text-back, customer list, booking and reviews for $249/mo',
+      'A chat assistant on your website that answers questions and takes leads at 2am',
+      'The Front Desk package: text-back, customer list, booking and reviews together',
     ],
-    forWho: 'Owners who are on the job all day and know they lose calls and quotes because nobody gets back to people fast enough.',
+    forWho: 'Owners who are busy with customers all day and know they lose calls and quotes because nobody gets back to people fast enough.',
+    price: 'Text-back $250 + $79/mo. Front Desk package $1,000 + $249/mo.',
     faq: [
       ['Will it sound like a robot?', 'No. Messages are written in your voice and you approve them before anything goes live.'],
-      ['Do I need new software?', 'Usually not. We work with your phone, email and website and keep it as simple as possible.'],
       ['Do I have to change my phone number?', 'No. You keep your number and your phone company. Calls you miss forward to our system, which texts the caller back or answers for you.'],
+      ['Do I need new software?', 'Usually not. We work with your phone, email and website and keep it as simple as possible.'],
+      ['Will the chat assistant make things up?', 'We limit it to your business info and set clear rules. When it does not know, it takes the customer\'s details and passes them to you.'],
+      ['Do I need to be good with tech?', 'No. We set it up and keep it running. You just get the customers.'],
     ],
   },
   {
@@ -108,7 +93,7 @@ export const services: Service[] = [
     headline: 'A plan to grow, and the tools to do it',
     intro: 'A website is one piece. Growth comes from knowing who your best customers are, what to charge, where your leads come from and following up on every one. We work with you like an in-house growth partner: build the plan, set up the website, marketing and systems behind it, and check the numbers with you every month.',
     includes: [
-      'Growth plan: target customers, services and goals',
+      'A written plan: target customers, services and goals',
       'Offer and pricing review',
       'Lead tracking from first call to paid job',
       'Marketing plan: Google, reviews, social and email',
@@ -116,6 +101,7 @@ export const services: Service[] = [
       'Monthly check-ins to adjust what is not working',
     ],
     forWho: 'New and growing small business owners who are great at the work and want help with the business side: getting customers, pricing and staying organized.',
+    price: 'Fixed quote in writing after a short call. No hourly billing.',
     faq: [
       ['Is this consulting or do you do the work?', 'Both. We help make the plan and then build the website, tools and marketing to carry it out.'],
       ['I just started my business. Is it too early?', 'No. It is the best time to set up the basics right so you are not fixing them later.'],
@@ -136,6 +122,7 @@ export const services: Service[] = [
       'Training so you actually use it',
     ],
     forWho: 'Owners who want to know which jobs make money and stop doing paperwork at midnight.',
+    price: 'Spreadsheet systems from $99. Owner dashboards from $2,500.',
     faq: [
       ['Is this accounting software?', 'No. It works alongside your accountant and makes their job (and bill) smaller.'],
     ],
@@ -155,6 +142,7 @@ export const services: Service[] = [
       'Help when something stops working',
     ],
     forWho: 'Small offices and crews without an IT person.',
+    price: '$60 an hour. Setup jobs like business email from $150.',
     faq: [
       ['Do you come on site?', 'Yes, across Northwest Indiana. Many fixes can also be done remotely.'],
     ],

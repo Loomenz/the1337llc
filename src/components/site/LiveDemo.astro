@@ -5,7 +5,7 @@
 import { DEMO_TRADES } from '../../data/demo';
 const first = DEMO_TRADES[0];
 const steps = [
-  ['Call goes unanswered', "You're on a roof. It rings out."],
+  ['Call goes unanswered', "You're busy with a customer. It rings out."],
   ['Text back in seconds', 'From your own number, in your words.'],
   ['They pick a time', "It's on your calendar. Reminder goes out the day before."],
   ['Lead in your board', 'Name, job, the whole thread. Nothing on a sticky note.'],
@@ -14,14 +14,14 @@ const steps = [
 <section id="demo" class="relative border-t-2 border-ink" aria-labelledby="demo-title">
   <div class="mx-auto grid max-w-[1440px] gap-10 px-[max(16px,env(safe-area-inset-left,0px))] py-16 md:px-8 md:py-24 lg:grid-cols-12 lg:gap-8" data-demo data-trades={JSON.stringify(DEMO_TRADES)}>
     <div class="lg:col-span-5">
-      <p class="mono mb-6 text-[.72rem] uppercase tracking-[.12em] text-mute">02 / 06 · See it work</p>
+      <p class="mono mb-6 text-[.75rem] uppercase tracking-[.12em] text-mute">See it work</p>
       <h2 id="demo-title" class="display mask-lines text-[clamp(3rem,7vw,6.6rem)]">
         <span class="ml"><span>Missed call.</span></span>
-        <span class="ml"><span><span class="accent">Booked</span> job.</span></span>
+        <span class="ml"><span>Booked <span class="accent">anyway.</span></span></span>
       </h2>
-      <p class="mt-6 max-w-[38ch] text-[1.2rem] leading-snug">Pick your trade and watch what happens when you can't pick up. This is the real flow, with a made-up customer.</p>
+      <p class="mt-6 max-w-[38ch] text-[1.2rem] leading-snug">Pick your business and watch what happens when you can't pick up. This is the real flow, with a made-up customer.</p>
 
-      <div class="mt-7 flex flex-wrap gap-2" role="group" aria-label="Pick your trade">
+      <div class="mt-7 flex flex-wrap gap-2" role="group" aria-label="Pick your business">
         {DEMO_TRADES.map((t, i) => (
           <button type="button" class="chip" data-trade={t.id} aria-pressed={i === 0 ? 'true' : 'false'}>{t.label}</button>
         ))}
@@ -43,7 +43,7 @@ const steps = [
       <div class="phone" aria-label="Demo phone">
         <div class="notch" aria-hidden="true"></div>
         <header class="phone-head">
-          <span class="mono text-[.62rem] uppercase tracking-[.12em] opacity-60">Messages</span>
+          <span class="mono text-[.75rem] uppercase tracking-[.12em] opacity-60">Messages</span>
           <b data-shop>{first.shop}</b>
         </header>
         <div class="thread" data-thread role="log" aria-live="polite" aria-label="Demo text thread"></div>
@@ -103,10 +103,10 @@ const steps = [
   .board {
     width: 100%; max-width: 520px; background: var(--color-paper); border: 2px solid var(--color-ink); border-radius: 14px; overflow: hidden;
   }
-  .board-head { display: flex; justify-content: space-between; align-items: center; padding: .8rem 1rem; background: var(--color-ink); color: var(--color-paper); font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; }
+  .board-head { display: flex; justify-content: space-between; align-items: center; padding: .8rem 1rem; background: var(--color-ink); color: var(--color-paper); font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; }
   .board table { font-size: .9rem; border-collapse: collapse; }
-  .board th { font-size: .64rem; text-transform: uppercase; letter-spacing: .12em; color: var(--color-mute); font-weight: 500; padding: .7rem 1rem .4rem; }
-  .board-foot { padding: .7rem 1rem; border-top: 2px solid var(--color-ink); font-size: .72rem; color: var(--color-mute); }
+  .board th { font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; color: var(--color-mute); font-weight: 500; padding: .7rem 1rem .4rem; }
+  .board-foot { padding: .7rem 1rem; border-top: 2px solid var(--color-ink); font-size: .75rem; color: var(--color-mute); }
 </style>
 
 <style is:global>
@@ -114,7 +114,7 @@ const steps = [
   [data-thread] > div { max-width: 84%; }
   [data-thread] > :first-child { margin-top: auto; }
   .board td { padding: .7rem 1rem; border-top: 1px solid rgb(17 17 17 / .15); vertical-align: top; }
-  .board .st { font-family: var(--font-mono); font-size: .72rem; white-space: nowrap; }
+  .board .st { font-family: var(--font-mono); font-size: .75rem; white-space: nowrap; }
   .board .st.hot { background: var(--color-hivis); color: var(--color-ink); padding: .2em .45em; border-radius: 4px; font-weight: 700; }
   @media (max-width: 420px) { .board th:nth-child(2), .board td:nth-child(2) { display: none; } }
   [data-thread] .b { padding: .55rem .8rem; border-radius: 18px; }
@@ -122,11 +122,11 @@ const steps = [
   [data-thread] .in .b { background: #e6e3da; border-bottom-left-radius: 5px; }
   [data-thread] .out { align-self: flex-end; }
   [data-thread] .out .b { background: var(--color-ink); color: var(--color-paper); border-bottom-right-radius: 5px; }
-  [data-thread] .sys { align-self: center; max-width: 100%; font-family: var(--font-mono); font-size: .64rem; letter-spacing: .08em; text-transform: uppercase; color: var(--color-mute); text-align: center; }
+  [data-thread] .sys { align-self: center; max-width: 100%; font-family: var(--font-mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--color-mute); text-align: center; }
   [data-thread] .call { align-self: stretch; max-width: 100%; display: flex; align-items: center; gap: .7rem; padding: .7rem .8rem; border-radius: 16px; border: 2px solid var(--color-ink); background: #fff; }
   [data-thread] .call .ic { flex: none; width: 2.2rem; height: 2.2rem; border-radius: 99px; display: grid; place-items: center; background: var(--color-ink); color: var(--color-paper); }
   [data-thread] .call.missed .ic { background: var(--color-hivis); color: var(--color-ink); }
-  [data-thread] .call small { display: block; font-family: var(--font-mono); font-size: .66rem; color: var(--color-mute); }
+  [data-thread] .call small { display: block; font-family: var(--font-mono); font-size: .75rem; color: var(--color-mute); }
   [data-thread] .booked { align-self: stretch; max-width: 100%; padding: .75rem .85rem; border-radius: 14px; background: var(--color-hivis); color: var(--color-ink); }
   [data-thread] .booked b { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; font-size: 1.5rem; line-height: .9; display: block; }
   [data-thread] .dots span { display: inline-block; width: 6px; height: 6px; margin: 0 1px; border-radius: 9px; background: var(--color-mute); }
@@ -145,7 +145,7 @@ const steps = [
 </style>
 
 <script>
-  interface Trade { id: string; label: string; shop: string; caller: string; ask: string; reply: string; pick: string; job: string; slot: string }
+  interface Trade { id: string; label: string; shop: string; caller: string; ask: string; reply: string; pick: string; job: string; slot: string; away: string; booked: string }
 
   function initDemo() {
     const root = document.querySelector<HTMLElement>('[data-demo]');
@@ -180,7 +180,7 @@ const steps = [
       board.querySelector('tr.new')?.remove();
       foot.textContent = 'Waiting for the next call…';
       shop.textContent = t.shop;
-      const outText = `Hi, this is ${t.shop.replace(/\.$/, '')}. Sorry we missed you, we're out on a job. What can we help with?`;
+      const outText = `Hi, this is ${t.shop.replace(/\.$/, '')}. Sorry we missed you, ${t.away}. What can we help with?`;
 
       // each beat: [delay ms, action]
       const beats: [number, () => void][] = [
@@ -204,7 +204,7 @@ const steps = [
         [7400, () => { step(2, 1800); bubble('in', t.pick); }],
         [8300, () => {
           const li = el('div', 'booked');
-          li.append(el('span', 'mono text-[.64rem] uppercase tracking-[.12em]', 'Estimate booked'), el('b', '', t.slot), el('span', 'text-[.85rem]', 'On your calendar. Reminder text goes out the day before.'));
+          li.append(el('span', 'mono text-[.75rem] uppercase tracking-[.12em]', t.booked), el('b', '', t.slot), el('span', 'text-[.85rem]', 'On your calendar. Reminder text goes out the day before.'));
           add(li);
         }],
         [9200, () => {

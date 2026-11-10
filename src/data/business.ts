@@ -10,6 +10,14 @@ export const BUSINESS = {
   region: 'Northwest Indiana & Chicagoland',
 };
 
+// Both forms post to Web3Forms, which emails each submission to BUSINESS.email.
+// The access key is a public form id (it is meant to sit in page HTML), not a secret.
+// To send submissions to a different inbox, create a new key for that address at web3forms.com.
+export const FORM = {
+  action: 'https://api.web3forms.com/submit',
+  accessKey: 'd1094bc0-76f1-4b46-9d2e-e21891510e64',
+};
+
 // Service area, roughly west to east then north. Used for the town strip, the schema and future city pages.
 export const TOWNS = [
   'Hammond', 'Munster', 'Highland', 'Schererville', 'Dyer', 'St. John', 'Crown Point',
@@ -26,7 +34,7 @@ export function localBusinessSchema() {
     email: BUSINESS.email,
     ...(BUSINESS.phone ? { telephone: BUSINESS.phone } : {}),
     image: `${BUSINESS.url}/og-image.png`,
-    description: 'Local crew building websites, local SEO and AI tools that answer calls, follow up on leads and book estimates for contractors and local shops.',
+    description: 'Local studio building websites, local SEO and tools that answer calls, follow up on leads and book customers for small businesses.',
     // Service-area business: no street address, only the region and the towns served.
     address: { '@type': 'PostalAddress', addressRegion: 'IN', addressCountry: 'US' },
     areaServed: TOWNS.map((name) => ({ '@type': 'City', name })),

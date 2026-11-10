@@ -43,7 +43,7 @@
   /* Locomotive-style bracket badge: [WEB] */
   .badge {
     display: inline-flex; align-items: center; gap: .15em;
-    font-family: var(--font-mono); font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    font-family: var(--font-mono); font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
     padding: .28em .55em; border: 1.5px solid currentColor; border-radius: 4px; line-height: 1;
   }
   .badge::before { content: "["; opacity: .55; }

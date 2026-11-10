@@ -1,5 +1,5 @@
 ---
-// 03 / 06: three real jobs as a strip of framed screenshots.
+// Three real jobs as a strip of framed screenshots.
 import { Picture } from 'astro:assets';
 import { projects } from '../../data/work';
 import { WORK_IMAGES } from '../../data/work-images';
@@ -9,7 +9,7 @@ const pick = projects.filter((p) => p.image).slice(0, 3);
   <div class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] py-16 md:px-8 md:py-24">
     <div class="mb-10 flex flex-wrap items-end justify-between gap-6">
       <div>
-        <p class="mono mb-5 text-[.72rem] uppercase tracking-[.12em] text-mute">03 / 06 · Work</p>
+        <p class="mono mb-5 text-[.75rem] uppercase tracking-[.12em] text-mute">Work</p>
         <h2 id="work-title" class="display mask-lines text-[clamp(3rem,8vw,7.6rem)]"><span class="ml"><span>Real local</span></span><span class="ml"><span><span class="accent">clients.</span></span></span></h2>
       </div>
       <a href="/work/" class="inline-flex items-center gap-2 rounded-full border-2 border-ink px-6 py-3 font-semibold hover:bg-ink hover:text-paper">All the work <span aria-hidden="true">→</span></a>
@@ -21,7 +21,7 @@ const pick = projects.filter((p) => p.image).slice(0, 3);
             <span class="frame">
               <Picture src={WORK_IMAGES[p.image!]} formats={['avif', 'webp']} widths={[400, 700]} sizes="(min-width: 768px) 30vw, 100vw" alt={p.alt ?? `${p.name} website`} loading="lazy" decoding="async" />
             </span>
-            <span class="mono mt-4 flex justify-between text-[.72rem] uppercase tracking-[.1em] text-mute"><span>Job 0{i + 1}</span><span>{p.url}</span></span>
+            <span class="mono mt-4 flex justify-between text-[.75rem] uppercase tracking-[.1em] text-mute"><span>Job 0{i + 1}</span><span>{p.url}</span></span>
             <span class="display mt-2 block text-[2.4rem] group-hover:text-hivis">{p.name}</span>
             <span class="block text-mute">{p.blurb}</span>
           </a>

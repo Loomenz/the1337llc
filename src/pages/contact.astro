@@ -1,42 +1,43 @@
 ---
 import Site from '../layouts/Site.astro';
 import PageHead from '../components/site/PageHead.astro';
-import { BUSINESS } from '../data/business';
-import { FIXES } from '../data/fixes';
-import { services } from '../data/services';
+import { BUSINESS, FORM } from '../data/business';
+import { BUCKETS, BUCKET_OF } from '../data/buckets';
 
 const tel = BUSINESS.phone;
 const ways = [
-  { id: 'text', label: 'Text', big: BUSINESS.phoneDisplay, href: tel ? `sms:${tel}` : null, note: 'Fastest. Send a photo of the problem if you want.' },
-  { id: 'call', label: 'Call', big: BUSINESS.phoneDisplay, href: tel ? `tel:${tel}` : null, note: "If we're on a job, you get a text back in minutes." },
+  { id: 'text', label: 'Text', big: BUSINESS.phoneDisplay, href: tel ? `sms:${tel}` : null, note: 'Fastest. Text this number from your phone. Send a photo of the problem if you want.' },
+  { id: 'call', label: 'Call', big: BUSINESS.phoneDisplay, href: tel ? `tel:${tel}` : null, note: "If we can't pick up, you get a text back in minutes." },
   { id: 'email', label: 'Email', big: BUSINESS.email, href: `mailto:${BUSINESS.email}`, note: 'Reply within one business day.' },
 ];
 ---
 <Site title="Contact & Free Quote: Text, Call or Email the Crew | 1337" description="Text, call or email 1337 for a fixed quote on a website, Google and local SEO, or AI tools. Northwest Indiana and Chicagoland. Reply within one business day.">
-  <PageHead num="06 / 06" label="Contact" lines={['Text us.', '<span class="accent">Seriously.</span>']} lede="Tell us what's bugging you. You'll get a real person and a fixed quote, usually within a day." />
+  <PageHead num="Contact" label="Text, call, email or use the form" lines={['Text us.', '<span class="accent">Seriously.</span>']} lede="Tell us what's bugging you. You'll get a real person and a fixed quote, usually within a day." />
 
   <section class="mx-auto grid max-w-[1440px] gap-12 px-[max(16px,env(safe-area-inset-left,0px))] pb-20 md:px-8 lg:grid-cols-12">
     <ul class="ways lg:col-span-5">
       {ways.map((w) => (
         <li id={w.id} class="scroll-mt-24">
-          <p class="mono text-[.72rem] uppercase tracking-[.12em] text-mute">{w.label}</p>
+          <p class="mono text-[.75rem] uppercase tracking-[.12em] text-mute">{w.label}</p>
           {w.href
-            ? <a href={w.href} class="display big hover:text-hivis">{w.big}</a>
-            : <p class="display big">{w.big.replace(' [placeholder]', '')} <span class="badge align-middle text-[.6rem]">Placeholder</span></p>}
+            ? <a href={w.href} class="display big hover:text-hivis" data-keep-sms>{w.big}</a>
+            : <p class="display big">{w.big.replace(' [placeholder]', '')} <span class="badge align-middle text-[.75rem]">Placeholder</span></p>}
           <p class="mt-1 text-mute">{w.note}</p>
         </li>
       ))}
     </ul>
 
-    <form id="form" class="form lg:col-span-7 scroll-mt-24" action={`https://formsubmit.co/${BUSINESS.email}`} method="POST" data-form>
-      <header class="mono flex items-center justify-between border-b-2 border-ink pb-3 text-[.72rem] uppercase tracking-[.1em]">
+    <form id="form" class="form lg:col-span-7 scroll-mt-24" action={FORM.action} method="POST" data-form data-map={JSON.stringify(BUCKET_OF)}>
+      <header class="mono flex items-center justify-between border-b-2 border-ink pb-3 text-[.75rem] uppercase tracking-[.1em]">
         <span>Quote request</span><span>Takes 1 minute</span>
       </header>
       <p class="thanks" role="status" hidden data-thanks>Got it. We'll get back to you within one business day, usually sooner.</p>
-      <input type="hidden" name="_subject" value="New quote request from the1337llc.com">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" value={`${BUSINESS.url}/contact/?sent=1#form`}>
-      <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input type="hidden" name="access_key" value={FORM.accessKey}>
+      <input type="hidden" name="subject" value="New quote request from the1337llc.com">
+      <input type="hidden" name="from_name" value="1337 website">
+      <input type="hidden" name="redirect" value={`${BUSINESS.url}/contact/?sent=1#form`}>
+      <!-- Spam trap: people never see this box, bots tick it, and Web3Forms drops the submission. -->
+      <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
 
       <div class="grid gap-5 sm:grid-cols-2">
         <label class="f"><span>Your name</span><input name="name" autocomplete="name" required></label>
@@ -47,17 +48,13 @@ const ways = [
       <label class="f"><span>What's going on?</span>
         <select name="problem" data-problem>
           <option value="">Pick one (or skip)</option>
-          <optgroup label="Problems">
-            {FIXES.map((f) => <option value={f.id}>{f.pain}</option>)}
-          </optgroup>
-          <optgroup label="Services">
-            {services.map((s) => <option value={s.slug}>{s.name}</option>)}
-            <option value="systems">Custom system</option>
-          </optgroup>
-          <option value="other">Something else</option>
+          {BUCKETS.map((b) => <option value={b.id}>{b.name}</option>)}
+          <option value="other">Not sure / something else</option>
         </select>
       </label>
-      <label class="f"><span>Anything else? <i>(optional)</i></span><textarea name="message" rows="4" placeholder="e.g. I'm a roofer in Crown Point and miss half my calls in summer."></textarea></label>
+      <!-- Carries the exact thing they clicked on another page (e.g. "noshow"), so the email says more than the bucket. -->
+      <input type="hidden" name="clicked_from" data-from>
+      <label class="f"><span>Anything else? <i>(optional)</i></span><textarea name="message" rows="4" placeholder="e.g. I run a salon in Crown Point and miss half my calls on Saturdays."></textarea></label>
       <div class="flex flex-wrap items-center gap-4">
         <button type="submit" class="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-4 text-[1.08rem] font-semibold text-paper transition-colors hover:bg-hivis hover:text-ink">Send it <span aria-hidden="true">→</span></button>
         <p class="text-[.95rem] text-mute">No spam, no sales list. Just a reply.</p>
@@ -69,11 +66,11 @@ const ways = [
 <style>
   .ways { display: grid; align-content: start; border-top: 2px solid var(--color-ink); }
   .ways li { padding: 1.4rem 0; border-bottom: 1px solid rgb(17 17 17 / .22); }
-  .big { display: block; margin-top: .4rem; font-size: clamp(2rem, 4.6vw, 3.6rem); overflow-wrap: anywhere; }
+  .big { display: block; margin-top: .4rem; padding: .15em 0; font-size: clamp(2rem, 4.6vw, 3.6rem); overflow-wrap: anywhere; }
   .form { display: grid; gap: 1.3rem; align-self: start; padding: 1.4rem; border: 2px solid var(--color-ink); border-radius: 14px; background: var(--color-paper); box-shadow: 10px 10px 0 var(--color-hivis); }
   @media (min-width: 768px) { .form { padding: 2rem 2.2rem 2.2rem; } }
   .f { display: grid; gap: .45rem; }
-  .f > span { font-family: var(--font-mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; }
+  .f > span { font-family: var(--font-mono); font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; }
   .f i { font-style: normal; color: var(--color-mute); }
   .f input, .f select, .f textarea { width: 100%; min-height: 52px; padding: .8rem .95rem; font: inherit; font-size: 1.08rem; border: 2px solid var(--color-ink); border-radius: 8px; background: #fff; }
   .f textarea { min-height: 120px; resize: vertical; }
@@ -89,7 +86,9 @@ const ways = [
     const q = new URLSearchParams(location.search);
     const pick = q.get('fix') || q.get('service');
     const sel = form.querySelector<HTMLSelectElement>('[data-problem]')!;
-    if (pick && [...sel.options].some((o) => o.value === pick)) sel.value = pick;
+    const bucket = pick ? (JSON.parse(form.dataset.map || '{}')[pick] ?? pick) : '';
+    if (bucket && [...sel.options].some((o) => o.value === bucket)) sel.value = bucket;
+    if (pick) form.querySelector<HTMLInputElement>('[data-from]')!.value = pick;
     if (q.get('sent')) form.querySelector<HTMLElement>('[data-thanks]')!.hidden = false;
   }
   initForm();

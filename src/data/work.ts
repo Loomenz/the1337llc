@@ -18,34 +18,34 @@ export interface Project {
 export const projects: Project[] = [
   {
     name: 'SPK Lawn & Snow', url: 'spklawnandsnow.com', blurb: 'Commercial & residential property maintenance',
-    tags: [{ label: 'Dual quote engine', hot: true }, { label: 'Website' }],
+    tags: [{ label: 'Instant lawn + snow quotes', hot: true }, { label: 'Website' }],
     size: 'wide', kind: 'scroll', image: '/work/spk-lawn.jpg', alt: 'SPK Lawn & Snow website',
   },
   {
     name: 'SPK Homes', url: 'spkhomes.com', blurb: 'Home builder, Kingsford Heights IN',
-    tags: [{ label: 'Next.js' }, { label: 'Floor plans' }],
+    tags: [{ label: 'Floor plans' }, { label: 'Website' }],
     size: 'narrow', kind: 'hero', image: '/work/spk-homes.jpg',
     headline: 'SPK Homes', caption: 'Affordable new construction & custom-built homes',
   },
   {
     name: 'Tony Cutz Grass', url: 'tonycutzgrass.com', blurb: 'Landscaping with on-site invoicing & payments',
-    tags: [{ label: 'Field POS', hot: true }, { label: 'Instant quotes' }],
+    tags: [{ label: 'Customers pay on site', hot: true }, { label: 'Instant quotes' }],
     size: 'narrow', kind: 'scroll', image: '/work/tony-cutz.jpg', alt: 'Tony Cutz Grass website',
   },
   {
     name: 'Big Iron Fleet Services', url: 'bigironfleet.com', blurb: 'Mobile heavy-duty truck & fleet repair',
-    tags: [{ label: 'Concept build' }, { label: 'Lead gen' }],
+    tags: [{ label: 'Sample build', hot: true }, { label: 'Quote requests' }],
     size: 'wide', kind: 'scroll', image: '/work/big-iron-fleet.jpg', alt: 'Big Iron Fleet Services website concept',
   },
   {
     name: 'SPK Excavating', url: 'spkexcavating.com', blurb: 'Land clearing & site prep',
-    tags: [{ label: 'Next.js' }, { label: 'Before / after' }],
+    tags: [{ label: 'Before + after photos' }, { label: 'Website' }],
     size: 'wide', kind: 'hero', image: '/work/spk-excavating.jpg',
     headline: 'Land Clearing.<br>Site Prep. Done right.', caption: 'Northwest Indiana excavation & site work',
   },
   {
     name: 'Glass Godz', url: 'glassgodz.com', blurb: 'Window & glass specialists',
-    tags: [{ label: 'Next.js' }, { label: 'Quote form' }],
+    tags: [{ label: 'Quote form' }, { label: 'Website' }],
     size: 'narrow', kind: 'hero', image: '/work/glass-godz.jpg',
     headline: 'Glass Godz', caption: 'Master window, glass & screen repair',
   },
