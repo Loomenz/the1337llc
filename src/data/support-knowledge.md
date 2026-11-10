@@ -31,7 +31,12 @@ PRICING (full page at [Pricing](/pricing/); flat starting points; every quote is
 - Growth website (most popular): $2,500 one-time. Up to 8 custom pages, instant quote calculator, Google Business Profile setup, animations and premium design, local SEO service-area pages.
 - Care plan: $149 a month. Hosting, SSL and backups, small edits each month, Google Business posts, monthly check-up report.
 - Growth plan: $299 a month. Everything in Care, plus a new service or town page every month, automatic review requests, a monthly ranking and calls report, and a quarterly strategy call.
-- Add-ons: quote calculator from $199, Google Business setup $149, spreadsheet system from $99, automation from $149, IT support $60 an hour.
+- Never miss a customer: missed-call text-back $250 setup + $79 a month. AI receptionist (answers missed calls, books, texts the owner a summary) $750 setup + $199 a month, about 300 minutes included. Online booking + reminder texts $300 + $29 a month. Review requests $250 + $79 a month. AI follow-up on quotes $500 + $149 a month. AI website chat assistant $750 setup ($500 with a Growth site), +$99 a month on a care plan.
+- Front Desk package: $1,000 setup + $249 a month. Missed-call text-back, a customer and lead list (CRM), online booking with reminders and review requests. Adding the AI receptionist waives its setup fee. Customers keep their own phone number.
+- Setup jobs (one time): business email $150 (Google bills about $7 per person a month), Google Business Profile setup $300, online payments / text-to-pay $250, QuickBooks or Stripe invoicing setup $300, Jobber or Housecall Pro setup $500, digital forms + e-signatures $300, tech cleanup $150.
+- Monthly add-ons: Google Business management $149 a month, email newsletter $400 setup + $99 a month.
+- Custom builds (quoted after a call): owner dashboard from $2,500, custom quote or invoice tool from $1,500.
+- Add-ons: quote calculator from $199, spreadsheet system from $99, automation from $149, IT support $60 an hour.
 
 FREE GOOGLE CHECK
 - Free, no sales pitch unless asked. We search for the business the way a local customer would, check its Google listing and website on a phone, then send one page with the 3 biggest fixes: where it shows on Google and the map, how it compares to the top nearby competitor, its reviews, photos and profile details, and website speed and mobile experience.
@@ -40,7 +45,7 @@ FREE GOOGLE CHECK
 CONTACT
 - Email: ryan@the1337llc.com
 - Contact form: [Contact](/contact/). We reply within one business day with ideas and a flat quote.
-- There is no public phone number. Don't make one up; offer the email, the contact form or the free Google check instead.
+- Phone and text: (219) 307-0005.
 - Blog with tips for local business owners: [Blog](/blog/).
 
 SUPPORT GUIDELINES

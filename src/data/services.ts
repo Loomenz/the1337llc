@@ -86,15 +86,18 @@ export const services: Service[] = [
     intro: 'Calls come in while you are on a job. Quote requests sit in your inbox overnight. Customers who would happily leave a review never get asked. We set up simple AI-powered tools that answer, follow up and ask for you, so leads do not slip through.',
     includes: [
       'Missed-call text-back: callers get a text right away',
+      'An AI receptionist that answers the calls you miss, books the job and texts you a summary',
+      'One customer list (a CRM) with every call, text and quote in one place',
+      'Online booking with confirmation and reminder texts',
       'Automatic follow-up on quote requests',
       'Review requests after every finished job',
-      'After-hours intake that collects job details and photos',
-      'Leads sent straight to your phone or a simple tracker',
+      'The Front Desk package: text-back, customer list, booking and reviews for $249/mo',
     ],
     forWho: 'Owners who are on the job all day and know they lose calls and quotes because nobody gets back to people fast enough.',
     faq: [
       ['Will it sound like a robot?', 'No. Messages are written in your voice and you approve them before anything goes live.'],
       ['Do I need new software?', 'Usually not. We work with your phone, email and website and keep it as simple as possible.'],
+      ['Do I have to change my phone number?', 'No. You keep your number and your phone company. Calls you miss forward to our system, which texts the caller back or answers for you.'],
     ],
   },
   {
