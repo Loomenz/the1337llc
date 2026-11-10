@@ -6,7 +6,7 @@ export interface Trade {
   description: string;
   intro: string;
   needs: string[];
-  example: { name: string; url: string; image: string; note: string };
+  example: { name: string; url: string; image: string; note: string; sample?: boolean };
 }
 
 export const trades: Trade[] = [
@@ -37,7 +37,7 @@ export const trades: Trade[] = [
       'On-site invoicing and payments from your phone',
       'Google reviews front and center',
     ],
-    example: { name: 'SPK Lawn & Snow', url: 'https://spklawnandsnow.com', image: '/work/spk-lawn.jpg', note: 'Commercial and residential maintenance with a dual quote engine for lawn and snow.' },
+    example: { name: 'SPK Lawn & Snow', url: 'https://spklawnandsnow.com', image: '/work/spk-lawn.jpg', note: 'Commercial and residential maintenance with instant quotes for lawn and snow.' },
   },
   {
     slug: 'home-builders',
@@ -65,6 +65,6 @@ export const trades: Trade[] = [
       'Coverage area map for your mobile service',
       'Fleet account sign-up form',
     ],
-    example: { name: 'Big Iron Fleet Services', url: 'https://bigironfleet.com', image: '/work/big-iron-fleet.jpg', note: 'Concept build for mobile heavy-duty truck and fleet repair.' },
+    example: { name: 'Big Iron Fleet Services', url: 'https://bigironfleet.com', image: '/work/big-iron-fleet.jpg', note: 'A sample we built to show what a mobile truck and fleet repair site can do.', sample: true },
   },
 ];

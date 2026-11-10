@@ -3,8 +3,7 @@ import Site from '../layouts/Site.astro';
 import PageHead from '../components/site/PageHead.astro';
 import Faq from '../components/site/Faq.astro';
 import CtaBand from '../components/site/CtaBand.astro';
-import { plans, addons, frontDesk, setups, monthlyAddons, custom } from '../data/pricing';
-import { FIXES } from '../data/fixes';
+import { starters, groups } from '../data/pricing';
 
 const steps: [string, string, string][] = [
   ['Text or call', 'Tell us what is bugging you. Two minutes, plain English.', 'Day 0'],
@@ -12,23 +11,18 @@ const steps: [string, string, string][] = [
   ['We build, you check', 'You get a live preview link early and tell us what to change. Revisions included.', 'Days to 3 weeks'],
   ['Live, and we stay on it', 'We hook up your domain, Google and forms, then keep it running if you want us to.', 'Launch day'],
 ];
-const sites = plans.filter((p) => p.per === 'one-time');
-const monthly = plans.filter((p) => p.per !== 'one-time');
-const ai: [string, string, string][] = [
-  ['AI chat assistant on your site', 'Answers questions 24/7 from what you teach it, hands off hot leads to you.', '$750 setup ($500 with a Growth site)'],
-  ['AI add-on for a care plan', 'Keeps your assistant trained on new services, prices and questions.', '+$99/mo'],
-];
 const faq: [string, string][] = [
   ['Are these the final prices?', 'They are flat starting points for the most common jobs. After a quick call you get a fixed quote in writing, and the price does not creep once you say yes.'],
-  ['Do I need a monthly plan?', 'No. Care and Growth plans are optional. They keep the site updated, backed up and growing so you never have to think about it.'],
+  ['Do I need a monthly plan?', 'No. The Care and Growth plans are optional. They keep the site updated, backed up and growing so you never have to think about it.'],
   ['Who owns the website?', 'You do. The domain, the content and the code are yours, including if you stop a monthly plan. No hostage situations.'],
   ['Do you charge by the hour?', 'Not for builds. Every build is a flat price. IT support is the one thing billed hourly, at $60 an hour, and we tell you before the clock starts.'],
   ['Do I have to change my phone number?', 'No. You keep your number and your phone company. We set your phone to forward calls you miss to our system, which texts the caller back or answers for you. You can turn it off any time.'],
-  ['What about bigger or custom builds?', 'Payment systems, portals, dashboards and marketplaces are quoted per project after a call. See custom systems or just text us what you need.'],
+  ['What about bigger or custom builds?', 'Online stores, portals, dashboards and payment systems are quoted per project after a call. See custom builds or just tell us what you need.'],
+  ['Why does Front Desk cost more than its parts?', 'Because it adds the customer list that ties every call, text, booking and review to one person, and that list is not sold on its own. It also waives the $750 setup if you add the AI receptionist.'],
 ];
 ---
-<Site title="Pricing & How It Works: Flat Prices for Websites, SEO & AI | 1337" description="Flat, written prices for websites, local SEO, missed-call text-back, an AI receptionist, the Front Desk package and setup jobs like business email. How it works, start to launch.">
-  <PageHead num="04 / 06" label="Pricing + how it works" lines={['Flat prices.', 'No <span class="accent">surprises.</span>']} lede="Every price is on this page. You get a fixed quote in writing before any work starts, and you own everything we build." />
+<Site title="Pricing & How It Works: Flat Prices for Websites, Google & Call Tools | 1337" description="Flat, written prices for websites, local SEO, missed-call text-back, an AI receptionist, the Front Desk package and setup jobs like business email. How it works, start to launch.">
+  <PageHead num="Pricing" label="How it works" lines={['Flat prices.', 'No <span class="accent">surprises.</span>']} lede="Every price is on this page. You get a fixed quote in writing before any work starts, and you own everything we build." />
 
   <section id="how" class="bg-ink text-paper scroll-mt-20" aria-labelledby="how-title">
     <div class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] py-16 md:px-8 md:py-24">
@@ -39,82 +33,61 @@ const faq: [string, string][] = [
             <span class="display n">{String(i + 1).padStart(2, '0')}</span>
             <b class="mt-4 block text-[1.3rem]">{h}</b>
             <p class="mt-2 text-paper/75">{p}</p>
-            <p class="mono mt-4 text-[.7rem] uppercase tracking-[.12em] text-hivis">{when}</p>
+            <p class="mono mt-4 text-[.75rem] uppercase tracking-[.12em] text-hivis">{when}</p>
           </li>
         ))}
       </ol>
     </div>
   </section>
 
-  <section class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] py-16 md:px-8 md:py-24" aria-labelledby="sheet-title">
+  <section class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] pt-16 md:px-8 md:pt-24" aria-labelledby="start-title">
     <div class="mb-10 flex flex-wrap items-end justify-between gap-4">
-      <h2 id="sheet-title" class="display mask-lines text-[clamp(2.8rem,7vw,6.4rem)]"><span class="ml"><span>The price sheet</span></span></h2>
-      <p class="mono text-[.72rem] uppercase tracking-[.12em] text-mute">Rev. 2026 · prices in USD</p>
+      <h2 id="start-title" class="display mask-lines text-[clamp(2.8rem,7vw,6.4rem)]"><span class="ml"><span>Start <span class="accent">here</span></span></span></h2>
+      <p class="max-w-[38ch] text-[1.1rem] text-mute">Most owners start with one of these four. Everything else is on the full price sheet below.</p>
     </div>
+    <ul class="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+      {starters.map((p) => (
+        <li class:list={['card', p.flag && 'hot']}>
+          <h3 class="display text-[2.1rem]">{p.name}</h3>
+          {p.flag && <span class="mono pick">{p.flag}</span>}
+          <p class="display cprice">{p.price}</p>
+          <p class="mono cper">{p.per}</p>
+          <p class="mt-4 text-[1.05rem] leading-snug">{p.what}</p>
+          <ul class="incl">{p.includes.map((x) => <li>{x}</li>)}</ul>
+          <a href={p.href} class="btn">{p.cta} <span aria-hidden="true">→</span></a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] py-16 md:px-8 md:py-24" aria-labelledby="sheet-title">
+    <div class="mb-8 flex flex-wrap items-end justify-between gap-4">
+      <h2 id="sheet-title" class="display mask-lines text-[clamp(2.8rem,7vw,6.4rem)]"><span class="ml"><span>The full price sheet</span></span></h2>
+      <p class="mono text-[.75rem] uppercase tracking-[.12em] text-mute">Rev. 2026 · prices in USD</p>
+    </div>
+    <nav aria-label="Jump to a section" class="mb-8">
+      <ul class="flex flex-wrap gap-2">
+        {groups.map((g) => <li><a href={`#p-${g.bucket}`} class="jump">{g.title}</a></li>)}
+      </ul>
+    </nav>
 
     <div class="sheet">
-      <h3 class="grp"><span class="badge">WEB</span> Websites · one time</h3>
-      {sites.map((p) => (
-        <div class="line">
-          <div><b class="display nm">{p.name}{p.featured && <span class="mono pick">Most pick this</span>}</b><p class="what">{p.features.join(' · ')}</p></div>
-          <p class="display price">{p.price}</p>
-        </div>
+      {groups.map((g) => (
+        <details id={`p-${g.bucket}`} class="scroll-mt-24" open data-grp>
+          <summary class="grp">
+            <h3 class="display text-[clamp(2rem,4vw,3rem)]">{g.title}</h3>
+            <span class="text-mute">{g.items.length} prices · {g.note}</span>
+            <span class="tog" aria-hidden="true"></span>
+          </summary>
+          {g.items.map((it) => (
+            <div class="line">
+              <div><b class="nm">{it.name}{it.flag && <span class="mono pick">{it.flag}</span>}</b><p class="what">{it.what}</p></div>
+              <p class="display price">{it.price}</p>
+            </div>
+          ))}
+          <p class="pt-5"><a href={g.href} class="btn">{g.cta} <span aria-hidden="true">→</span></a></p>
+        </details>
       ))}
-
-      <h3 class="grp"><span class="badge">SEO</span> Monthly plans · cancel anytime</h3>
-      {monthly.map((p) => (
-        <div class="line">
-          <div><b class="display nm">{p.name}</b><p class="what">{p.features.join(' · ')}</p></div>
-          <p class="display price">{p.price}<span class="per">/mo</span></p>
-        </div>
-      ))}
-
-      <h3 class="grp"><span class="badge">AI</span> Never miss a customer</h3>
-      <div class="line fd">
-        <div><b class="display nm">{frontDesk.name}<span class="mono pick">Best value</span></b><p class="what">{frontDesk.includes.join(' · ')}. Add the AI receptionist and we waive its setup fee.</p></div>
-        <p class="display price">{frontDesk.monthly}<span class="per">/mo</span><span class="mono setup">+ {frontDesk.setup} setup</span></p>
-      </div>
-      {FIXES.map((f) => (
-        <div class="line">
-          <div><b class="display nm">{f.name}</b><p class="what">{f.fix} <span class="mono when">{f.speed.split('.')[0]}.</span></p></div>
-          <p class="price small">{f.cost}</p>
-        </div>
-      ))}
-      {ai.map(([n, w, c]) => (
-        <div class="line">
-          <div><b class="display nm">{n}</b><p class="what">{w}</p></div>
-          <p class="price small">{c}</p>
-        </div>
-      ))}
-
-      <h3 class="grp"><span class="badge">OPS</span> Setup jobs · one time</h3>
-      {setups.map(([n, w, c]) => (
-        <div class="line">
-          <div><b class="display nm">{n}</b><p class="what">{w}</p></div>
-          <p class="price small">{c}</p>
-        </div>
-      ))}
-
-      <h3 class="grp"><span class="badge">SEO</span> Monthly add-ons</h3>
-      {monthlyAddons.map(([n, w, c]) => (
-        <div class="line">
-          <div><b class="display nm">{n}</b><p class="what">{w}</p></div>
-          <p class="price small">{c}</p>
-        </div>
-      ))}
-
-      <h3 class="grp"><span class="badge">DEV</span> Built for you · quoted after a call</h3>
-      {custom.map(([n, w, c]) => (
-        <div class="line">
-          <div><b class="display nm">{n}</b><p class="what">{w}</p></div>
-          <p class="price small">{c}</p>
-        </div>
-      ))}
-
-      <h3 class="grp"><span class="badge">OPS</span> Add-ons</h3>
-      <div class="adds">
-        {addons.map(([n, c]) => <p><span>{n}</span><span class="dots" aria-hidden="true"></span><b class="mono">{c}</b></p>)}
-      </div>
     </div>
   </section>
 
@@ -127,23 +100,54 @@ const faq: [string, string][] = [
   .step .n { font-size: clamp(4rem, 8vw, 7rem); color: transparent; -webkit-text-stroke: 2px var(--color-paper); }
   @media (min-width: 768px) { .step { border-bottom: 0; border-right: 1px solid rgb(242 240 234 / .25); padding-left: 1.25rem; } .step:first-child { padding-left: 0; } .step:last-child { border-right: 0; } }
 
-  .sheet { border: 2px solid var(--color-ink); border-radius: 14px; padding: .5rem 1.25rem 1.5rem; background: var(--color-paper); box-shadow: 10px 10px 0 var(--color-ink); }
-  @media (min-width: 768px) { .sheet { padding: .75rem 2.2rem 2.2rem; } }
-  .grp { display: flex; align-items: center; gap: .75rem; font-family: var(--font-mono); font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; padding: 2rem 0 .8rem; border-bottom: 2px solid var(--color-ink); }
-  .line { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem; align-items: start; padding: 1.15rem 0; border-bottom: 1px dashed rgb(17 17 17 / .3); }
-  .nm { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; font-size: clamp(1.7rem, 3vw, 2.4rem); }
-  .pick { font-weight: 600; font-size: .62rem; letter-spacing: .1em; background: var(--color-hivis); padding: .35em .6em; border-radius: 4px; }
-  .what { margin-top: .4rem; color: var(--color-mute); max-width: 70ch; line-height: 1.45; }
-  .when { font-size: .78em; color: var(--color-ink); }
-  .price { font-size: clamp(2rem, 4vw, 3.2rem); text-align: right; white-space: nowrap; }
-  .price .per { font-size: .45em; margin-left: .1em; }
-  .price .setup { display: block; font-size: .8rem; font-weight: 600; margin-top: .3rem; }
-  .fd { background: rgb(17 17 17 / .04); margin: 0 -.75rem; padding-left: .75rem; padding-right: .75rem; border-radius: 8px; }
-  .price.small { font-family: var(--font-mono); font-size: .85rem; font-weight: 600; white-space: normal; max-width: 22ch; line-height: 1.4; }
-  .adds { display: grid; gap: .1rem; padding-top: .8rem; }
-  @media (min-width: 768px) { .adds { grid-template-columns: 1fr 1fr; column-gap: 3rem; } }
-  .adds p { display: flex; align-items: baseline; gap: .6rem; padding: .55rem 0; font-size: 1.05rem; }
-  .adds .dots { flex: 1; border-bottom: 2px dotted rgb(17 17 17 / .35); }
-  .adds b { font-size: .9rem; white-space: nowrap; }
-  @media (max-width: 520px) { .line { grid-template-columns: 1fr; gap: .5rem; } .price { text-align: left; } }
+  .card { display: flex; flex-direction: column; padding: 1.5rem 1.4rem 1.6rem; border: 2px solid var(--color-ink); border-radius: 14px; background: var(--color-paper); box-shadow: 8px 8px 0 var(--color-ink); }
+  .card.hot { box-shadow: 8px 8px 0 var(--color-hivis); }
+  .cprice { margin-top: 1rem; font-size: clamp(2.2rem, 3.2vw, 2.8rem); }
+  .cper { margin-top: .35rem; font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; color: var(--color-mute); }
+  .incl { margin: 1rem 0 1.4rem; display: grid; gap: .45rem; font-size: 1rem; }
+  .incl li { display: flex; gap: .6rem; line-height: 1.35; }
+  .incl li::before { content: "✓"; flex: none; font-weight: 800; color: var(--color-hivis); }
+  .btn { display: inline-flex; align-items: center; gap: .5rem; min-height: 48px; padding: 0 1.4rem; border-radius: 999px; background: var(--color-ink); color: var(--color-paper); font-weight: 600; transition: background .2s, color .2s; }
+  .btn:hover, .btn:focus-visible { background: var(--color-hivis); color: var(--color-ink); }
+  .card .btn { margin-top: auto; align-self: flex-start; }
+  .pick { align-self: flex-start; font-weight: 600; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; background: var(--color-hivis); padding: .3em .6em; border-radius: 4px; }
+  .card .pick { margin-top: .6rem; }
+  .jump { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1rem; border: 2px solid var(--color-ink); border-radius: 999px; font-weight: 600; }
+  .jump:hover, .jump:focus-visible { background: var(--color-ink); color: var(--color-paper); }
+
+  .sheet { border: 2px solid var(--color-ink); border-radius: 14px; padding: .5rem 1.25rem 1.75rem; background: var(--color-paper); box-shadow: 10px 10px 0 var(--color-ink); }
+  @media (min-width: 768px) { .sheet { padding: .75rem 2.2rem 2.4rem; } }
+  .grp { position: relative; display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1.5rem; padding: 1.8rem 3.2rem .9rem 0; border-bottom: 2px solid var(--color-ink); cursor: pointer; list-style: none; }
+  .grp::-webkit-details-marker { display: none; }
+  .grp h3 { margin-right: auto; }
+  .tog { position: absolute; right: 0; bottom: .7rem; width: 2.4rem; height: 2.4rem; border: 2px solid var(--color-ink); border-radius: 999px; }
+  .tog::before, .tog::after { content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 2px; background: currentColor; translate: -50% -50%; transition: rotate .25s; }
+  .tog::after { rotate: 90deg; }
+  details[open] .tog::after { rotate: 0deg; }
+  details[open] { padding-bottom: 1rem; }
+  .line { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem; align-items: start; padding: 1.1rem 0; border-bottom: 1px dashed rgb(17 17 17 / .3); }
+  .nm { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; font-size: 1.25rem; font-weight: 700; line-height: 1.2; }
+  .what { margin-top: .35rem; color: var(--color-mute); max-width: 68ch; line-height: 1.45; }
+  /* Every price is the same size and face, so none of them is harder to read than another. */
+  .price { font-size: clamp(1.6rem, 2.4vw, 2rem); text-align: right; white-space: nowrap; }
+  @media (max-width: 600px) { .line { grid-template-columns: 1fr; gap: .45rem; } .price { text-align: left; order: -1; } .line > div { display: contents; } .nm { order: -2; } .what { order: 0; margin-top: 0; } }
 </style>
+
+<script>
+  // The full sheet is long. On phones start with the groups closed, so the page is five tappable
+  // headings instead of eleven screens. Without JavaScript, or on a desktop, everything stays open.
+  function initSheet() {
+    const groups = document.querySelectorAll<HTMLDetailsElement>('details[data-grp]');
+    if (!groups.length || groups[0].dataset.ready) return;
+    groups[0].dataset.ready = '1';
+    const target = location.hash.slice(1);
+    if (window.matchMedia('(max-width: 767px)').matches) groups.forEach((g) => { g.open = g.id === target; });
+    // A jump link opens the group it points at.
+    document.querySelectorAll<HTMLAnchorElement>('a.jump').forEach((a) => a.addEventListener('click', () => {
+      const g = document.getElementById(a.hash.slice(1)) as HTMLDetailsElement | null;
+      if (g) g.open = true;
+    }));
+  }
+  initSheet();
+  document.addEventListener('astro:page-load', initSheet);
+</script>

@@ -1,11 +1,17 @@
 ---
 // Ink footer: one last blunt ask, every way to reach us, the towns we cover and the site map.
 import { BUSINESS, TOWNS } from '../../data/business';
+import { BUCKETS } from '../../data/buckets';
+import { CITIES } from '../../data/cities';
+import { trades } from '../../data/trades';
 const sms = BUSINESS.phone ? `sms:${BUSINESS.phone}` : '/contact/#text';
 const cols: [string, [string, string][]][] = [
-  ['Fixes', [['Websites', '/services/websites/'], ['Google + local SEO', '/services/local-seo/'], ['AI tools', '/services/ai-lead-tools/'], ['Custom systems', '/systems/'], ['All services', '/services/']]],
-  ['Shop', [['Work', '/work/'], ['Pricing', '/pricing/'], ['How it works', '/pricing/#how'], ['Crew', '/about/'], ['Free Google check', '/free-audit/'], ['Blog', '/blog/']]],
+  ['What we do', BUCKETS.map((b): [string, string] => [b.name, b.href ?? '/services/'])],
+  ['Company', [['Work', '/work/'], ['Pricing', '/pricing/'], ['How it works', '/pricing/#how'], ['About', '/about/'], ['Free Google check', '/free-audit/'], ['Blog', '/blog/']]],
+  ['Websites for', trades.map((t): [string, string] => [t.trade, `/websites-for/${t.slug}/`])],
 ];
+const tel = BUSINESS.phone ? `tel:${BUSINESS.phone}` : '/contact/#call';
+const cityPage = Object.fromEntries(CITIES.map((c) => [c.town, `/${c.slug}/`]));
 const year = new Date().getFullYear();
 ---
 <footer class="bg-ink text-paper" aria-labelledby="foot-title">
@@ -13,27 +19,30 @@ const year = new Date().getFullYear();
     <h2 id="foot-title" class="sr-only">Contact and site map</h2>
     <div class="flex flex-wrap items-center gap-3">
       <a href={sms} class="inline-flex items-center gap-2 rounded-full bg-hivis px-7 py-4 text-[1.1rem] font-semibold text-ink transition-transform hover:-translate-y-0.5">Text us <span aria-hidden="true">→</span></a>
+      <a href={tel} class="inline-flex items-center gap-2 rounded-full border-2 border-paper px-7 py-[14px] text-[1.1rem] font-semibold transition-colors hover:bg-paper hover:text-ink">Call {BUSINESS.phoneDisplay}</a>
       <a href={`mailto:${BUSINESS.email}`} class="inline-flex items-center gap-2 rounded-full border-2 border-paper px-7 py-[14px] text-[1.1rem] font-semibold transition-colors hover:bg-paper hover:text-ink">{BUSINESS.email}</a>
     </div>
 
     <div class="mt-16 grid gap-10 border-t border-paper/25 pt-10 md:grid-cols-12">
-      <div class="md:col-span-5">
-        <p class="mono mb-4 text-[.72rem] uppercase tracking-[.12em] text-mute-dark">Where we work</p>
-        <p class="max-w-[46ch] text-[1.05rem] leading-relaxed text-paper/85">{TOWNS.join(' · ')}, and anywhere else by phone and screen share.</p>
+      <div class="md:col-span-4">
+        <p class="mono mb-4 text-[.75rem] uppercase tracking-[.12em] text-mute-dark">Where we work</p>
+        <ul class="towns max-w-[46ch] text-[1.05rem] text-paper/85">
+          {TOWNS.map((t) => <li>{cityPage[t] ? <a href={cityPage[t]} class="inline-flex min-h-[44px] items-center underline decoration-hivis decoration-2 underline-offset-4 hover:text-hivis">{t}</a> : t}</li>)}
+        </ul>
+        <p class="mt-3 max-w-[46ch] text-[1.05rem] text-paper/85">Anywhere else by phone and screen share.</p>
       </div>
       {cols.map(([h, links]) => (
-        <nav class="md:col-span-3" aria-label={h}>
-          <p class="mono mb-4 text-[.72rem] uppercase tracking-[.12em] text-mute-dark">{h}</p>
-          <ul class="grid gap-2 text-[1.05rem]">
-            {links.map(([l, href]) => <li><a href={href} class="hover:text-hivis">{l}</a></li>)}
+        <nav class:list={[h === 'What we do' ? 'md:col-span-3' : h === 'Company' ? 'md:col-span-2' : 'md:col-span-3']} aria-label={h}>
+          <p class="mono mb-4 text-[.75rem] uppercase tracking-[.12em] text-mute-dark">{h}</p>
+          <ul class="grid text-[1.05rem]">
+            {links.map(([l, href]) => <li><a href={href} class="flex min-h-[44px] items-center hover:text-hivis">{l}</a></li>)}
           </ul>
         </nav>
       ))}
-      <div class="md:col-span-1"></div>
     </div>
 
     <p aria-hidden="true" class="display wordmark mt-14">1337</p>
-    <div class="mono mt-6 flex flex-wrap items-end justify-between gap-4 text-[.7rem] uppercase tracking-[.12em] text-mute-dark">
+    <div class="mono mt-6 flex flex-wrap items-end justify-between gap-4 text-[.75rem] uppercase tracking-[.12em] text-mute-dark">
       <span>© {year} 1337 LLC · {BUSINESS.region}</span>
       <button type="button" class="egg-spot uppercase tracking-[.12em] hover:text-hivis" data-egg>Don't click this</button>
     </div>
@@ -41,5 +50,8 @@ const year = new Date().getFullYear();
 </footer>
 
 <style>
+  /* Towns wrap like a sentence; the ones with their own page are links with room to tap. */
+  .towns { display: flex; flex-wrap: wrap; column-gap: .9rem; }
+  .towns li { display: inline-flex; align-items: center; min-height: 44px; }
   .wordmark { font-size: clamp(8rem, 38vw, 34rem); line-height: .78; letter-spacing: -.03em; color: transparent; -webkit-text-stroke: 2px rgb(242 240 234 / .5); margin-bottom: -.06em; user-select: none; }
 </style>

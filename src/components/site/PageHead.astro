@@ -7,7 +7,7 @@ const { num, label, lines, lede, dark = false } = Astro.props;
 <section class:list={['relative', dark ? 'bg-ink text-paper' : '']}>
   <div class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] pb-12 pt-10 md:px-8 md:pb-16 md:pt-16">
     <div class="mb-6 flex flex-wrap items-center justify-between gap-3 md:mb-10">
-      <p class:list={['mono text-[.72rem] uppercase tracking-[.12em]', dark ? 'text-mute-dark' : 'text-mute']}>{num} · {label}</p>
+      <p class:list={['mono text-[.75rem] uppercase tracking-[.12em]', dark ? 'text-mute-dark' : 'text-mute']}>{num} · {label}</p>
       <slot name="badges" />
     </div>
     <h1 class="display text-[clamp(3.4rem,11.5vw,11rem)]">

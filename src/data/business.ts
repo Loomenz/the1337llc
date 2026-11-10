@@ -26,7 +26,7 @@ export function localBusinessSchema() {
     email: BUSINESS.email,
     ...(BUSINESS.phone ? { telephone: BUSINESS.phone } : {}),
     image: `${BUSINESS.url}/og-image.png`,
-    description: 'Local crew building websites, local SEO and AI tools that answer calls, follow up on leads and book estimates for contractors and local shops.',
+    description: 'Local studio building websites, local SEO and tools that answer calls, follow up on leads and book customers for small businesses.',
     // Service-area business: no street address, only the region and the towns served.
     address: { '@type': 'PostalAddress', addressRegion: 'IN', addressCountry: 'US' },
     areaServed: TOWNS.map((name) => ({ '@type': 'City', name })),

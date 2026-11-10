@@ -3,41 +3,44 @@ import Site from '../../layouts/Site.astro';
 import PageHead from '../../components/site/PageHead.astro';
 import CtaBand from '../../components/site/CtaBand.astro';
 import { services } from '../../data/services';
-import { SERVICE_TAGS, SERVICE_PAIN } from '../../data/service-groups';
+import { BUCKETS } from '../../data/buckets';
+// The same five buckets as the menu, the price sheet and the contact form.
+const byslug = Object.fromEntries(services.map((s) => [s.slug, s]));
 ---
-<Site title="Services: Websites, Local SEO & AI Tools in NWI | 1337" description="Websites, Google and local SEO, AI tools that answer missed calls and follow up on leads, plus business systems and IT for Northwest Indiana and Chicagoland small businesses.">
-  <PageHead num="01 / 06" label="Services" lines={['What we', '<span class="accent">fix</span> for you.']} lede="Pick the problem. We'll tell you the fix, what it costs and how fast it's live. Most jobs are one of these." >
-    <ul slot="badges" class="flex gap-2" aria-label="What we do">
-      {['WEB', 'SEO', 'AI', 'OPS'].map((b, i) => <li class="badge snap" style={`--i:${i}`}>{b}</li>)}
-    </ul>
-  </PageHead>
+<Site title="Services: Websites, Google & Call Tools for Small Businesses | 1337" description="Five things we do for Northwest Indiana and Chicagoland small businesses: websites, getting found on Google, never missing a call, back-office setup, and custom builds. Prices shown.">
+  <PageHead num="Services" label="Five things we do" lines={['What we', '<span class="accent">fix</span> for you.']} lede="Pick the problem. We'll tell you the fix, what it costs and how fast it's live." />
 
   <section class="bg-ink text-paper">
     <ol class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] py-10 md:px-8 md:py-16">
-      {services.map((s, i) => (
-        <li>
-          <a href={`/services/${s.slug}/`} class="svc group">
-            <span class="mono num">{String(i + 1).padStart(2, '0')}</span>
-            <span class="flex-1">
-              <span class="display block text-[clamp(2.2rem,6vw,5.2rem)]">{s.name}</span>
-              <span class="accent mt-1 block text-[clamp(1.15rem,2vw,1.6rem)] text-mute-dark">&ldquo;{SERVICE_PAIN[s.slug]}.&rdquo;</span>
-            </span>
-            <span class="badge hidden sm:inline-flex">{SERVICE_TAGS[s.slug]}</span>
-            <span aria-hidden="true" class="arrow"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 11h14M12 5l6 6-6 6"/></svg></span>
-          </a>
+      {BUCKETS.map((b, i) => (
+        <li class="bk">
+          {b.href ? (
+            <a href={b.href} class="svc group">
+              <span class="mono num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="flex-1">
+                <span class="display block text-[clamp(2.2rem,6vw,5.2rem)]">{b.name}</span>
+                <span class="accent mt-1 block text-[clamp(1.15rem,2vw,1.6rem)] text-mute-dark">&ldquo;{b.pain}.&rdquo;</span>
+                <span class="mt-2 block max-w-[52ch] text-[1.05rem] text-paper/75">{b.blurb}</span>
+              </span>
+              <span aria-hidden="true" class="arrow"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 11h14M12 5l6 6-6 6"/></svg></span>
+            </a>
+          ) : (
+            <div class="svc">
+              <span class="mono num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="flex-1">
+                <span class="display block text-[clamp(2.2rem,6vw,5.2rem)]">{b.name}</span>
+                <span class="accent mt-1 block text-[clamp(1.15rem,2vw,1.6rem)] text-mute-dark">&ldquo;{b.pain}.&rdquo;</span>
+                <span class="mt-2 block max-w-[52ch] text-[1.05rem] text-paper/75">{b.blurb}</span>
+                <ul class="mt-4 flex flex-wrap gap-2">
+                  {b.pages!.map((slug) => (
+                    <li><a href={`/services/${slug}/`} class="sub">{byslug[slug].name} <span aria-hidden="true">→</span></a></li>
+                  ))}
+                </ul>
+              </span>
+            </div>
+          )}
         </li>
       ))}
-      <li>
-        <a href="/systems/" class="svc group">
-          <span class="mono num">{String(services.length + 1).padStart(2, '0')}</span>
-          <span class="flex-1">
-            <span class="display block text-[clamp(2.2rem,6vw,5.2rem)]">Custom systems</span>
-            <span class="accent mt-1 block text-[clamp(1.15rem,2vw,1.6rem)] text-mute-dark">&ldquo;I need something nobody sells.&rdquo;</span>
-          </span>
-          <span class="badge hidden sm:inline-flex">DEV</span>
-          <span aria-hidden="true" class="arrow"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 11h14M12 5l6 6-6 6"/></svg></span>
-        </a>
-      </li>
     </ol>
   </section>
   <CtaBand />
@@ -45,11 +48,13 @@ import { SERVICE_TAGS, SERVICE_PAIN } from '../../data/service-groups';
 
 <style>
   .svc { display: flex; align-items: center; gap: 1.25rem; padding: 1.6rem .25rem; border-top: 1px solid rgb(242 240 234 / .22); transition: color .25s; }
-  li:last-child .svc { border-bottom: 1px solid rgb(242 240 234 / .22); }
+  .bk:last-child .svc { border-bottom: 1px solid rgb(242 240 234 / .22); }
+  .sub { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; padding: 0 1rem; border: 2px solid rgb(242 240 234 / .6); border-radius: 999px; font-weight: 600; transition: background .2s, color .2s, border-color .2s; }
+  .sub:hover, .sub:focus-visible { background: var(--color-hivis); border-color: var(--color-hivis); color: var(--color-ink); }
   .svc .num { width: 2.2rem; flex: none; font-size: .75rem; color: var(--color-mute-dark); align-self: flex-start; padding-top: .9rem; }
   .svc .display { transition: transform .35s var(--ease-snap); }
   .svc .arrow { flex: none; display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 999px; border: 2px solid currentColor; transition: background .25s, color .25s, border-color .25s, transform .35s var(--ease-snap); }
-  .svc:hover .display, .svc:focus-visible .display { transform: translateX(.4rem); }
-  .svc:hover .arrow, .svc:focus-visible .arrow { background: var(--color-hivis); border-color: var(--color-hivis); color: var(--color-ink); transform: rotate(-45deg); }
-  .svc:hover .num { color: var(--color-hivis); }
+  a.svc:hover .display, a.svc:focus-visible .display { transform: translateX(.4rem); }
+  a.svc:hover .arrow, a.svc:focus-visible .arrow { background: var(--color-hivis); border-color: var(--color-hivis); color: var(--color-ink); transform: rotate(-45deg); }
+  a.svc:hover .num { color: var(--color-hivis); }
 </style>

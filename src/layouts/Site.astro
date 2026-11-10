@@ -54,5 +54,18 @@ const ld = [localBusinessSchema(), ...schema];
   </main>
   <SiteFooter />
   <HardHats />
+  <script is:inline>
+    // "Text us" links are sms: links, which only work on phones. On a computer with a mouse
+    // they do nothing, so send those visitors to the contact page, where the number and the form are.
+    // Links marked data-keep-sms (the number on the contact page itself) are left alone.
+    (function () {
+      function fix() {
+        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+        document.querySelectorAll('a[href^="sms:"]:not([data-keep-sms])').forEach(function (a) { a.setAttribute('href', '/contact/#text'); });
+      }
+      fix();
+      document.addEventListener('astro:page-load', fix);
+    })();
+  </script>
 </body>
 </html>

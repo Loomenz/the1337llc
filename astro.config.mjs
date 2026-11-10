@@ -9,6 +9,11 @@ export default defineConfig({
   site: 'https://the1337llc.com',
   integrations: [react()],
   // How it works now lives on the pricing page.
-  redirects: { '/process': '/pricing/' },
+  redirects: {
+    '/process': '/pricing/',
+    // The two AI service pages were merged into one plain-named page.
+    '/services/ai-lead-tools': '/services/never-miss-a-call/',
+    '/services/ai-integrations': '/services/never-miss-a-call/',
+  },
   vite: { plugins: [tailwindcss()] },
 });
