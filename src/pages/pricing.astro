@@ -8,31 +8,32 @@ import Faq from '../components/Faq.astro';
 
 const faq: [string, string][] = [
   ['Are these the final prices?', 'They are flat starting points for the most common projects. After a free call you get a fixed quote in writing, and the price does not creep once you say yes.'],
+  ['How do deposits and financing work?', 'Every build requires either a 50% deposit to start (with the remaining 50% due right before launch) or approved third-party monthly financing at checkout (via Klarna or Affirm), which lets you pay monthly over time while we start right away.'],
+  ['How does Multi-Town Local SEO Expansion work?', 'Most contractors only show up on Google in the town on their mailing address. We build dedicated Service + Town pages for the surrounding cities you want to work in, overhaul your Google Business Profile, and automate 5-star customer reviews so you start getting exclusive calls from neighboring towns.'],
   ['How fast can my site go live?', 'Most sites go live within two weeks of the deposit, depending on how quickly we get your photos and details.'],
-  ['Do I need a monthly plan?', 'No. The Care and Growth plans are optional. They keep your site updated, backed up and growing so you never have to think about it.'],
-  ['Who owns the website?', 'You do. The domain, the content and the code are yours, including if you stop a monthly plan.'],
-  ['What about custom software or bigger builds?', 'Payment systems, marketplaces, portals and dashboards are quoted per project. See custom systems or tell us what you need.'],
+  ['Do I need a monthly plan?', 'Basic hosting & care starts at $149/mo (optional), or choose the $399/mo Monthly SEO & Town Expansion plan if you want us adding new neighboring town pages, posting to Google Maps weekly, and actively growing your territory every month.'],
+  ['Who owns the website?', 'You do. Once your project is paid in full, the domain, content and code are 100% yours—even if you stop a monthly plan.'],
 ];
 
 ---
 <Base
-  title="Website & SEO Pricing: Flat, Up-Front Prices | 1337"
-  description="Flat pricing for small business websites, local SEO and care plans. Starter sites from $1,200, Growth sites $2,500, care plans from $149 a month. You own everything."
+  title="Local SEO, Multi-Town Expansion & Website Pricing | 1337"
+  description="Flat pricing for Local SEO, Multi-Town Business Expansion, websites and automation. Starter sites $1,200, Local Market Dominator $2,500, Monthly SEO & Town Expansion $399/mo."
 >
   <PageHero
-    label="Pricing // Fixed before we start"
+    label="Pricing // Fixed in writing before we start"
     title="Flat prices,"
     accent="no surprises."
-    lead="Pick a starting point or ask for a custom quote. Either way you get a written, fixed price before any work begins, and you own everything we build."
+    lead="Pick a starting point or ask for a custom quote. Start with a 50% deposit (and 50% at launch) or use monthly financing at checkout—either way you get a written, fixed price before any work begins."
   >
     <Panel slot="aside" file="quote_0042.txt" status="fixed" rows={[
-      ['Growth website', '$2,500', 'ok'],
-      ['Instant quote calculator', 'included', 'ok'],
-      ['Google Business setup', 'included', 'ok'],
-      ['Care plan', '$149 / mo', 'ok'],
-      ['Price changes after yes', 'none'],
-      ['Who owns it', 'you'],
-    ]} foot={['Total, in writing', '$2,500 + $149/mo']} />
+      ['Local Market Dominator', '$2,500', 'ok'],
+      ['10 Service + Town SEO pages', 'included', 'ok'],
+      ['Google Map Pack overhaul', 'included', 'ok'],
+      ['Ballpark quote + text-back', 'included', 'ok'],
+      ['To start work', '50% deposit (or financed)', 'ok'],
+      ['Ownership once paid', '100% yours'],
+    ]} foot={['Written quote, clear terms', '$1,250 to start + $1,250 at launch']} />
   </PageHero>
   <Pricing bare />
   <Faq items={faq} />

@@ -1,23 +1,49 @@
-<section class="hero"><canvas id="mark3d" class="mark3d" aria-hidden="true"></canvas><div class="halo" aria-hidden="true"></div><div class="floor" aria-hidden="true"></div>
+<section class="hero"><canvas id="mark3d" class="mark3d" aria-hidden="true"></canvas><div class="halo" aria-hidden="true"></div>
 <div class="wrap hero-grid">
   <div>
-    <div class="label mono"><span class="dot"><i></i></span>SYS_1337 // Business development &amp; software studio</div>
+    <div class="label mono"><span class="dot"><i></i></span>1337 LLC // Local SEO, Multi-Town Expansion &amp; Business Systems</div>
     <h1>
-      <span class="line"><span>We build</span></span>
-      <span class="line"><span class="grad swap serif" id="swap">websites</span></span>
-      <span class="line"><span>that pay for themselves.</span></span>
+      <span class="line"><span>We help your business</span></span>
+      <span class="line"><span class="grad swap serif" id="swap">own Google Maps.</span></span>
     </h1>
-    <p class="lead">Websites that get found, AI that answers your customers, and custom systems that run the business. Then we keep it all running.</p>
+    <p class="lead">Stop losing high-paying jobs in neighboring towns or letting missed calls go to voicemail. We push your business into the Top 3 on Google Maps, build town-by-town expansion pages so you dominate nearby cities, and set up instant missed-call text-backs, online price calculators, and credit card or customer-financing invoices from your phone.</p>
+
+    <div class="hero-Menu">
+      <div class="hero-menu-label mono">HOW DO YOU WANT TO GROW FIRST? <span class="dim">(CLICK ANY TO SEE HOW IT WORKS)</span></div>
+      <div class="hero-pills">
+        <a href="#blueprint" class="hero-pill" data-jump-bp="0">
+          <span class="hp-idx mono">01</span>
+          <span><b>Own Google Maps &amp; Nearby Towns</b><small>Top-3 Map Pack + multi-town expansion SEO</small></span>
+          <i class="hp-arr">→</i>
+        </a>
+        <a href="#blueprint" class="hero-pill" data-jump-bp="1">
+          <span class="hp-idx mono">02</span>
+          <span><b>Catch Missed Calls &amp; Auto-Quote</b><small>Instant text-backs + ballpark calculator</small></span>
+          <i class="hp-arr">→</i>
+        </a>
+        <a href="#blueprint" class="hero-pill" data-jump-bp="2">
+          <span class="hp-idx mono">03</span>
+          <span><b>Take Credit Cards &amp; Financing</b><small>Phone invoices, Apple Pay &amp; Pay-Over-Time</small></span>
+          <i class="hp-arr">→</i>
+        </a>
+        <a href="#blueprint" class="hero-pill" data-jump-bp="3">
+          <span class="hp-idx mono">04</span>
+          <span><b>Kill Late-Night Paperwork</b><small>Auto quote chasers &amp; 1-page job tracker</small></span>
+          <i class="hp-arr">→</i>
+        </a>
+      </div>
+    </div>
+
     <div class="cta">
-      <a class="btn primary magnetic" href="/contact/">Start a project <span class="arr">→</span></a>
-      <a class="btn magnetic" href="/free-audit/">Free Google check</a>
+      <a class="btn primary magnetic" href="/contact/">Get a flat written quote <span class="arr">→</span></a>
+      <a class="btn magnetic" href="/free-audit/">Free Google Maps &amp; town ranking check</a>
     </div>
   </div>
 </div>
 <div class="wrap hero-foot mono" aria-hidden="true">
-  <span>N 41.6° / W 87.3° · Northwest Indiana + remote</span>
-  <span class="hide-sm">Flat pricing · You own everything</span>
-  <span class="hide-sm">Fig. 01 · Growth, built</span>
+  <span>N 41.6° / W 87.3° · Northwest Indiana + Chicagoland</span>
+  <span class="hide-sm">50% deposit or monthly financing · Written quotes</span>
+  <span class="hide-sm">Zero hostage lock-in · Built to pay for itself</span>
 </div>
 </section>
 
@@ -27,11 +53,25 @@ import { heroMark } from '../scripts/hero-mark';
 
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// rotating headline word
-const words = ['websites', 'payments', 'AI tools', 'stores', 'systems', 'apps'];
+// rotating headline phrase — Local SEO & expansion first, plain-English owner outcomes
+const words = ['own Google Maps.', 'take over nearby towns.', 'win more jobs.', 'get paid faster.', 'catch every call.', 'kill the paperwork.'];
 let wi = 0;
-const sw = document.getElementById('swap')!;
-if (!reduce) setInterval(() => { wi = (wi + 1) % words.length; scramble(sw, words[wi]); }, 2600);
+const sw = document.getElementById('swap');
+if (sw && !reduce) setInterval(() => { wi = (wi + 1) % words.length; scramble(sw, words[wi]); }, 2800);
+
+// Interactive Hero problem pills -> scroll to #blueprint and activate the matching tab
+document.querySelectorAll<HTMLAnchorElement>('[data-jump-bp]').forEach((pill) => {
+  pill.addEventListener('click', (e) => {
+    const idx = pill.dataset.jumpBp;
+    const targetTab = document.querySelector<HTMLButtonElement>(`.bp-tab[data-bp="${idx}"]`);
+    const section = document.getElementById('blueprint');
+    if (targetTab) targetTab.click();
+    if (section) {
+      e.preventDefault();
+      section.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    }
+  });
+});
 
 heroMark();
 </script>

@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Roman's Roofing | Concept homepage</title>
+<style>
+:root{--ink:#121212;--ink2:#1c1c1c;--ink3:#262626;--line:#2f2f2f;--orange:#f39a1e;--orange2:#ffb347;--paper:#f6f3ee;--muted:#a9a9a9;--text:#f2f2f2}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Inter","Segoe UI",system-ui,-apple-system,Arial,sans-serif;background:var(--ink);color:var(--text);line-height:1.55}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.concept{background:#fff3df;color:#5a3a00;font-size:13px;text-align:center;padding:7px 12px}
+.concept b{font-weight:700}
+/* top */
+.top{background:#0b0b0b;border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)}
+.top .wrap{display:flex;justify-content:space-between;gap:12px;padding-top:8px;padding-bottom:8px;flex-wrap:wrap}
+.top b{color:var(--text)}
+header{position:sticky;top:0;z-index:5;background:rgba(18,18,18,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:74px;gap:16px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:54px;height:54px;border-radius:10px;object-fit:cover}
+.brand strong{display:block;font-size:20px;letter-spacing:.5px;line-height:1.1}
+.brand span{font-size:11px;color:var(--orange);letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+nav{display:flex;gap:22px;font-size:15px;color:#d6d6d6;white-space:nowrap}
+.btn,.brand strong{white-space:nowrap}
+nav a:hover{color:var(--orange)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;border-radius:10px;padding:14px 22px;font-size:16px;transition:.2s}
+.btn-o{background:var(--orange);color:#111}
+.btn-o:hover{background:var(--orange2)}
+.btn-g{border:1.5px solid #555;color:var(--text)}
+.btn-g:hover{border-color:var(--orange);color:var(--orange)}
+.call{font-weight:800;font-size:18px;color:var(--orange);white-space:nowrap}
+/* hero */
+.hero{position:relative;min-height:640px;display:flex;align-items:flex-end;overflow:hidden}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,10,.92) 0%,rgba(10,10,10,.72) 45%,rgba(10,10,10,.15) 100%)}
+.hero .wrap{position:relative;z-index:2;padding-top:90px;padding-bottom:80px;width:100%}
+.eyebrow{display:inline-block;color:var(--orange);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:13px;margin-bottom:16px}
+h1{font-size:clamp(38px,5.6vw,68px);line-height:1.02;letter-spacing:-1.5px;max-width:720px;font-weight:850}
+h1 em{font-style:normal;color:var(--orange)}
+.lede{font-size:19px;color:#d9d9d9;max-width:560px;margin:20px 0 30px}
+.ctas{display:flex;gap:14px;flex-wrap:wrap}
+.hero-badges{display:flex;gap:22px;margin-top:34px;flex-wrap:wrap;font-size:14px;color:#cfcfcf}
+.hero-badges span:before{content:"✓";color:var(--orange);font-weight:900;margin-right:7px}
+/* trust */
+.trust{background:var(--orange);color:#141414}
+.trust .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding-top:22px;padding-bottom:22px}
+.trust div{font-weight:800;font-size:17px;line-height:1.2}
+.trust small{display:block;font-weight:600;font-size:13px;opacity:.75;margin-top:3px}
+section{padding:96px 0}
+.kicker{color:var(--orange);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:13px}
+h2{font-size:clamp(30px,3.6vw,46px);line-height:1.08;letter-spacing:-1px;margin:10px 0 16px;font-weight:820}
+.sub{color:var(--muted);max-width:620px;font-size:17px}
+/* services */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.card{background:var(--ink2);border:1px solid var(--line);border-radius:16px;padding:28px;transition:.2s}
+.card:hover{border-color:var(--orange);transform:translateY(-3px)}
+.card .ic{width:46px;height:46px;border-radius:12px;background:rgba(243,154,30,.13);color:var(--orange);display:grid;place-items:center;font-size:22px;margin-bottom:18px}
+.card h3{font-size:20px;margin-bottom:8px}
+.card p{color:var(--muted);font-size:15px}
+/* aerial */
+.split{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.photo{border-radius:18px;overflow:hidden;border:1px solid var(--line);position:relative}
+.photo img{width:100%;height:520px;object-fit:cover}
+.tag{position:absolute;left:16px;bottom:16px;background:rgba(10,10,10,.85);border:1px solid var(--line);padding:10px 14px;border-radius:10px;font-size:14px}
+.tag b{color:var(--orange)}
+.steps{margin-top:30px;display:grid;gap:16px}
+.step{display:flex;gap:16px;align-items:flex-start;background:var(--ink2);border:1px solid var(--line);border-radius:14px;padding:18px}
+.step .n{flex:0 0 38px;height:38px;border-radius:50%;background:var(--orange);color:#111;font-weight:900;display:grid;place-items:center}
+.step h4{font-size:17px;margin-bottom:3px}
+.step p{color:var(--muted);font-size:15px}
+/* storm band */
+.storm{background:var(--paper);color:#151515}
+.storm .split{grid-template-columns:1fr 1fr}
+.storm .sub{color:#555}
+.storm ul{list-style:none;margin-top:22px;display:grid;gap:12px}
+.storm li{padding-left:30px;position:relative;font-weight:600}
+.storm li:before{content:"";position:absolute;left:0;top:5px;width:18px;height:18px;border-radius:5px;background:var(--orange)}
+.finance{background:#151515;color:var(--text);border-radius:18px;padding:34px}
+.finance h3{font-size:26px;margin-bottom:8px}
+.finance .big{font-size:52px;font-weight:900;color:var(--orange);letter-spacing:-1px;line-height:1}
+.finance p{color:var(--muted);margin:12px 0 22px}
+/* reviews */
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+.rev{background:var(--ink2);border:1px solid var(--line);border-radius:16px;padding:26px}
+.stars{color:var(--orange);letter-spacing:3px;font-size:18px;margin-bottom:12px}
+.rev p{font-size:16px;color:#e4e4e4}
+.rev cite{display:block;font-style:normal;color:var(--muted);font-size:14px;margin-top:14px}
+/* crew */
+.crew{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:16px;margin-top:40px}
+.crew .photo img{height:300px}
+/* area */
+.towns{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.towns span{border:1px solid var(--line);background:var(--ink2);padding:9px 15px;border-radius:999px;font-size:15px}
+/* cta */
+.final{background:linear-gradient(135deg,#1d1d1d,#101010);border-top:1px solid var(--line)}
+.final .split{grid-template-columns:1fr 1fr}
+form{background:var(--ink2);border:1px solid var(--line);border-radius:18px;padding:28px;display:grid;gap:14px}
+form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+input,select,textarea{width:100%;background:#111;border:1px solid #3a3a3a;color:var(--text);border-radius:10px;padding:14px;font:inherit;font-size:15px}
+textarea{min-height:90px;resize:vertical}
+footer{background:#0b0b0b;color:var(--muted);font-size:14px;padding:40px 0;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.mobile-call{display:none}
+@media (max-width:1100px){nav{display:none}}
+@media (max-width:900px){
+ nav,.top .hide-m{display:none}
+ .trust .wrap{grid-template-columns:1fr 1fr}
+ .grid,.reviews{grid-template-columns:1fr}
+ .split,.storm .split,.final .split{grid-template-columns:1fr;gap:34px}
+ .crew{grid-template-columns:1fr 1fr}.crew .photo:first-child{grid-column:1/-1}
+ .photo img{height:340px}
+ .hero{min-height:600px}
+ .hero:after{background:linear-gradient(0deg,rgba(10,10,10,.95) 0%,rgba(10,10,10,.75) 55%,rgba(10,10,10,.3) 100%)}
+ section{padding:70px 0}
+ form .row{grid-template-columns:1fr}
+ header .btn{display:none}
+ .brand span{display:none}.brand strong{font-size:17px}.brand img{width:44px;height:44px}.call{font-size:16px}
+ .top{display:none}
+ .mobile-call{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:9;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+ body{padding-bottom:76px}
+}
+</style>
+</head>
+<body>
+<div class="concept"><b>Concept preview</b> made by 1337 LLC for Roman's Roofing. Not a live site.</div>
+
+<div class="top"><div class="wrap">
+  <span>Serving Lake &amp; Porter County, IN and the Chicago suburbs</span>
+  <span class="hide-m">Mon to Fri, 8am to 4pm &nbsp;·&nbsp; <b>Licensed · Bonded · Insured</b></span>
+</div></div>
+
+<header><div class="wrap">
+  <a class="brand" href="#"><img src="img/logo.jpg" alt="Roman's Roofing logo"><div><strong>ROMAN'S ROOFING</strong><span>Renovations · Siding · Gutters</span></div></a>
+  <nav><a href="#services">Services</a><a href="#how">How it works</a><a href="#storm">Storm damage</a><a href="#reviews">Reviews</a><a href="#area">Service area</a></nav>
+  <a class="call" href="tel:+12198389111">(219) 838-9111</a>
+  <a class="btn btn-o" href="#quote">Free inspection</a>
+</div></header>
+
+<section class="hero" style="padding:0">
+  <img class="bg" src="img/truck.jpg" alt="Roman's Roofing truck and yard sign on a job in Northwest Indiana">
+  <div class="wrap">
+    <span class="eyebrow">Family owned roofing contractor · Northwest Indiana</span>
+    <h1>A new roof in a day. <em>Done right</em> for life.</h1>
+    <p class="lede">Roof replacement, repair, siding and gutters across Lake and Porter County. Free inspection, an aerial quote within 24 hours, and a lifetime warranty on our work.</p>
+    <div class="ctas">
+      <a class="btn btn-o" href="#quote">Book a free inspection</a>
+      <a class="btn btn-g" href="tel:+12198389111">Call (219) 838-9111</a>
+    </div>
+    <div class="hero-badges"><span>GAF Master Elite</span><span>Lifetime warranty</span><span>$0 down financing</span><span>Insurance claim help</span></div>
+  </div>
+</section>
+
+<div class="trust"><div class="wrap">
+  <div>GAF Master Elite<small>Top tier of GAF contractors</small></div>
+  <div>Lifetime warranty<small>On our roofing work</small></div>
+  <div>24-hour aerial quotes<small>No ladder, no waiting</small></div>
+  <div>$0 down options<small>Ask about financing</small></div>
+</div></div>
+
+<section id="services"><div class="wrap">
+  <span class="kicker">What we do</span>
+  <h2>Everything on the outside of your home.</h2>
+  <p class="sub">One crew for the roof, siding and gutters, so you're not juggling three contractors.</p>
+  <div class="grid">
+    <div class="card"><div class="ic">▲</div><h3>Roof replacement</h3><p>Tear-off to final cleanup, most homes in a single day, with GAF architectural shingles.</p></div>
+    <div class="card"><div class="ic">✚</div><h3>Roof repair</h3><p>Leaks, missing shingles and flashing fixed fast, so a small problem doesn't become a big one.</p></div>
+    <div class="card"><div class="ic">⌂</div><h3>New roof installation</h3><p>New builds and additions, done to manufacturer spec so your warranty holds up.</p></div>
+    <div class="card"><div class="ic">▦</div><h3>Siding</h3><p>Vinyl and James Hardie siding in a wide range of styles and colors.</p></div>
+    <div class="card"><div class="ic">◡</div><h3>Gutters &amp; gutter guards</h3><p>Seamless gutters and leaf guards that keep water moving and debris out.</p></div>
+    <div class="card"><div class="ic">☁</div><h3>Attic insulation</h3><p>Lower heating bills and help your new roof last longer.</p></div>
+  </div>
+</div></section>
+
+<section id="how" style="background:#161616;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap split">
+  <div class="photo"><img src="img/aerial.jpg" alt="Aerial view of a finished roof replacement"><div class="tag"><b>Aerial quote</b> · measured from above, priced in 24 hours</div></div>
+  <div>
+    <span class="kicker">How it works</span>
+    <h2>Three steps. No pressure.</h2>
+    <p class="sub">You'll know exactly what your roof needs and what it costs before anyone climbs a ladder.</p>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><div><h4>Free inspection</h4><p>We look over your roof and show you photos of what we find.</p></div></div>
+      <div class="step"><div class="n">2</div><div><h4>Aerial quote in 24 hours</h4><p>Exact measurements from above, and a clear written price.</p></div></div>
+      <div class="step"><div class="n">3</div><div><h4>Install day</h4><p>Most crews start at 8am and finish by mid-afternoon, then clean up every nail.</p></div></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="storm" class="storm"><div class="wrap split">
+  <div>
+    <span class="kicker">Storm damage</span>
+    <h2>Hail or wind damage? We handle the insurance side.</h2>
+    <p class="sub">Insurance claims are stressful. We document the damage, meet your adjuster, and handle the paperwork so you can get back to normal.</p>
+    <ul><li>Free storm damage inspection</li><li>Photo documentation for your claim</li><li>We work directly with your adjuster</li><li>Emergency tarping and repairs</li></ul>
+  </div>
+  <div class="finance">
+    <h3>Need a roof now?</h3>
+    <div class="big">$0 down</div>
+    <p>Financing options with low monthly payments. Ask us about current offers when we inspect your roof.</p>
+    <a class="btn btn-o" href="#quote">Check if you qualify</a>
+  </div>
+</div></section>
+
+<section id="reviews"><div class="wrap">
+  <span class="kicker">Reviews</span>
+  <h2>What homeowners say.</h2>
+  <div class="reviews">
+    <div class="rev"><div class="stars">★★★★★</div><p>"Roman's Roofing replaced our roof in a few hours! It looks beautiful."</p><cite>John A. · Schererville, IN</cite></div>
+    <div class="rev"><div class="stars">★★★★★</div><p>"Showed up within the hour and quickly repaired our roof at a fair price."</p><cite>Jennifer W. · Schererville, IN</cite></div>
+    <div class="rev"><div class="stars">★★★★★</div><p>"Great experience having Roman's do roofs on garage and home."</p><cite>Debbi F. · Michigan City, IN</cite></div>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <span class="kicker">The crew</span>
+  <h2>Local people. Trained, certified, and part of the community.</h2>
+  <div class="crew">
+    <div class="photo"><img src="img/team.jpg" alt="The Roman's Roofing team at a community event"></div>
+    <div class="photo"><img src="img/training.jpg" alt="Crew members at a manufacturer training"></div>
+    <div class="photo"><img src="img/genie.jpg" alt="Roman's Roofing truck at a community event"></div>
+  </div>
+</div></section>
+
+<section id="area" style="background:#161616;border-top:1px solid var(--line)"><div class="wrap">
+  <span class="kicker">Service area</span>
+  <h2>Proudly roofing Northwest Indiana.</h2>
+  <p class="sub">Lake and Porter County, plus select Chicago suburbs.</p>
+  <div class="towns">
+    <span>Crown Point</span><span>Hobart</span><span>Merrillville</span><span>Schererville</span><span>St. John</span><span>Dyer</span><span>Munster</span><span>Highland</span><span>Griffith</span><span>Cedar Lake</span><span>Lowell</span><span>Lake Station</span><span>Hammond</span><span>Whiting</span><span>Naperville, IL</span><span>Aurora, IL</span><span>Plainfield, IL</span>
+  </div>
+</div></section>
+
+<section id="quote" class="final"><div class="wrap split">
+  <div>
+    <span class="kicker">Free inspection</span>
+    <h2>Find out what your roof really needs.</h2>
+    <p class="sub">Tell us a little about your home and we'll call you back the same business day. Prefer to talk now?</p>
+    <p style="margin-top:22px"><a class="call" style="font-size:30px" href="tel:+12198389111">(219) 838-9111</a></p>
+    <p class="sub" style="margin-top:6px">Mon to Fri, 8am to 4pm</p>
+  </div>
+  <form onsubmit="return false">
+    <div class="row"><input placeholder="Name"><input placeholder="Phone"></div>
+    <input placeholder="Address or town">
+    <select><option>What do you need?</option><option>Roof replacement</option><option>Roof repair</option><option>Storm damage / insurance</option><option>Siding</option><option>Gutters</option></select>
+    <textarea placeholder="Anything we should know? (optional)"></textarea>
+    <button class="btn btn-o" style="border:0;cursor:pointer">Request my free inspection</button>
+  </form>
+</div></section>
+
+<footer><div class="wrap">
+  <div><strong style="color:#fff">Roman's Roofing LLC</strong><br>Licensed · Bonded · Insured · Family owned<br><a href="tel:+12198389111">(219) 838-9111</a></div>
+  <div>© 2026 Roman's Roofing LLC<br><span style="color:#777">Concept design by 1337 LLC</span></div>
+</div></footer>
+
+<a class="btn btn-o mobile-call" href="tel:+12198389111">Call (219) 838-9111</a>
+</body>
+</html>

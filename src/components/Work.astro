@@ -11,11 +11,109 @@ const shown = limit ? projects.slice(0, limit) : projects;
 ---
 <section id="work" class={bare ? "flush" : undefined}><div class="wrap">
   {!bare && (<div class="head reveal">
-    <div><div class="eyebrow">Selected work</div><h2>Built for businesses<br>that <span class="grad">get their hands dirty.</span></h2></div>
-    <p class="sub">Real sites for real local companies. Hover a card to scroll through the build.</p>
+    <div><div class="eyebrow">Verified production builds</div><h2>Engineered for businesses<br>that <span class="grad">get their hands dirty.</span></h2></div>
+    <p class="sub">Real systems running for real companies. Hover any build to preview, or click a card to inspect the architecture and launch the live site.</p>
   </div>)}
   <div class="work">
     {shown.map((p) => <ProjectCard project={p} />)}
   </div>
-  {limit && <div class="more-link reveal"><a class="btn magnetic" href="/work/">See all work <span class="arr">→</span></a></div>}
-</div></section>
+  {limit && <div class="more-link reveal"><a class="btn magnetic" href="/work/">View all {projects.length} production builds <span class="arr">→</span></a></div>}
+</div>
+
+<!-- Interactive Case Study Inspection Modal -->
+<div class="cs-modal" id="cs-modal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="cs-backdrop" id="cs-backdrop"></div>
+  <div class="cs-dialog">
+    <div class="cs-top mono">
+      <span id="cs-url">SYS_INSPECT // URL</span>
+      <button type="button" class="cs-close mono" id="cs-close" aria-label="Close case study">✕ ESC</button>
+    </div>
+    <div class="cs-body">
+      <div class="cs-preview">
+        <img id="cs-img" src="" alt="" />
+      </div>
+      <div class="cs-info">
+        <div class="cs-tags" id="cs-tags"></div>
+        <h3 id="cs-title">Project Name</h3>
+        <p class="cs-blurb" id="cs-blurb"></p>
+        <div class="cs-blocks">
+          <div class="cs-block">
+            <span class="mono warn">01 // THE BOTTLENECK</span>
+            <p id="cs-problem"></p>
+          </div>
+          <div class="cs-block">
+            <span class="mono">02 // THE 1337 SYSTEM</span>
+            <p id="cs-solution"></p>
+          </div>
+          <div class="cs-block ok">
+            <span class="mono ok">03 // MEASURED OUTCOME</span>
+            <p id="cs-outcome"></p>
+          </div>
+        </div>
+        <div class="cs-actions">
+          <a class="btn primary magnetic" id="cs-live" href="#" target="_blank" rel="noopener">Launch live site <span class="arr">↗</span></a>
+          <a class="btn magnetic" href="/contact/">Build something like this</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
+const modal = document.getElementById('cs-modal');
+const backdrop = document.getElementById('cs-backdrop');
+const closeBtn = document.getElementById('cs-close');
+const csUrl = document.getElementById('cs-url');
+const csImg = document.getElementById('cs-img') as HTMLImageElement | null;
+const csTitle = document.getElementById('cs-title');
+const csBlurb = document.getElementById('cs-blurb');
+const csProblem = document.getElementById('cs-problem');
+const csSolution = document.getElementById('cs-solution');
+const csOutcome = document.getElementById('cs-outcome');
+const csTags = document.getElementById('cs-tags');
+const csLive = document.getElementById('cs-live') as HTMLAnchorElement | null;
+
+function openModal(data: any) {
+  if (!modal) return;
+  if (csUrl) csUrl.textContent = `SYS_INSPECT // ${data.url}`;
+  if (csImg && data.image) { csImg.src = data.image; csImg.alt = data.name; }
+  if (csTitle) csTitle.textContent = data.name;
+  if (csBlurb) csBlurb.textContent = data.blurb;
+  if (csProblem) csProblem.textContent = data.problem || 'Manual quotes and slow mobile experience.';
+  if (csSolution) csSolution.textContent = data.solution || 'Custom high-speed website and automated lead funnel.';
+  if (csOutcome) csOutcome.textContent = data.outcome || 'Faster inquiries and higher local conversion.';
+  if (csTags && Array.isArray(data.tags)) {
+    csTags.innerHTML = data.tags.map((t: any) => `<span class="mono">${t.label}</span>`).join('');
+  }
+  if (csLive) csLive.href = `https://${data.url}`;
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  window.dispatchEvent(new CustomEvent('1337:sfx', { detail: { freq: 520, dur: 0.06 } }));
+}
+
+function closeModal() {
+  if (!modal) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+}
+
+document.querySelectorAll<HTMLElement>('.proj[data-project]').forEach((card) => {
+  card.addEventListener('click', () => {
+    try {
+      const data = JSON.parse(card.dataset.project || '{}');
+      openModal(data);
+    } catch {}
+  });
+  card.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      card.click();
+    }
+  });
+});
+
+closeBtn?.addEventListener('click', closeModal);
+backdrop?.addEventListener('click', closeModal);
+window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+</script>

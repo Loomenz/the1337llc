@@ -5,14 +5,144 @@ interface Props { project: Project }
 const { project: p } = Astro.props;
 const cls = ['proj', p.size === 'full' ? '' : p.size, 'reveal', 'tilt'].filter(Boolean).join(' ');
 ---
-<article class={cls} style={p.size === 'full' ? 'grid-column:span 12' : undefined}>
-  <div class="frame"><div class="bar"><i></i><i></i><i></i><span class="url">{p.url}</span></div>
-    {p.kind === 'scroll' && (
-      <div class="shot"><img class="long" src={p.image} alt={p.alt} loading="lazy"></div>
-    )}
-    {p.kind === 'hero' && (
-      <div class="shot hero-img" style={`background-image:url(${p.image})`}><div class="zoom"></div><div class="overlay"><h4 set:html={p.headline}></h4><p>{p.caption}</p></div></div>
-    )}
+<article
+  class={cls}
+  style={p.size === 'full' ? 'grid-column:span 12' : undefined}
+  data-project={JSON.stringify(p)}
+  tabindex="0"
+  role="button"
+  aria-label={`Inspect ${p.name} case study`}
+>
+  <div class="frame">
+    <div class="bar">
+      <i></i><i></i><i></i>
+      <span class="url">{p.url}</span>
+      <span class="bar-cta mono">SEE HOW IT WORKS →</span>
+    </div>
+
+    <!-- Custom Dark-Luxury System Schematics (Plain-English owner view) -->
+    <div class="schem mono">
+      {p.id === 'spk-lawn' && (
+        <div class="schem-inner">
+          <div class="schem-top">
+            <span>TOOL // ONLINE_PRICE_CALCULATOR</span>
+            <span class="schem-pill"><i class="dot-em"></i> LIVE</span>
+          </div>
+          <div class="schem-grid2">
+            <div class="schem-box">
+              <span class="dim">SERVICE PICKED</span>
+              <b>LAWN + SNOW</b>
+            </div>
+            <div class="schem-box">
+              <span class="dim">LOT SIZE</span>
+              <b>12,400 SQ FT</b>
+            </div>
+          </div>
+          <div class="schem-meter"><i style="width:74%"></i></div>
+          <div class="schem-foot">
+            <div><span class="dim">INSTANT BALLPARK QUOTE</span><div class="schem-big">$65 <small>/ visit</small></div></div>
+            <span class="schem-tag">BOOKED ONLINE</span>
+          </div>
+        </div>
+      )}
+
+      {p.id === 'tony-cutz' && (
+        <div class="schem-inner">
+          <div class="schem-top">
+            <span>TOOL // DRIVEWAY_PHONE_INVOICE</span>
+            <span class="schem-pill"><i class="dot-em"></i> PAID</span>
+          </div>
+          <div class="schem-pos">
+            <div class="schem-pos-row"><span>Invoice #1042 · Full Cut &amp; Edge</span><b>$85.00</b></div>
+            <div class="schem-pos-row"><span>Paid With</span><b>Credit Card / Apple Pay</b></div>
+            <div class="schem-pos-row"><span>Google Review Text</span><b class="em">Sent Automatically ✓</b></div>
+          </div>
+          <div class="schem-foot">
+            <div><span class="dim">STATUS</span><div class="schem-big">PAID IN DRIVEWAY</div></div>
+            <span class="schem-tag">RECEIPT SENT</span>
+          </div>
+        </div>
+      )}
+
+      {p.id === 'spk-homes' && (
+        <div class="schem-inner">
+          <div class="schem-top">
+            <span>TOOL // INTERACTIVE_FLOOR_PLANS</span>
+            <span class="schem-pill"><i class="dot-em"></i> LIVE</span>
+          </div>
+          <div class="schem-blueprint">
+            <div class="bp-room r1"><span>PRIMARY SUITE</span></div>
+            <div class="bp-room r2"><span>OPEN KITCHEN · 1,840 SF</span></div>
+            <div class="bp-room r3"><span>2-CAR GARAGE</span></div>
+          </div>
+          <div class="schem-foot">
+            <div><span class="dim">BUYER PICKED</span><div class="schem-big">3 BED · 2 BATH</div></div>
+            <span class="schem-tag">WALKTHROUGH BOOKED</span>
+          </div>
+        </div>
+      )}
+
+      {p.id === 'glass-godz' && (
+        <div class="schem-inner">
+          <div class="schem-top">
+            <span>TOOL // PHOTO_QUOTE_FORM</span>
+            <span class="schem-pill"><i class="dot-em"></i> SENT TO PHONE</span>
+          </div>
+          <div class="schem-pos">
+            <div class="schem-pos-row"><span>01 · Broken Window Photos</span><b>2 photos attached ✓</b></div>
+            <div class="schem-pos-row"><span>02 · Window Size</span><b>48" × 72" Double Pane</b></div>
+            <div class="schem-pos-row"><span>03 · Sent to Owner's Phone</span><b class="em">Ready to Quote</b></div>
+          </div>
+          <div class="schem-foot">
+            <div><span class="dim">RESULT</span><div class="schem-big">NO WASTED TRIP</div></div>
+            <span class="schem-tag">FAST QUOTE</span>
+          </div>
+        </div>
+      )}
+
+      {p.id === 'big-iron' && (
+        <div class="schem-inner">
+          <div class="schem-top">
+            <span>TOOL // ROADSIDE_DISPATCH</span>
+            <span class="schem-pill"><i class="dot-em"></i> 24/7 ACTIVE</span>
+          </div>
+          <div class="schem-pos">
+            <div class="schem-pos-row"><span>Truck Location</span><b>I-80 / I-94 Mile 34</b></div>
+            <div class="schem-pos-row"><span>Service Needed</span><b>Mobile Diesel Repair</b></div>
+            <div class="schem-pos-row"><span>Tech Dispatched</span><b class="em">On the way · 18m</b></div>
+          </div>
+          <div class="schem-foot">
+            <div><span class="dim">CALL TYPE</span><div class="schem-big">1-TAP EMERGENCY</div></div>
+            <span class="schem-tag">FLEET ACCOUNT</span>
+          </div>
+        </div>
+      )}
+
+      {p.id === 'spk-excavating' && (
+        <div class="schem-inner">
+          <div class="schem-top">
+            <span>TOOL // SITE_PREP_QUOTE_FORM</span>
+            <span class="schem-pill"><i class="dot-em"></i> LIVE</span>
+          </div>
+          <div class="schem-grid2">
+            <div class="schem-box">
+              <span class="dim">LOT SIZE</span>
+              <b>4.2 ACRES</b>
+            </div>
+            <div class="schem-box">
+              <span class="dim">WORK NEEDED</span>
+              <b>CLEAR + GRADE</b>
+            </div>
+          </div>
+          <div class="schem-meter"><i style="width:88%"></i></div>
+          <div class="schem-foot">
+            <div><span class="dim">LEAD QUALITY</span><div class="schem-big">READY TO BUILD</div></div>
+            <span class="schem-tag">SERIOUS BUYER</span>
+          </div>
+        </div>
+      )}
+    </div>
   </div>
   <div class="meta"><div><h3>{p.name}</h3><p>{p.blurb}</p></div><div class="tags">{p.tags.map((t) => <span class={t.hot ? 'hot' : undefined}>{t.label}</span>)}</div></div>
+  <div class="proj-outcome mono"><span>✓ PAYOFF:</span> {p.outcome}</div>
 </article>
