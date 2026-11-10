@@ -10,6 +10,14 @@ export const BUSINESS = {
   region: 'Northwest Indiana & Chicagoland',
 };
 
+// Both forms post to Web3Forms, which emails each submission to BUSINESS.email.
+// The access key is a public form id (it is meant to sit in page HTML), not a secret.
+// To send submissions to a different inbox, create a new key for that address at web3forms.com.
+export const FORM = {
+  action: 'https://api.web3forms.com/submit',
+  accessKey: 'd1094bc0-76f1-4b46-9d2e-e21891510e64',
+};
+
 // Service area, roughly west to east then north. Used for the town strip, the schema and future city pages.
 export const TOWNS = [
   'Hammond', 'Munster', 'Highland', 'Schererville', 'Dyer', 'St. John', 'Crown Point',
