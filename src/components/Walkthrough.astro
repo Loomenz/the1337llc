@@ -1,0 +1,40 @@
+---
+// Home page: who Ryan is and how the free walkthrough works. The main call to action.
+const steps = [
+  ['Book 30 minutes', 'A phone or video call, whenever works for you. Evenings are fine.'],
+  ['I look at how money comes in', 'Your phone, your Google listing, your quotes and how you get paid.'],
+  ['You get a one-page Fix List', 'Each fix has a flat price next to it. Do one, all of them, or none.'],
+];
+---
+<section id="walkthrough"><div class="wrap">
+  <div class="head reveal">
+    <div>
+      <div class="eyebrow">Free 30-minute call</div>
+      <h2>Local, plain-spoken,<br><span class="grad">no pitch.</span></h2>
+    </div>
+    <p class="sub">I'm Ryan. I came up in the trades and now I fix the stuff that costs local businesses jobs: missed calls, weak Google listings, slow quotes and late payments. I'm based in Northwest Indiana, so I know the towns and the trades you work in.</p>
+  </div>
+  <ol class="wt-steps">
+    {steps.map(([title, text], i) => (
+      <li class="wt-step reveal">
+        <span class="wt-idx mono">0{i + 1}</span>
+        <h3>{title}</h3>
+        <p>{text}</p>
+      </li>
+    ))}
+  </ol>
+  <div class="cta wt-cta reveal">
+    <a class="btn primary magnetic" href="/free-audit/">Book a free call <span class="arr">→</span></a>
+    <a class="btn magnetic" href="/contact/">Or send a question</a>
+  </div>
+</div></section>
+
+<style>
+  .wt-steps { list-style: none; margin: 40px 0 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+  .wt-step { border: 1px solid rgba(255, 255, 255, .1); border-radius: 16px; padding: 24px; background: rgba(255, 255, 255, .02); }
+  .wt-idx { font-size: 12px; opacity: .6; }
+  .wt-step h3 { margin: 10px 0 8px; font-size: 20px; }
+  .wt-step p { margin: 0; opacity: .75; line-height: 1.5; }
+  .wt-cta { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+  @media (max-width: 800px) { .wt-steps { grid-template-columns: 1fr; } }
+</style>

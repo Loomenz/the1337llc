@@ -13,8 +13,8 @@ interface Props {
 }
 
 const {
-  title = '1337 | Websites, AI & Business Development for NWI & Chicagoland',
-  description = '1337 LLC helps local businesses grow with high-converting websites, local SEO, AI chat assistants and automations, and hands-on small business development across Northwest Indiana and Chicagoland. See our work and get a free Google check.',
+  title = '1337 | Local Help for NWI Businesses: Calls, Google & Payments',
+  description = '1337 LLC helps Northwest Indiana businesses stop losing jobs: missed-call text-backs, Google profile fixes, quote follow-up, on-site payments and websites, at flat prices.',
   ogTitle = title,
   ogDescription = description,
   image = '/og-image.png',
@@ -43,14 +43,13 @@ const ogImage = new URL(image, Astro.site);
 <link rel="manifest" href="/site.webmanifest">
 <slot name="head" />
 <script is:inline>
-  // Always open at the top (phones restore the old scroll spot on reload/revisit)
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   if (!location.hash) addEventListener('load', () => scrollTo({ top: 0, behavior: 'instant' }));
 </script>
 </head>
 <body>
-<div class="bg"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
-<div class="gridbg"></div><div class="noise"></div><div class="cursor" id="glow"></div>
+<div class="bg"><div class="blob b1"></div></div>
+<div class="noise"></div><div class="cursor" id="glow"></div>
 
 <Header />
 
@@ -75,11 +74,16 @@ document.getElementById('yr')!.textContent = String(new Date().getFullYear());
 const nav = document.getElementById('nav')!;
 addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 30), { passive: true });
 
-// cursor glow
+// subtle ambient cursor glow
 const glow = document.getElementById('glow')!;
 if (fine && !reduce) {
-  addEventListener('pointermove', (e) => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; }, { passive: true });
-} else glow.style.display = 'none';
+  addEventListener('pointermove', (e) => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+  }, { passive: true });
+} else {
+  glow.style.display = 'none';
+}
 
 // scramble on hover
 document.querySelectorAll<HTMLElement>('[data-scramble]').forEach((el) => {
@@ -90,25 +94,18 @@ document.querySelectorAll<HTMLElement>('[data-scramble]').forEach((el) => {
 // reveal on scroll
 const io = new IntersectionObserver((es) => es.forEach((e) => {
   if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-}), { threshold: .12, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll<HTMLElement>('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 3) * 80 + 'ms'; io.observe(el); });
+}), { threshold: .1, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll<HTMLElement>('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 3) * 60 + 'ms'; io.observe(el); });
 
-// touch screens have no hover, so color the work card that sits in the middle of the screen
-if (!fine) {
-  const lit = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle('lit', e.isIntersecting)), { rootMargin: '-35% 0px -35% 0px' });
-  document.querySelectorAll('.proj').forEach((el) => lit.observe(el));
-}
-
-// tilt
-// cards lean toward the cursor and catch a glare where it points (systems stack cards are moved by GSAP instead)
-const depth = '.tilt, .bento:not(.stack) > .tile, .price, .post-card, .stat';
+// subtle card glare + micro-tilt
+const depth = '.tilt, .bento > .tile, .price, .post-card, .stat';
 if (fine && !reduce) document.querySelectorAll<HTMLElement>(depth).forEach((c) => {
-  const k = c.classList.contains('tilt') ? 6 : 8;
+  const k = c.classList.contains('tilt') ? 3.5 : 4.5;
   c.classList.add('depth-tilt');
   c.addEventListener('pointermove', (e) => {
     const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
     c.classList.add('tilting');
-    c.style.transform = `perspective(1100px) rotateY(${x * k}deg) rotateX(${-y * k}deg) translateY(-6px)`;
+    c.style.transform = `perspective(1200px) rotateY(${x * k}deg) rotateX(${-y * k}deg) translateY(-4px)`;
     c.style.setProperty('--x', e.clientX - r.left + 'px');
     c.style.setProperty('--y', e.clientY - r.top + 'px');
   });
@@ -119,7 +116,7 @@ if (fine && !reduce) document.querySelectorAll<HTMLElement>(depth).forEach((c) =
 if (fine && !reduce) document.querySelectorAll<HTMLElement>('.magnetic').forEach((b) => {
   b.addEventListener('pointermove', (e) => {
     const r = b.getBoundingClientRect();
-    b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .18}px,${(e.clientY - r.top - r.height / 2) * .28}px)`;
+    b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .15}px,${(e.clientY - r.top - r.height / 2) * .22}px)`;
   });
   b.addEventListener('pointerleave', () => b.style.transform = '');
 });

@@ -4,10 +4,10 @@ import AuditCta from '../../components/AuditCta.astro';
 import { services } from '../../data/services';
 import { trades } from '../../data/trades';
 ---
-<Base title="Services | 1337" description="Websites, local SEO, AI integrations, small business development, business systems and IT for Northwest Indiana and Chicagoland contractors and small businesses.">
+<Base title="Solutions & Services | 1337" description="High-converting websites, 24/7 missed-call recovery, local SEO, back-office automation, field invoicing and IT for Northwest Indiana and Chicagoland businesses.">
   <section class="post-list"><div class="wrap">
-    <div class="eyebrow">Services</div>
-    <h2>Everything that gets you <span class="grad">more calls.</span></h2>
+    <div class="eyebrow">Solutions</div>
+    <h2>Systems that bring in calls and <span class="grad">buy back your time.</span></h2>
     <div class="posts">{services.map((s) => (
       <a class="post-card" href={`/services/${s.slug}/`}>
         <span class="mono">{s.name}</span>
@@ -16,15 +16,15 @@ import { trades } from '../../data/trades';
       </a>
     ))}
       <a class="post-card" href="/systems/">
-        <span class="mono">Custom Systems</span>
-        <h3>Payment systems, marketplaces &amp; custom software</h3>
-        <p>Checkout with instant payouts, two-sided marketplaces, online stores and AI assistants, built and run for businesses anywhere.</p>
+        <span class="mono">Custom Business Tools</span>
+        <h3>Credit cards, customer financing &amp; custom tools</h3>
+        <p>Take credit cards, Apple Pay, Text-to-Pay and customer financing on the spot—plus online stores, booking portals and custom business software.</p>
       </a>
     </div>
-    <h2 style="margin-top:80px">Built for <span class="grad">your trade.</span></h2>
+    <h2 style="margin-top:80px">Engineered for <span class="grad">your trade.</span></h2>
     <div class="posts">{trades.map((t) => (
       <a class="post-card" href={`/websites-for/${t.slug}/`}>
-        <span class="mono">Websites for</span>
+        <span class="mono">Solutions for</span>
         <h3>{t.trade}</h3>
         <p>{t.description}</p>
       </a>

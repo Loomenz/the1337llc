@@ -8,13 +8,35 @@ interface Props {
 const { teaser = false, bare = false } = Astro.props;
 ---
 <section id="pricing" class={bare ? "flush" : undefined}><div class="wrap">
-  {!bare && (<div class="head reveal"><div><div class="eyebrow">Pricing</div><h2>Flat prices.<br><span class="grad">No surprises.</span></h2></div>
-  <p class="sub">Starting points for the most common projects. Every quote is fixed and agreed before work begins.</p></div>)}
+  {!bare && (<div class="head reveal"><div><div class="eyebrow">Simple, honest pricing</div><h2>Flat prices.<br><span class="grad">Clear payment options.</span></h2></div>
+  <p class="sub">Every project gets a fixed written quote before we start. Split your build 50/50 (half deposit to start, half at launch) or finance monthly at checkout.</p></div>)}
+
+  <!-- High-Trust Financing & Ownership Guarantee Bar -->
+  <div class="fin-bar reveal">
+    <div class="fin-item">
+      <span class="fin-tag mono">50 / 50 DEPOSIT SPLIT</span>
+      <b>50% Deposit to Start, 50% at Launch</b>
+      <p>Half down kicks off your build. The final 50% is due right before we connect your domain and take it live.</p>
+    </div>
+    <div class="fin-item">
+      <span class="fin-tag mono">MONTHLY FINANCING</span>
+      <b>Pay Over Time via Klarna / Affirm</b>
+      <p>Prefer monthly payments? Finance your build at checkout through third-party lenders so we can start right away.</p>
+    </div>
+    <div class="fin-item">
+      <span class="fin-tag mono">ZERO HOSTAGE LOCK-IN</span>
+      <b>100% Yours Once Paid in Full</b>
+      <p>Unlike agencies that rent you a site forever, once your build is paid off, the domain, code and customer list are 100% yours.</p>
+    </div>
+  </div>
+
   <div class="prices">
     {plans.map((p) => (
       <div class={p.featured ? 'price feat reveal' : 'price reveal'}>
         {p.featured && <span class="badge">MOST POPULAR</span>}
-        <h3>{p.name}</h3><div class="amt">{p.price}<small> {p.per}</small></div>
+        <h3>{p.name}</h3>
+        <div class="amt">{p.price}<small> {p.per}</small></div>
+        {p.subnote && <div class="price-sub mono">{p.subnote}</div>}
         <ul>{p.features.map((f) => <li>{f}</li>)}</ul>
         {p.featured
           ? <a class="btn primary magnetic" href="/contact/">{p.cta} <span class="arr">→</span></a>
@@ -23,6 +45,6 @@ const { teaser = false, bare = false } = Astro.props;
     ))}
   </div>
   {teaser
-    ? <div class="more-link reveal"><a class="btn magnetic" href="/pricing/">Full pricing &amp; add-ons <span class="arr">→</span></a></div>
+    ? <div class="more-link reveal"><a class="btn magnetic" href="/pricing/">See all add-ons &amp; financing options <span class="arr">→</span></a></div>
     : <div class="addons reveal">{addons.map(([name, price]) => <span>{name} <b>{price}</b></span>)}</div>}
 </div></section>
