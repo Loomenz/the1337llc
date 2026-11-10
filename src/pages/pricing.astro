@@ -3,7 +3,7 @@ import Site from '../layouts/Site.astro';
 import PageHead from '../components/site/PageHead.astro';
 import Faq from '../components/site/Faq.astro';
 import CtaBand from '../components/site/CtaBand.astro';
-import { plans, addons } from '../data/pricing';
+import { plans, addons, frontDesk, setups, monthlyAddons, custom } from '../data/pricing';
 import { FIXES } from '../data/fixes';
 
 const steps: [string, string, string][] = [
@@ -23,10 +23,11 @@ const faq: [string, string][] = [
   ['Do I need a monthly plan?', 'No. Care and Growth plans are optional. They keep the site updated, backed up and growing so you never have to think about it.'],
   ['Who owns the website?', 'You do. The domain, the content and the code are yours, including if you stop a monthly plan. No hostage situations.'],
   ['Do you charge by the hour?', 'Not for builds. Every build is a flat price. IT support is the one thing billed hourly, at $60 an hour, and we tell you before the clock starts.'],
+  ['Do I have to change my phone number?', 'No. You keep your number and your phone company. We set your phone to forward calls you miss to our system, which texts the caller back or answers for you. You can turn it off any time.'],
   ['What about bigger or custom builds?', 'Payment systems, portals, dashboards and marketplaces are quoted per project after a call. See custom systems or just text us what you need.'],
 ];
 ---
-<Site title="Pricing & How It Works: Flat Prices for Websites, SEO & AI | 1337" description="Flat, written prices for websites ($1,200 and $2,500), Google and local SEO ($299/mo), missed-call text-back ($249) and AI tools. How it works, start to launch.">
+<Site title="Pricing & How It Works: Flat Prices for Websites, SEO & AI | 1337" description="Flat, written prices for websites, local SEO, missed-call text-back, an AI receptionist, the Front Desk package and setup jobs like business email. How it works, start to launch.">
   <PageHead num="04 / 06" label="Pricing + how it works" lines={['Flat prices.', 'No <span class="accent">surprises.</span>']} lede="Every price is on this page. You get a fixed quote in writing before any work starts, and you own everything we build." />
 
   <section id="how" class="bg-ink text-paper scroll-mt-20" aria-labelledby="how-title">
@@ -68,7 +69,11 @@ const faq: [string, string][] = [
         </div>
       ))}
 
-      <h3 class="grp"><span class="badge">AI</span> Quick fixes</h3>
+      <h3 class="grp"><span class="badge">AI</span> Never miss a customer</h3>
+      <div class="line fd">
+        <div><b class="display nm">{frontDesk.name}<span class="mono pick">Best value</span></b><p class="what">{frontDesk.includes.join(' · ')}. Add the AI receptionist and we waive its setup fee.</p></div>
+        <p class="display price">{frontDesk.monthly}<span class="per">/mo</span><span class="mono setup">+ {frontDesk.setup} setup</span></p>
+      </div>
       {FIXES.map((f) => (
         <div class="line">
           <div><b class="display nm">{f.name}</b><p class="what">{f.fix} <span class="mono when">{f.speed.split('.')[0]}.</span></p></div>
@@ -76,6 +81,30 @@ const faq: [string, string][] = [
         </div>
       ))}
       {ai.map(([n, w, c]) => (
+        <div class="line">
+          <div><b class="display nm">{n}</b><p class="what">{w}</p></div>
+          <p class="price small">{c}</p>
+        </div>
+      ))}
+
+      <h3 class="grp"><span class="badge">OPS</span> Setup jobs · one time</h3>
+      {setups.map(([n, w, c]) => (
+        <div class="line">
+          <div><b class="display nm">{n}</b><p class="what">{w}</p></div>
+          <p class="price small">{c}</p>
+        </div>
+      ))}
+
+      <h3 class="grp"><span class="badge">SEO</span> Monthly add-ons</h3>
+      {monthlyAddons.map(([n, w, c]) => (
+        <div class="line">
+          <div><b class="display nm">{n}</b><p class="what">{w}</p></div>
+          <p class="price small">{c}</p>
+        </div>
+      ))}
+
+      <h3 class="grp"><span class="badge">DEV</span> Built for you · quoted after a call</h3>
+      {custom.map(([n, w, c]) => (
         <div class="line">
           <div><b class="display nm">{n}</b><p class="what">{w}</p></div>
           <p class="price small">{c}</p>
@@ -108,6 +137,8 @@ const faq: [string, string][] = [
   .when { font-size: .78em; color: var(--color-ink); }
   .price { font-size: clamp(2rem, 4vw, 3.2rem); text-align: right; white-space: nowrap; }
   .price .per { font-size: .45em; margin-left: .1em; }
+  .price .setup { display: block; font-size: .8rem; font-weight: 600; margin-top: .3rem; }
+  .fd { background: rgb(17 17 17 / .04); margin: 0 -.75rem; padding-left: .75rem; padding-right: .75rem; border-radius: 8px; }
   .price.small { font-family: var(--font-mono); font-size: .85rem; font-weight: 600; white-space: normal; max-width: 22ch; line-height: 1.4; }
   .adds { display: grid; gap: .1rem; padding-top: .8rem; }
   @media (min-width: 768px) { .adds { grid-template-columns: 1fr 1fr; column-gap: 3rem; } }

@@ -17,8 +17,8 @@ export const FIXES: Fix[] = [
     name: 'Missed-call text-back + AI receptionist',
     pain: "My phone rings while I'm on a roof",
     tags: ['AI'],
-    fix: 'Every missed call gets a text back in seconds, from your number. Want more? An AI receptionist picks up, asks what they need and books the estimate on your calendar.',
-    cost: 'Text-back from $249. AI receptionist $750 + $99/mo.',
+    fix: 'Every missed call gets a text back in seconds, signed with your business name. You keep your number. Want more? An AI receptionist picks up, asks what they need and books the estimate on your calendar.',
+    cost: 'Text-back $250 + $79/mo. AI receptionist $750 + $199/mo.',
     speed: 'Live in 3–5 days',
   },
   {
@@ -36,7 +36,7 @@ export const FIXES: Fix[] = [
     pain: 'Nobody finds me on Google',
     tags: ['SEO'],
     fix: 'We fix your Google Business Profile, build a page for every town you work in, and get reviews coming in. Every month you see what moved.',
-    cost: '$299 to set up, then $299/mo.',
+    cost: '$300 to set up, then from $149/mo.',
     speed: 'First fixes in a week. Rankings take months, and anyone promising #1 is lying.',
   },
   {
@@ -54,7 +54,7 @@ export const FIXES: Fix[] = [
     pain: 'People no-show my estimates',
     tags: ['AI'],
     fix: 'Every booked estimate gets a confirmation text, a reminder the day before and a one-tap reschedule link. Fewer wasted drives.',
-    cost: '$249, or included with the AI receptionist.',
+    cost: '$300 + $29/mo with online booking, or included in Front Desk.',
     speed: 'Live in 2–3 days',
   },
   {
@@ -63,7 +63,7 @@ export const FIXES: Fix[] = [
     pain: 'My reviews are a mess',
     tags: ['SEO'],
     fix: 'After every job the customer gets a short text with a one-tap link to review you on Google. We help you answer the bad ones without losing your cool.',
-    cost: '$249 one time.',
+    cost: '$250 + $79/mo, or included in Front Desk.',
     speed: 'Live in 2 days',
   },
 ];
