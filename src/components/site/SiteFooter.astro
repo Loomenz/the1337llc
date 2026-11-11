@@ -7,7 +7,7 @@ import { trades } from '../../data/trades';
 const sms = BUSINESS.phone ? `sms:${BUSINESS.phone}` : '/contact/#text';
 const cols: [string, [string, string][]][] = [
   ['What we do', BUCKETS.map((b): [string, string] => [b.name, b.href ?? '/services/'])],
-  ['Company', [['Work', '/work/'], ['Pricing', '/pricing/'], ['How it works', '/pricing/#how'], ['About', '/about/'], ['Free Google check', '/free-audit/'], ['Blog', '/blog/']]],
+  ['Company', [['Work', '/work/'], ['Pricing', '/pricing/'], ['How it works', '/pricing/#how'], ['About', '/about/'], ['Service area', '/service-area/'], ['Free Google check', '/free-audit/'], ['Blog', '/blog/']]],
   ['Websites for', trades.map((t): [string, string] => [t.trade, `/websites-for/${t.slug}/`])],
 ];
 const tel = BUSINESS.phone ? `tel:${BUSINESS.phone}` : '/contact/#call';

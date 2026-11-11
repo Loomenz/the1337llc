@@ -1,0 +1,107 @@
+---
+// Service area: a rough map of the towns we cover and a list by county, linking every town page.
+// Towns and counties come from data/business.ts; town pages from data/cities.ts.
+import Site from '../layouts/Site.astro';
+import PageHead from '../components/site/PageHead.astro';
+import CtaBand from '../components/site/CtaBand.astro';
+import { BUSINESS, TOWNS, TOWN_AT, COUNTY_OF } from '../data/business';
+import { CITIES } from '../data/cities';
+
+const cityPage = Object.fromEntries(CITIES.map((c) => [c.town, `/${c.slug}/`]));
+
+// Simple flat projection, good enough for a 60-mile box.
+const L0 = -87.95, L1 = -86.8, A0 = 41.22, A1 = 41.88;
+const W = 1000;
+const k = Math.cos((41.55 * Math.PI) / 180);
+const H = Math.round((W * (A1 - A0)) / ((L1 - L0) * k));
+const px = ([lat, lon]: [number, number]) => [Math.round(((lon - L0) / (L1 - L0)) * W), Math.round(((A1 - lat) / (A1 - A0)) * H)];
+
+// Lake Michigan's south shore, roughly, from Chicago around to Michigan City.
+const shore: [number, number][] = [
+  [41.88, -87.615], [41.76, -87.545], [41.7, -87.52], [41.68, -87.47], [41.64, -87.4], [41.61, -87.3],
+  [41.62, -87.2], [41.65, -87.07], [41.68, -86.98], [41.72, -86.89], [41.78, -86.8],
+];
+const lake = `M${shore.map((p) => px(p).join(' ')).join(' L')} L${W} 0 L${px(shore[0])[0]} 0 Z`;
+const [lineX, lineTop] = px([41.7, -87.525]);
+
+// Where each label sits next to its dot, so the tight cluster by the state line stays readable.
+const left = new Set(['Calumet City', 'Lansing', 'Munster', 'Dyer', 'St. John', 'Michigan City']);
+const below = new Set(['Tinley Park']);
+const nudge: Record<string, number> = { Munster: 24, Lansing: -6, Hammond: -8, 'Calumet City': -4, 'Orland Park': -16, Schererville: 24 };
+const dots = TOWNS.map((t) => {
+  const [x, y] = px(TOWN_AT[t]);
+  const end = left.has(t);
+  const under = below.has(t);
+  return { t, x, y, lx: under ? x : end ? x - 13 : x + 13, ly: under ? y + 34 : y + 7 + (nudge[t] ?? 0), anchor: under ? 'middle' : end ? 'end' : 'start', page: cityPage[t] };
+});
+
+const counties = [...new Set(TOWNS.map((t) => COUNTY_OF[t]))].map((county) => ({ county, towns: TOWNS.filter((t) => COUNTY_OF[t] === county) }));
+
+const crumbs = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${BUSINESS.url}/` },
+    { '@type': 'ListItem', position: 2, name: 'Service area', item: `${BUSINESS.url}/service-area/` },
+  ],
+};
+---
+<Site title="Service Area: Web Design & Local SEO in Northwest Indiana & Chicagoland | 1337" description="1337 builds websites, Google Business Profiles and call tools for small businesses in Lake, Porter and LaPorte County, Indiana, and Chicago's south and southwest suburbs. See every town we cover." schema={[crumbs]}>
+  <PageHead num="Service area" label="Where we work" lines={['The Region,', 'and <span class="accent">a bit past it.</span>']} lede="We work with businesses across Northwest Indiana and Chicagoland. No storefront: we come to you, or we do it all by phone, text and screen share." />
+
+  <section class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] pb-16 md:px-8 md:pb-24" aria-labelledby="map-title">
+    <h2 id="map-title" class="sr-only">Map of the towns we serve</h2>
+    <figure class="map">
+      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Rough map of the ${TOWNS.length} towns we serve, from Chicago and Orland Park in Illinois across Lake and Porter County to Michigan City, Indiana.`}>
+        <path d={lake} class="lake" />
+        <text x={px([41.8, -87.2])[0]} y={px([41.8, -87.2])[1]} class="lake-label">Lake Michigan</text>
+        <line x1={lineX} y1={lineTop} x2={lineX} y2={H} class="state" />
+        <text x={lineX - 12} y={H - 16} class="state-label" text-anchor="end">Illinois</text>
+        <text x={lineX + 12} y={H - 16} class="state-label">Indiana</text>
+        {dots.map((d) => (
+          <g class:list={['town', d.page && 'has-page']}>
+            <circle cx={d.x} cy={d.y} r={d.page ? 8 : 5} />
+            <text x={d.lx} y={d.ly} text-anchor={d.anchor}>{d.t}</text>
+          </g>
+        ))}
+      </svg>
+      <figcaption class="mono mt-3 text-[.75rem] uppercase tracking-[.12em] text-mute">Roughly to scale · Every town has its own page below</figcaption>
+    </figure>
+  </section>
+
+  <section class="mx-auto max-w-[1440px] px-[max(16px,env(safe-area-inset-left,0px))] pb-20 md:px-8" aria-labelledby="list-title">
+    <div class="mb-8 flex items-end justify-between gap-4 border-b-2 border-ink pb-4">
+      <h2 id="list-title" class="mono text-[.75rem] uppercase tracking-[.12em]">Every town, by county</h2>
+      <span class="mono text-[.75rem] uppercase tracking-[.12em] text-mute">{TOWNS.length} towns</span>
+    </div>
+    <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+      {counties.map(({ county, towns }) => (
+        <div>
+          <h3 class="display text-[clamp(1.9rem,3vw,2.6rem)]">{county}</h3>
+          <ul class="mt-3 grid">
+            {towns.map((t) => (
+              <li>{cityPage[t]
+                ? <a href={cityPage[t]} class="flex min-h-[44px] items-center justify-between gap-4 border-b border-ink/20 font-semibold hover:underline hover:decoration-hivis hover:decoration-2 hover:underline-offset-4"><span>{t}</span><span aria-hidden="true">→</span></a>
+                : <span class="flex min-h-[44px] items-center border-b border-ink/20 text-mute">{t}</span>}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <p class="mt-10 max-w-[60ch] text-[1.1rem] leading-relaxed text-mute">Not on the list? We work with businesses anywhere by phone and screen share. Most of what we build, from websites to Google profiles to text-back, never needs us on site.</p>
+  </section>
+
+  <CtaBand title="Run a business in the Region?" accent="Text us. Quote in a day." />
+</Site>
+
+<style>
+  .map svg { width: 100%; height: auto; display: block; border: 2px solid var(--color-ink); border-radius: 14px; background: var(--color-paper); }
+  .lake { fill: var(--color-paper-2); stroke: var(--color-ink); stroke-width: 2; }
+  .lake-label { font-family: var(--font-serif); font-style: italic; font-size: 30px; fill: var(--color-mute); }
+  .state { stroke: var(--color-ink); stroke-width: 2; stroke-dasharray: 10 8; }
+  .state-label { font-family: var(--font-mono); font-size: 16px; letter-spacing: .12em; text-transform: uppercase; fill: var(--color-mute); }
+  .town circle { fill: var(--color-paper); stroke: var(--color-ink); stroke-width: 2.5; }
+  .town.has-page circle { fill: var(--color-hivis); }
+  .town text { font-family: var(--font-mono); font-size: 19px; fill: var(--color-ink); paint-order: stroke; stroke: var(--color-paper); stroke-width: 5px; stroke-linejoin: round; }
+  .town.has-page text { font-weight: 700; }
+  @media (max-width: 640px) { .town text { font-size: 26px; } .town:not(.has-page) text { display: none; } }
+</style>

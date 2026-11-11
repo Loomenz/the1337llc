@@ -8,7 +8,7 @@ import { CITIES } from '../data/cities';
 export const GET: APIRoute = async ({ site }) => {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
   const paths = [
-    '/', '/work/', '/services/', '/systems/', '/pricing/', '/about/', '/contact/', '/free-audit/',
+    '/', '/work/', '/services/', '/systems/', '/pricing/', '/about/', '/contact/', '/free-audit/', '/service-area/',
     ...services.map((s) => `/services/${s.slug}/`),
     ...trades.map((t) => `/websites-for/${t.slug}/`),
     ...CITIES.map((c) => `/${c.slug}/`),
