@@ -20,7 +20,7 @@ const mk = (town: string, state: 'IN' | 'IL', county: string, nearby: string[], 
   town, state, county, nearby, local, roads,
 });
 
-export const CITIES: City[] = [
+const ALL: City[] = [
   mk('Crown Point', 'IN', 'Lake County', ['Merrillville', 'Cedar Lake', 'St. John', 'Lowell'],
     "Crown Point is the Lake County seat, with the old courthouse square at its center and new subdivisions going up on every side. That growth means a lot of new homeowners searching Google for contractors, cleaners and shops they haven't picked yet.",
     ['the courthouse square', 'Main St', 'US 231', 'I-65']),
@@ -63,6 +63,28 @@ export const CITIES: City[] = [
   mk('Michigan City', 'IN', 'LaPorte County', ['Chesterton'],
     "Michigan City has the lakefront at Washington Park and the Lighthouse Place outlets, so it gets a lot of visitors who don't know the local businesses. They search Google, and the businesses with the best profiles get found.",
     ['Franklin St', 'US 20', 'US 421', 'I-94']),
+  mk('Hammond', 'IN', 'Lake County', ['Munster', 'Highland', 'Calumet City'],
+    "Hammond runs from the Lake Michigan shore down to the Little Calumet River, right on the Illinois line. Its shops and services along Indianapolis Boulevard and Calumet Avenue pull customers from both states, so they need to show up on both sides of the line.",
+    ['Indianapolis Blvd', 'Calumet Ave', 'Kennedy Ave', 'Hohman Ave']),
+  mk('Lowell', 'IN', 'Lake County', ['Cedar Lake', 'Crown Point'],
+    "Lowell is a small town in south Lake County, with a classic downtown and farm country all around it. Customers here are loyal, but new families moving in still search Google before they pick a shop or a contractor.",
+    ['downtown Commercial Ave', 'SR 2', 'US 41']),
+  mk('Lansing', 'IL', 'Cook County', ['Munster', 'Calumet City'],
+    "Lansing sits right on the Indiana line, and its businesses on Torrence Avenue and Ridge Road draw from both states. When a customer has two dozen options a few minutes apart, a clear website and good reviews decide who gets the call.",
+    ['Torrence Ave', 'Ridge Rd', 'Burnham Ave']),
+  mk('Calumet City', 'IL', 'Cook County', ['Hammond', 'Lansing'],
+    "Calumet City sits off I-94 near the state line, with busy shopping along Torrence Avenue. Plenty of its customers are passing through, which makes showing up on Google Maps with the right hours and photos especially important.",
+    ['Torrence Ave', 'River Oaks Dr', 'State St']),
+  mk('Tinley Park', 'IL', 'Cook County', ['Orland Park', 'Chicago'],
+    "Tinley Park spreads across Cook and Will County, with a downtown on Oak Park Avenue and big retail along Harlem Avenue and 159th Street. It's a crowded market on Google, so a complete profile and steady reviews matter.",
+    ['Oak Park Ave', 'Harlem Ave', '159th St']),
+  mk('Chicago', 'IL', 'Cook County', ['Orland Park', 'Tinley Park', 'Calumet City'],
+    "Chicago is the biggest market around and the most crowded on Google. A neighborhood shop is competing with the whole city, so showing up comes down to a sharp profile, reviews and pages that say exactly which neighborhoods you serve.",
+    ['Western Ave', 'Cicero Ave', 'Halsted St']),
 ];
+
+import { TOWNS } from './business';
+// Same order as TOWNS (west to east), so no single town leads.
+export const CITIES: City[] = TOWNS.map((t) => ALL.find((c) => c.town === t)).filter((c): c is City => !!c);
 
 export const cityBySlug = (town: string) => CITIES.find((c) => c.town === town);

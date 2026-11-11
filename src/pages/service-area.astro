@@ -25,12 +25,14 @@ const lake = `M${shore.map((p) => px(p).join(' ')).join(' L')} L${W} 0 L${px(sho
 const [lineX, lineTop] = px([41.7, -87.525]);
 
 // Where each label sits next to its dot, so the tight cluster by the state line stays readable.
-const left = new Set(['Calumet City', 'Lansing', 'Munster', 'Dyer', 'St. John', 'Michigan City', 'Tinley Park']);
+const left = new Set(['Calumet City', 'Lansing', 'Munster', 'Dyer', 'St. John', 'Michigan City']);
+const below = new Set(['Tinley Park']);
 const nudge: Record<string, number> = { Munster: 24, Lansing: -6, Hammond: -8, 'Calumet City': -4, 'Orland Park': -16, Schererville: 24 };
 const dots = TOWNS.map((t) => {
   const [x, y] = px(TOWN_AT[t]);
   const end = left.has(t);
-  return { t, x, y, lx: end ? x - 13 : x + 13, ly: y + 7 + (nudge[t] ?? 0), end, page: cityPage[t] };
+  const under = below.has(t);
+  return { t, x, y, lx: under ? x : end ? x - 13 : x + 13, ly: under ? y + 34 : y + 7 + (nudge[t] ?? 0), anchor: under ? 'middle' : end ? 'end' : 'start', page: cityPage[t] };
 });
 
 const counties = [...new Set(TOWNS.map((t) => COUNTY_OF[t]))].map((county) => ({ county, towns: TOWNS.filter((t) => COUNTY_OF[t] === county) }));
@@ -58,11 +60,11 @@ const crumbs = {
         {dots.map((d) => (
           <g class:list={['town', d.page && 'has-page']}>
             <circle cx={d.x} cy={d.y} r={d.page ? 8 : 5} />
-            <text x={d.lx} y={d.ly} text-anchor={d.end ? 'end' : 'start'}>{d.t}</text>
+            <text x={d.lx} y={d.ly} text-anchor={d.anchor}>{d.t}</text>
           </g>
         ))}
       </svg>
-      <figcaption class="mono mt-3 text-[.75rem] uppercase tracking-[.12em] text-mute">Roughly to scale · Big dots have their own page</figcaption>
+      <figcaption class="mono mt-3 text-[.75rem] uppercase tracking-[.12em] text-mute">Roughly to scale · Every town has its own page below</figcaption>
     </figure>
   </section>
 
