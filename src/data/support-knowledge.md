@@ -43,7 +43,7 @@ FREE GOOGLE CHECK
 - Request it at [Free Google check](/free-audit/).
 
 CONTACT
-- Email: ryan@the1337llc.com
+- Email: hello@the1337llc.com
 - Contact form: [Contact](/contact/). We reply within one business day with ideas and a flat quote.
 - Phone and text: (219) 307-0005.
 - Blog with tips for local business owners: [Blog](/blog/).

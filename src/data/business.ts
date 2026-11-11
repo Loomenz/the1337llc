@@ -4,7 +4,7 @@ export const BUSINESS = {
   name: '1337 LLC',
   short: '1337',
   url: 'https://the1337llc.com',
-  email: 'ryan@the1337llc.com',
+  email: 'hello@the1337llc.com',
   phone: '+12193070005' as string | null,
   phoneDisplay: '(219) 307-0005',
   region: 'Northwest Indiana & Chicagoland',
